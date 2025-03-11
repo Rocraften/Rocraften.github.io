@@ -3,15 +3,70 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Eleven Labs Convai Agent</title>
+  <title>Jarvis AI</title>
+  
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+  
+  <!-- CSS Styles -->
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #6a11cb, #2575fc);
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 3em;
+      font-weight: 700;
+      margin: 0.5em 0;
+    }
+
+    p {
+      font-size: 1.5em;
+      font-weight: 300;
+      margin: 0.5em 0 2em;
+    }
+
+    .widget-container {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 15px;
+      padding: 2em;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    a {
+      color: #00ffcc;
+      text-decoration: none;
+      font-weight: 700;
+    }
+    
+    a:hover {
+      color: #00ffaa;
+      text-decoration: underline;
+    }
+  </style>
 </head>
 <body>
-  <h1>Welcome to Jarvis!</h1>
-  <p>Interact with the AI agent below:</p>
+  <h1>Welcome to the Jarvis</h1>
+  <p>Interact with the AI agent below and have some fun!</p>
   
-  <!-- Eleven Labs Convai Widget -->
-  <elevenlabs-convai agent-id="REm91TaE5uKbuRxrBDCn"></elevenlabs-convai>
-  <script src="https://elevenlabs.io/convai-widget/index.js" async type="text/javascript"></script>
+  <div class="widget-container">
+    <!-- Eleven Labs Convai Widget -->
+    <elevenlabs-convai agent-id="REm91TaE5uKbuRxrBDCn"></elevenlabs-convai>
+    <script src="https://elevenlabs.io/convai-widget/index.js" async type="text/javascript"></script>
+  </div>
 
+  <footer>
+    <p>Made with ♥ by <a href="#">Rocraften!</a></p>
+  </footer>
 </body>
 </html>
