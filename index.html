@@ -10,15 +10,12 @@
       font-family: Arial, sans-serif;
       background-color: #1e1e2f;
       color: #ffffff;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
     }
 
     .container {
       text-align: center;
       max-width: 600px;
+      margin: 10vh auto;
     }
 
     .container h1 {
@@ -32,25 +29,51 @@
       margin-bottom: 40px;
     }
 
-    .btn {
-      display: inline-block;
-      padding: 10px 20px;
+    .scroll-message {
       font-size: 1rem;
-      color: #1e1e2f;
-      background-color: #42b983;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      text-decoration: none;
-      font-weight: bold;
+      color: #ffffff;
+      margin-bottom: 50px;
+      animation: bounce 2s infinite;
     }
 
-    .btn:hover {
-      background-color: #36a172;
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+      }
+      40% {
+        transform: translateY(-10px);
+      }
+      60% {
+        transform: translateY(-5px);
+      }
     }
 
-    .widget {
-      margin-top: 50px;
+    section {
+      padding: 50px;
+      background-color: #252536;
+      margin: 30px 10px;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+      transition: transform 0.3s ease;
+    }
+
+    section:hover {
+      transform: scale(1.05);
+    }
+
+    h2 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+      color: #42b983;
+    }
+
+    p {
+      font-size: 1.2rem;
+    }
+
+    .more-info {
+      background-image: linear-gradient(to bottom right, #3e3e5b, #252536);
+      padding-top: 30px;
     }
   </style>
 </head>
@@ -58,11 +81,31 @@
   <div class="container">
     <h1>Welcome to Jarvis AI</h1>
     <p>Your intelligent assistant for a smarter future.</p>
-    <a href="#get-started" class="btn">Get Started</a>
-    <div class="widget">
-      <elevenlabs-convai agent-id="REm91TaE5uKbuRxrBDCn"></elevenlabs-convai>
-      <script src="https://elevenlabs.io/convai-widget/index.js" async type="text/javascript"></script>
-    </div>
+    <p class="scroll-message">Scroll down for more info ↓</p>
+  </div>
+  
+  <div class="more-info">
+    <section>
+      <h2>About Jarvis AI</h2>
+      <p>Jarvis AI is a cutting-edge virtual assistant built to simplify your life. Whether it's managing tasks, generating ideas, or assisting with information, Jarvis is here to help.</p>
+    </section>
+    <section>
+      <h2>Smart Features</h2>
+      <p>Jarvis offers voice-activated commands, advanced language understanding, and seamless integration with your devices to make everyday tasks effortless.</p>
+    </section>
+    <section>
+      <h2>Why Choose Jarvis AI?</h2>
+      <p>With a sleek interface and personalized recommendations, Jarvis AI adapts to your needs, ensuring an intuitive and enjoyable experience.</p>
+    </section>
+    <section>
+      <h2>Get Started</h2>
+      <p>Experience the future of technology by integrating Jarvis AI into your life today.</p>
+    </section>
+  </div>
+
+  <div class="widget">
+    <elevenlabs-convai agent-id="REm91TaE5uKbuRxrBDCn"></elevenlabs-convai>
+    <script src="https://elevenlabs.io/convai-widget/index.js" async type="text/javascript"></script>
   </div>
 </body>
 </html>
