@@ -13,10 +13,34 @@
       scroll-behavior: smooth;
     }
 
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background-color: #252536;
+      padding: 15px 0;
+      text-align: center;
+      z-index: 1000;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #42b983;
+      margin: 0 15px;
+      font-size: 1rem;
+      font-weight: bold;
+    }
+
+    nav a:hover {
+      color: #36a172;
+    }
+
     .container {
       text-align: center;
       max-width: 600px;
-      margin: 10vh auto;
+      margin: 15vh auto 5vh;
+      padding: 0 20px;
     }
 
     .container h1 {
@@ -66,13 +90,25 @@
       }
     }
 
+    .more-info {
+      background-image: linear-gradient(to bottom right, #3e3e5b, #252536);
+      padding: 30px 20px;
+    }
+
     section {
       padding: 50px;
       background-color: #252536;
       margin: 30px 10px;
       border-radius: 10px;
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
-      transition: transform 0.3s ease;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.6s ease-in-out;
+    }
+
+    section.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     section:hover {
@@ -89,21 +125,42 @@
       font-size: 1.2rem;
     }
 
-    .more-info {
-      background-image: linear-gradient(to bottom right, #3e3e5b, #252536);
-      padding-top: 30px;
+    .scroll-top-btn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #42b983;
+      color: #1e1e2f;
+      border: none;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      cursor: pointer;
+      font-size: 1.5rem;
+      display: none;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+    }
+
+    .scroll-top-btn:hover {
+      background-color: #36a172;
     }
   </style>
 </head>
 <body>
-  <div class="container">
+  <nav>
+    <a href="#home">Home</a>
+    <a href="#more-info">More Info</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <div id="home" class="container">
     <h1>Welcome to Jarvis AI</h1>
     <p>Your intelligent assistant for a smarter future.</p>
     <a href="#more-info" class="btn">Get Started</a>
     <p class="scroll-message">Or scroll down for more info ↓</p>
   </div>
   
-  <div class="more-info" id="more-info">
+  <div id="more-info" class="more-info">
     <section>
       <h2>About Jarvis AI</h2>
       <p>Jarvis AI is a cutting-edge virtual assistant built to simplify your life. Whether it's managing tasks, generating ideas, or assisting with information, Jarvis is here to help.</p>
@@ -116,15 +173,47 @@
       <h2>Why Choose Jarvis AI?</h2>
       <p>With a sleek interface and personalized recommendations, Jarvis AI adapts to your needs, ensuring an intuitive and enjoyable experience.</p>
     </section>
-    <section>
+    <section id="contact">
       <h2>Get Started</h2>
       <p>Experience the future of technology by integrating Jarvis AI into your life today.</p>
     </section>
   </div>
 
+  <button class="scroll-top-btn" onclick="scrollToTop()">↑</button>
+
   <div class="widget">
     <elevenlabs-convai agent-id="REm91TaE5uKbuRxrBDCn"></elevenlabs-convai>
     <script src="https://elevenlabs.io/convai-widget/index.js" async type="text/javascript"></script>
   </div>
+
+  <script>
+    // Show/hide scroll-to-top button
+    const scrollBtn = document.querySelector('.scroll-top-btn');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 300) {
+        scrollBtn.style.display = 'block';
+      } else {
+        scrollBtn.style.display = 'none';
+      }
+    });
+
+    // Scroll-to-top functionality
+    function scrollToTop() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Fade-in sections on scroll
+    const sections = document.querySelectorAll('section');
+    const revealSections = () => {
+      sections.forEach(section => {
+        const sectionTop = section.getBoundingClientRect().top;
+        if (sectionTop < window.innerHeight - 50) {
+          section.classList.add('visible');
+        }
+      });
+    };
+    window.addEventListener('scroll', revealSections);
+    window.addEventListener('load', revealSections);
+  </script>
 </body>
 </html>
