@@ -3,150 +3,66 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Jarvis AI Interface</title>
-  
-  <!-- Google Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
-  
-  <!-- CSS Styles -->
+  <title>Jarvis AI</title>
   <style>
-    /* General Styling */
     body {
-      font-family: 'Orbitron', sans-serif;
       margin: 0;
-      padding: 0;
-      background: radial-gradient(circle, #001f3f, #000814);
-      color: #00d8ff;
-      scroll-behavior: smooth; /* Smooth scrolling enabled */
-    }
-
-    /* Section Styling */
-    section {
+      font-family: Arial, sans-serif;
+      background-color: #1e1e2f;
+      color: #ffffff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
+    }
+
+    .container {
       text-align: center;
+      max-width: 600px;
     }
 
-    /* Header Section */
-    #home {
-      animation: pulse 2s infinite alternate;
+    .container h1 {
+      font-size: 3rem;
+      margin-bottom: 20px;
+      color: #42b983;
     }
 
-    h1 {
-      font-size: 3.5em;
-      font-weight: 700;
-      margin: 0.5em 0;
-      text-shadow: 0 0 25px #00d8ff, 0 0 50px #005f73;
+    .container p {
+      font-size: 1.2rem;
+      margin-bottom: 40px;
     }
 
-    p {
-      font-size: 1.3em;
-      font-weight: 400;
-      margin-bottom: 2em;
-    }
-
-    /* Call Box Section */
-    #call-box {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      background: rgba(0, 20, 40, 0.85);
-      border: 2px solid #00d8ff;
-      border-radius: 15px;
-      width: 60%;
-      max-width: 500px;
-      padding: 2em;
-      box-shadow: 0 0 30px #00b0e0, 0 0 60px #00d8ff;
-      animation: blue-pulse 3s infinite alternate;
-      text-align: center;
-    }
-
-    #call-box button {
-      background-color: #00d8ff;
-      color: #000814;
+    .btn {
+      display: inline-block;
+      padding: 10px 20px;
+      font-size: 1rem;
+      color: #1e1e2f;
+      background-color: #42b983;
       border: none;
-      padding: 1em 2em;
-      border-radius: 10px;
-      font-size: 1.2em;
-      cursor: pointer;
-      transition: background-color 0.3s ease, transform 0.2s ease;
-    }
-
-    #call-box button:hover {
-      background-color: #1f6feb;
-      transform: scale(1.1);
-      box-shadow: 0 0 20px #1f6feb;
-    }
-
-    /* Scroll Down Link */
-    .scroll-down {
-      color: #00d8ff;
-      font-size: 1.2em;
-      font-weight: bold;
+      border-radius: 5px;
       cursor: pointer;
       text-decoration: none;
-      transition: color 0.3s ease-in-out;
+      font-weight: bold;
     }
 
-    .scroll-down:hover {
-      color: #1f6feb;
+    .btn:hover {
+      background-color: #36a172;
     }
 
-    /* Animations */
-    @keyframes pulse {
-      from {
-        text-shadow: 0 0 25px #00d8ff, 0 0 50px #005f73;
-      }
-      to {
-        text-shadow: 0 0 35px #00b0e0, 0 0 70px #00d8ff;
-      }
-    }
-
-    @keyframes blue-pulse {
-      from {
-        box-shadow: 0 0 30px #00b0e0, 0 0 60px #00d8ff;
-      }
-      to {
-        box-shadow: 0 0 40px #00d8ff, 0 0 80px #00b0e0;
-      }
+    .widget {
+      margin-top: 50px;
     }
   </style>
 </head>
 <body>
-  <!-- Home Section -->
-  <section id="home">
-    <h1>Jarvis AI Interface</h1>
-    <p>Your futuristic assistant is online and ready.</p>
-    <a href="#call-box" class="scroll-down">Scroll Down to Activate</a>
-  </section>
-  
-  <!-- Call Box Section -->
-  <section id="call-box">
-    <div id="big-call-box">
-      <p>Activate Jarvis with one powerful click.</p>
-      <button id="activate-button">Activate Now</button>
+  <div class="container">
+    <h1>Welcome to Jarvis AI</h1>
+    <p>Your intelligent assistant for a smarter future.</p>
+    <a href="#get-started" class="btn">Get Started</a>
+    <div class="widget">
+      <elevenlabs-convai agent-id="REm91TaE5uKbuRxrBDCn"></elevenlabs-convai>
+      <script src="https://elevenlabs.io/convai-widget/index.js" async type="text/javascript"></script>
     </div>
-
-    <!-- Eleven Labs Widget -->
-    <elevenlabs-convai agent-id="REm91TaE5uKbuRxrBDCn"></elevenlabs-convai>
-    <script src="https://elevenlabs.io/convai-widget/index.js" async type="text/javascript"></script>
-  </section>
-
-  <script>
-    // JavaScript to Trigger Eleven Labs Widget
-    document.getElementById('activate-button').addEventListener('click', () => {
-      // Assuming Eleven Labs provides an API or method to start the agent
-      const widget = document.querySelector('elevenlabs-convai');
-      if (widget) {
-        widget.startAgent(); // Replace this with the actual method to activate the agent if different
-      } else {
-        alert('Error: Eleven Labs widget not found.');
-      }
-    });
-  </script>
+  </div>
 </body>
 </html>
