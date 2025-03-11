@@ -10,11 +10,12 @@
   
   <!-- CSS Styles -->
   <style>
+    /* General Styling */
     body {
       font-family: 'Orbitron', sans-serif;
       margin: 0;
       padding: 0;
-      background: #020d1f;
+      background: radial-gradient(circle, #001f3f, #000814);
       color: #00d8ff;
       display: flex;
       flex-direction: column;
@@ -25,11 +26,13 @@
       overflow: hidden;
     }
 
+    /* Heading Styling */
     h1 {
-      font-size: 3em;
+      font-size: 3.5em;
       font-weight: 700;
       margin: 0.5em 0;
-      text-shadow: 0 0 15px #00d8ff, 0 0 30px #00b0e0;
+      text-shadow: 0 0 20px #00d8ff, 0 0 40px #005f73;
+      animation: pulse 2s infinite alternate;
     }
 
     p {
@@ -38,15 +41,26 @@
       margin: 0.5em 0 2em;
     }
 
+    /* Widget Container Styling */
     .widget-container {
-      background: rgba(0, 0, 0, 0.7);
+      background: rgba(0, 20, 40, 0.8);
       border: 2px solid #00d8ff;
       border-radius: 15px;
       padding: 2em;
-      box-shadow: 0 0 20px #00b0e0, 0 0 40px #00d8ff;
-      animation: blue-glow 2s infinite alternate;
+      box-shadow: 0 0 30px #00b0e0, 0 0 60px #00d8ff;
+      animation: blue-pulse 3s infinite alternate;
+      position: relative;
     }
 
+    /* Futuristic Divider */
+    .divider {
+      width: 80%;
+      height: 1px;
+      background: linear-gradient(to right, transparent, #00d8ff, transparent);
+      margin: 2em auto;
+    }
+
+    /* Footer Styling */
     footer {
       margin-top: 2em;
       font-size: 0.9em;
@@ -64,28 +78,39 @@
       text-decoration: underline;
     }
 
-    @keyframes blue-glow {
+    /* Animations */
+    @keyframes pulse {
       from {
-        box-shadow: 0 0 20px #00b0e0, 0 0 40px #00d8ff;
+        text-shadow: 0 0 20px #00d8ff, 0 0 40px #005f73;
       }
       to {
-        box-shadow: 0 0 30px #00d8ff, 0 0 60px #00b0e0;
+        text-shadow: 0 0 30px #00b0e0, 0 0 60px #00d8ff;
+      }
+    }
+
+    @keyframes blue-pulse {
+      from {
+        box-shadow: 0 0 30px #00b0e0, 0 0 60px #00d8ff;
+      }
+      to {
+        box-shadow: 0 0 40px #00d8ff, 0 0 80px #00b0e0;
       }
     }
   </style>
 </head>
 <body>
   <h1>Jarvis AI Interface</h1>
-  <p>Your personal AI assistant is online. Interact below:</p>
+  <p>Your futuristic assistant is online and ready.</p>
   
   <div class="widget-container">
-    <!-- Jarvis Widget -->
     <elevenlabs-convai agent-id="REm91TaE5uKbuRxrBDCn"></elevenlabs-convai>
     <script src="https://elevenlabs.io/convai-widget/index.js" async type="text/javascript"></script>
   </div>
 
+  <div class="divider"></div>
+
   <footer>
-    <p>Designed for your futuristic needs by <a href="#">You</a>.</p>
+    <p>Crafted with precision by <a href="#">You</a>.</p>
   </footer>
 </body>
 </html>
