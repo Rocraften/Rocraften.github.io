@@ -3,70 +3,89 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Jarvis AI</title>
+  <title>Jarvis AI Interface</title>
   
   <!-- Google Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
   
   <!-- CSS Styles -->
   <style>
     body {
-      font-family: 'Roboto', sans-serif;
+      font-family: 'Orbitron', sans-serif;
       margin: 0;
       padding: 0;
-      background: linear-gradient(135deg, #6a11cb, #2575fc);
-      color: white;
+      background: #020d1f;
+      color: #00d8ff;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       min-height: 100vh;
       text-align: center;
+      overflow: hidden;
     }
 
     h1 {
       font-size: 3em;
       font-weight: 700;
       margin: 0.5em 0;
+      text-shadow: 0 0 15px #00d8ff, 0 0 30px #00b0e0;
     }
 
     p {
-      font-size: 1.5em;
-      font-weight: 300;
+      font-size: 1.3em;
+      font-weight: 400;
       margin: 0.5em 0 2em;
     }
 
     .widget-container {
-      background: rgba(255, 255, 255, 0.1);
+      background: rgba(0, 0, 0, 0.7);
+      border: 2px solid #00d8ff;
       border-radius: 15px;
       padding: 2em;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 0 20px #00b0e0, 0 0 40px #00d8ff;
+      animation: blue-glow 2s infinite alternate;
+    }
+
+    footer {
+      margin-top: 2em;
+      font-size: 0.9em;
+      color: #007a99;
     }
 
     a {
-      color: #00ffcc;
+      color: #00b0e0;
       text-decoration: none;
       font-weight: 700;
     }
-    
+
     a:hover {
-      color: #00ffaa;
+      color: #00d8ff;
       text-decoration: underline;
+    }
+
+    @keyframes blue-glow {
+      from {
+        box-shadow: 0 0 20px #00b0e0, 0 0 40px #00d8ff;
+      }
+      to {
+        box-shadow: 0 0 30px #00d8ff, 0 0 60px #00b0e0;
+      }
     }
   </style>
 </head>
 <body>
-  <h1>Welcome to the Jarvis</h1>
-  <p>Interact with the AI agent below and have some fun!</p>
+  <h1>Jarvis AI Interface</h1>
+  <p>Your personal AI assistant is online. Interact below:</p>
   
   <div class="widget-container">
-    <!-- Eleven Labs Convai Widget -->
+    <!-- Jarvis Widget -->
     <elevenlabs-convai agent-id="REm91TaE5uKbuRxrBDCn"></elevenlabs-convai>
     <script src="https://elevenlabs.io/convai-widget/index.js" async type="text/javascript"></script>
   </div>
 
   <footer>
-    <p>Made with ♥ by <a href="#">Rocraften!</a></p>
+    <p>Designed for your futuristic needs by <a href="#">You</a>.</p>
   </footer>
 </body>
 </html>
