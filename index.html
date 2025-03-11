@@ -10,6 +10,7 @@
       font-family: Arial, sans-serif;
       background-color: #1e1e2f;
       color: #ffffff;
+      scroll-behavior: smooth;
     }
 
     .container {
@@ -26,13 +27,30 @@
 
     .container p {
       font-size: 1.2rem;
-      margin-bottom: 40px;
+      margin-bottom: 20px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 10px 20px;
+      font-size: 1rem;
+      color: #1e1e2f;
+      background-color: #42b983;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .btn:hover {
+      background-color: #36a172;
     }
 
     .scroll-message {
       font-size: 1rem;
       color: #ffffff;
-      margin-bottom: 50px;
+      margin-top: 30px;
       animation: bounce 2s infinite;
     }
 
@@ -81,10 +99,11 @@
   <div class="container">
     <h1>Welcome to Jarvis AI</h1>
     <p>Your intelligent assistant for a smarter future.</p>
-    <p class="scroll-message">Scroll down for more info ↓</p>
+    <a href="#more-info" class="btn">Get Started</a>
+    <p class="scroll-message">Or scroll down for more info ↓</p>
   </div>
   
-  <div class="more-info">
+  <div class="more-info" id="more-info">
     <section>
       <h2>About Jarvis AI</h2>
       <p>Jarvis AI is a cutting-edge virtual assistant built to simplify your life. Whether it's managing tasks, generating ideas, or assisting with information, Jarvis is here to help.</p>
