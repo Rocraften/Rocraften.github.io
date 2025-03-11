@@ -65,10 +65,12 @@
       cursor: pointer;
       text-decoration: none;
       font-weight: bold;
+      transition: all 0.3s ease-in-out; /* Added transition for smoothness */
     }
 
     .btn:hover {
       background-color: #36a172;
+      transform: scale(1.05); /* Slightly increase size on hover */
     }
 
     .scroll-message {
@@ -139,10 +141,12 @@
       font-size: 1.5rem;
       display: none;
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+      transition: all 0.3s ease-in-out; /* Added transition for smoothness */
     }
 
     .scroll-top-btn:hover {
       background-color: #36a172;
+      transform: scale(1.1); /* Slightly increase size on hover */
     }
 
     .contact {
@@ -183,10 +187,12 @@
       border-radius: 5px;
       cursor: pointer;
       font-weight: bold;
+      transition: all 0.3s ease-in-out; /* Added transition for smoothness */
     }
 
     .contact button:hover {
       background-color: #36a172;
+      transform: scale(1.05); /* Slightly increase size on hover */
     }
   </style>
 </head>
@@ -265,6 +271,12 @@
     };
     window.addEventListener('scroll', revealSections);
     window.addEventListener('load', revealSections);
+
+    // Home button logic (similar to scroll-to-top)
+    document.querySelector('nav a[href="#home"]').addEventListener('click', (e) => {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
   </script>
 </body>
 </html>
