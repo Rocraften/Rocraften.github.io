@@ -128,7 +128,7 @@
     .scroll-top-btn {
       position: fixed;
       bottom: 20px;
-      right: 20px;
+      left: 20px; /* Changed to left */
       background-color: #42b983;
       color: #1e1e2f;
       border: none;
@@ -144,11 +144,55 @@
     .scroll-top-btn:hover {
       background-color: #36a172;
     }
+
+    .contact {
+      background-color: #3e3e5b;
+      padding: 50px 20px;
+      text-align: center;
+    }
+
+    .contact h2 {
+      color: #42b983;
+    }
+
+    .contact p {
+      font-size: 1.2rem;
+      margin-bottom: 20px;
+    }
+
+    .contact form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .contact input, .contact textarea {
+      width: 80%;
+      padding: 10px;
+      margin-bottom: 20px;
+      border: none;
+      border-radius: 5px;
+    }
+
+    .contact button {
+      padding: 10px 20px;
+      font-size: 1rem;
+      color: #1e1e2f;
+      background-color: #42b983;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .contact button:hover {
+      background-color: #36a172;
+    }
   </style>
 </head>
 <body>
   <nav>
-    <a href="#home" onclick="scrollToTop()">Home</a> <!-- Updated -->
+    <a href="#home" onclick="scrollToTop()">Home</a>
     <a href="#more-info">More Info</a>
     <a href="#contact">Contact</a>
   </nav>
@@ -173,10 +217,17 @@
       <h2>Why Choose Jarvis AI?</h2>
       <p>With a sleek interface and personalized recommendations, Jarvis AI adapts to your needs, ensuring an intuitive and enjoyable experience.</p>
     </section>
-    <section id="contact">
-      <h2>Get Started</h2>
-      <p>Experience the future of technology by integrating Jarvis AI into your life today.</p>
-    </section>
+  </div>
+
+  <div id="contact" class="contact">
+    <h2>Contact Us</h2>
+    <p>Have any questions? Feel free to reach out!</p>
+    <form>
+      <input type="text" name="name" placeholder="Your Name">
+      <input type="email" name="email" placeholder="Your Email">
+      <textarea name="message" placeholder="Your Message"></textarea>
+      <button type="submit">Send</button>
+    </form>
   </div>
 
   <button class="scroll-top-btn" onclick="scrollToTop()">↑</button>
