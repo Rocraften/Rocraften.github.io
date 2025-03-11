@@ -17,70 +17,83 @@
       padding: 0;
       background: radial-gradient(circle, #001f3f, #000814);
       color: #00d8ff;
+      overflow-x: hidden;
+    }
+
+    /* Section Styling */
+    section {
+      height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      min-height: 100vh;
       text-align: center;
-      overflow: hidden;
     }
 
-    /* Heading Styling */
+    /* Header Section */
+    #home {
+      animation: pulse 2s infinite alternate;
+    }
+
     h1 {
-      font-size: 3.8em;
+      font-size: 3.5em;
       font-weight: 700;
       margin: 0.5em 0;
       text-shadow: 0 0 25px #00d8ff, 0 0 50px #005f73;
-      animation: pulse 2s infinite alternate;
     }
 
     p {
       font-size: 1.3em;
       font-weight: 400;
-      margin: 0.5em 0 2em;
+      margin-bottom: 2em;
     }
 
-    /* Widget Container Styling */
-    .widget-container {
+    /* Call Button */
+    .call-button {
+      background-color: #00d8ff;
+      color: #000814;
+      border: none;
+      padding: 1em 2em;
+      border-radius: 10px;
+      font-size: 1.2em;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    .call-button:hover {
+      background-color: #1f6feb;
+      transform: scale(1.1);
+      box-shadow: 0 0 20px #1f6feb;
+    }
+
+    /* Big Call Box Section */
+    #big-call-box {
       background: rgba(0, 20, 40, 0.85);
       border: 2px solid #00d8ff;
       border-radius: 15px;
       padding: 2em;
-      width: 80%;
-      max-width: 600px;
       box-shadow: 0 0 30px #00b0e0, 0 0 60px #00d8ff;
       animation: blue-pulse 3s infinite alternate;
-      position: relative;
     }
 
-    /* Futuristic Divider */
-    .divider {
-      width: 80%;
-      height: 2px;
-      background: linear-gradient(to right, transparent, #00d8ff, transparent);
-      margin: 2em auto;
-    }
-
-    /* Footer Styling */
-    footer {
-      margin-top: 2em;
-      font-size: 0.9em;
-      color: #007a99;
-    }
-
-    a {
-      color: #00b0e0;
+    /* Hover Effects for Buttons and Links */
+    a, .scroll-down {
+      color: #00d8ff;
       text-decoration: none;
       font-weight: 700;
+      cursor: pointer;
+      transition: color 0.3s ease-in-out;
     }
 
-    a:hover {
-      color: #00d8ff;
-      text-decoration: underline;
+    a:hover, .scroll-down:hover {
+      color: #1f6feb;
     }
 
-    /* Animations */
+    /* Smooth Scrolling */
+    html {
+      scroll-behavior: smooth;
+    }
+
     @keyframes pulse {
       from {
         text-shadow: 0 0 25px #00d8ff, 0 0 50px #005f73;
@@ -101,16 +114,22 @@
   </style>
 </head>
 <body>
-  <h1>Jarvis AI Interface</h1>
-  <p>Your futuristic assistant is online and ready.</p>
+  <!-- Home Section -->
+  <section id="home">
+    <h1>Jarvis AI Interface</h1>
+    <p>Your futuristic assistant is online and ready.</p>
+    <a href="#call-box" class="scroll-down">Scroll to Learn More</a>
+  </section>
   
-  <div class="widget-container">
-    <elevenlabs-convai agent-id="REm91TaE5uKbuRxrBDCn"></elevenlabs-convai>
-    <script src="https://elevenlabs.io/convai-widget/index.js" async type="text/javascript"></script>
-  </div>
+  <!-- Call Box Section -->
+  <section id="call-box">
+    <div id="big-call-box">
+      <p>Activate Jarvis with just one click.</p>
+      <button class="call-button">Activate Now</button>
+    </div>
+  </section>
 
-  <div class="divider"></div>
-
+  <!-- Footer -->
   <footer>
     <p>Crafted with precision by <a href="#">You</a>.</p>
   </footer>
