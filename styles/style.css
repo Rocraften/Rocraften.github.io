@@ -41,11 +41,6 @@ input[type="text"] {
   border-radius: 4px;
 }
 
-input[type="file"] {
-  display: block;
-  margin: 0 auto 20px auto;
-}
-
 button {
   display: block;
   margin: 20px auto;
@@ -61,7 +56,7 @@ button:hover {
   background-color: #45a049;
 }
 
-#preview {
+#skinsContainer {
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
@@ -70,20 +65,18 @@ button:hover {
 
 .skin-item {
   text-align: center;
+  width: 160px; /* adjust as needed */
 }
 
-.skin-item img {
-  width: 100px;
-  height: 100px;
-  object-fit: cover;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+.skin-item canvas {
   display: block;
   margin: 0 auto 5px auto;
+  border: 1px solid #ccc;
+  border-radius: 5px;
 }
-
+  
 .skin-item input[type="text"] {
-  width: 100px;
+  width: 100%;
   padding: 4px;
   text-align: center;
   border: 1px solid #ccc;
