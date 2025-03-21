@@ -5,11 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Rocraften | Login</title>
     <link rel="stylesheet" href="css/styles.css" />
-    <!-- AOS for fade effects -->
+    <!-- AOS for animations (optional) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
-    <!-- Firebase SDKs (using compat for simplicity) -->
-    <script src="https://www.gstatic.com/firebasejs/9.21.0/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.21.0/firebase-auth-compat.js"></script>
   </head>
   <body class="login-bg">
     <div class="login-container" data-aos="fade-up">
@@ -22,9 +19,9 @@
       <p id="error-message" class="error"></p>
     </div>
 
-    <!-- Firebase Configuration & Auth Script -->
-    <script src="js/firebase-config.js"></script>
-    <script src="js/auth.js"></script>
+    <!-- Load our Firebase configuration & authentication code as modules -->
+    <script type="module" src="js/auth.js"></script>
+    <!-- Initialize AOS animations -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
     <script>
       AOS.init({ once: true });
