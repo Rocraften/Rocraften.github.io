@@ -3,13 +3,13 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Rocraften Portfolio - Home</title>
+    <title>Rocraften | Home</title>
     <link rel="stylesheet" href="css/styles.css" />
-    <!-- AOS Animate On Scroll CSS -->
+    <!-- Include AOS (Animate on Scroll) for fade/pop effects -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
   </head>
   <body>
-    <!-- Header & Navigation -->
+    <!-- Navigation -->
     <header>
       <nav class="navbar">
         <div class="logo">Rocraften</div>
@@ -18,47 +18,30 @@
           <li><a href="assets.html">Assets</a></li>
           <li><a href="about.html">About</a></li>
           <li><a href="contact.html">Contact</a></li>
+          <li><a href="upload.html">Upload</a></li>
           <li><a href="login.html">Login</a></li>
         </ul>
       </nav>
-      <div class="hero">
-        <div class="hero-content" data-aos="fade-up">
-          <h1>Welcome to Rocraften's Portfolio</h1>
-          <p>Discover my cutting‑edge Minecraft addons, Roblox creations, Python projects—and more!</p>
-          <a href="assets.html" class="btn">Explore My Assets</a>
-        </div>
-      </div>
     </header>
 
-    <!-- Main Content -->
-    <main>
-      <section id="features" class="section">
-        <div class="container">
-          <h2 data-aos="fade-up">What I Do</h2>
-          <div class="cards">
-            <div class="card" data-aos="fade-up" data-aos-delay="100">
-              <h3>Minecraft Addons</h3>
-              <p>Custom mods and innovative addons for Minecraft Bedrock and Java.</p>
-            </div>
-            <div class="card" data-aos="fade-up" data-aos-delay="200">
-              <h3>Roblox Creations</h3>
-              <p>Scripts, builds, and even entire game blueprints for Roblox.</p>
-            </div>
-            <div class="card" data-aos="fade-up" data-aos-delay="300">
-              <h3>Python Projects</h3>
-              <p>Automation and creative Python projects that push boundaries.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-    </main>
+    <!-- Hero Section -->
+    <section class="hero" data-aos="fade-in">
+      <div class="hero-content">
+        <h1>Welcome to Rocraften's World</h1>
+        <p>
+          Explore innovative Minecraft addons, Roblox creations, Python projects, and more!
+        </p>
+        <a href="assets.html" class="btn">Discover My Assets</a>
+      </div>
+    </section>
 
-    <!-- Footer -->
+    <!-- (Other sections remain as you already have them) -->
+
     <footer>
       <p>&copy; 2023 Rocraften. All Rights Reserved.</p>
     </footer>
 
-    <!-- AOS Script -->
+    <!-- AOS Animation Script -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
     <script>
       AOS.init({ once: true });
