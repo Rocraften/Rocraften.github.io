@@ -7,11 +7,12 @@
     <link rel="stylesheet" href="styles/style.css" />
     <!-- Include JSZip Library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <!-- Include Skinview3d Library -->
+    <script src="https://cdn.jsdelivr.net/npm/skinview3d@latest/dist/skinview3d.min.js"></script>
   </head>
   <body>
     <div class="container">
       <h1>Minecraft Skin Pack Generator</h1>
-      <!-- Pack Name Input -->
       <div id="uploadSection">
         <label for="packName">Pack Name:</label>
         <input
@@ -21,12 +22,19 @@
           value="SkinPack"
         />
 
-        <h2>Upload Skins</h2>
-        <input type="file" id="fileInput" multiple accept=".png" />
-        <!-- Preview area for skin image and name input -->
-        <div id="preview"></div>
-        <button id="generatePack">Generate Skin Pack</button>
+        <h2>Skins</h2>
+        <div id="skinsContainer"></div>
+
+        <button id="addSkinBtn" type="button">Add Skin</button>
+        <button id="generatePack" type="button">Generate Skin Pack</button>
       </div>
+      <!-- Hidden file input used when clicking "Add Skin" -->
+      <input
+        type="file"
+        id="individualInput"
+        accept=".png"
+        style="display: none;"
+      />
     </div>
     <script src="scripts/app.js"></script>
   </body>
