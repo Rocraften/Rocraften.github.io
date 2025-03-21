@@ -1,1 +1,58 @@
-
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rocraften | Upload Asset</title>
+    <link rel="stylesheet" href="css/styles.css" />
+    <!-- Firebase SDKs for upload -->
+    <script src="https://www.gstatic.com/firebasejs/9.21.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.21.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.21.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.21.0/firebase-storage-compat.js"></script>
+  </head>
+  <body>
+    <header>
+      <nav class="navbar">
+        <div class="logo">Rocraften</div>
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="assets.html">Assets</a></li>
+          <li><a href="upload.html" class="active">Upload</a></li>
+          <li><a href="login.html">Account</a></li>
+        </ul>
+      </nav>
+    </header>
+    <main class="upload-page">
+      <div class="container" data-aos="fade-up">
+        <h2>Upload an Asset</h2>
+        <form id="upload-form">
+          <input type="text" id="title" placeholder="Asset Title" required />
+          <textarea id="description" placeholder="Asset Description"></textarea>
+          <select id="category">
+            <option value="Minecraft">Minecraft</option>
+            <option value="Roblox">Roblox</option>
+            <option value="Python">Python</option>
+          </select>
+          <input type="text" id="tags" placeholder="Tags (e.g., Minecraft Bedrock, Java, Roblox Script)" />
+          <input type="file" id="asset-file" required />
+          <button type="submit" class="btn">Upload Asset</button>
+        </form>
+        <p id="upload-message"></p>
+      </div>
+    </main>
+    <script src="js/firebase-config.js"></script>
+    <script src="js/upload.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>
+      AOS.init({ once: true });
+      
+      // Redirect to login if user is not signed in
+      auth.onAuthStateChanged((user) => {
+        if (!user) {
+          window.location.href = "login.html";
+        }
+      });
+    </script>
+  </body>
+</html>
