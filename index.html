@@ -28,12 +28,12 @@
         <button id="addSkinBtn" type="button">Add Skin</button>
         <button id="generatePack" type="button">Generate Skin Pack</button>
       </div>
-      <!-- Hidden file input used when clicking "Add Skin" -->
+      <!-- Updated hidden file input style so it’s off-screen instead of display: none -->
       <input
         type="file"
         id="individualInput"
         accept=".png"
-        style="display: none;"
+        style="opacity: 0; position: absolute; left: -9999px;"
       />
     </div>
     <script src="scripts/app.js"></script>
