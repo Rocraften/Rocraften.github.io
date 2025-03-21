@@ -5,14 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Rocraften | Upload Asset</title>
     <link rel="stylesheet" href="css/styles.css" />
-    <!-- Firebase SDKs for upload -->
-    <script src="https://www.gstatic.com/firebasejs/9.21.0/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.21.0/firebase-auth-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.21.0/firebase-firestore-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.21.0/firebase-storage-compat.js"></script>
   </head>
   <body>
     <header>
+      <!-- (Reuse your existing navigation) -->
       <nav class="navbar">
         <div class="logo">Rocraften</div>
         <ul class="nav-links">
@@ -23,6 +19,7 @@
         </ul>
       </nav>
     </header>
+    
     <main class="upload-page">
       <div class="container" data-aos="fade-up">
         <h2>Upload an Asset</h2>
@@ -41,18 +38,14 @@
         <p id="upload-message"></p>
       </div>
     </main>
-    <script src="js/firebase-config.js"></script>
-    <script src="js/upload.js"></script>
+
+    <!-- Load Firebase config & upload code as modules -->
+    <script type="module" src="js/upload.js"></script>
+    <!-- Optionally initialize any animations -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
     <script>
       AOS.init({ once: true });
-      
-      // Redirect to login if user is not signed in
-      auth.onAuthStateChanged((user) => {
-        if (!user) {
-          window.location.href = "login.html";
-        }
-      });
+      // Redirect to login if not signed in (this code is inside upload.js in modular style)
     </script>
   </body>
 </html>
