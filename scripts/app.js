@@ -2,18 +2,16 @@
 
 let skins = []; // Array to store each skin: { data, nameInput }
 
-// When "Add Skin" is clicked, trigger the hidden file input.
+// Trigger the hidden file input when "Add Skin" is clicked.
 document.getElementById("addSkinBtn").addEventListener("click", () => {
   console.log("Add Skin button clicked.");
   document.getElementById("individualInput").click();
 });
 
-// Listen for changes on the hidden file input.
-document
-  .getElementById("individualInput")
-  .addEventListener("change", handleIndividualUpload);
+// When a file is selected, handle the upload.
+document.getElementById("individualInput").addEventListener("change", handleIndividualUpload);
 
-// Listen for generating the skin pack.
+// Generate the skin pack when button is clicked.
 document.getElementById("generatePack").addEventListener("click", generateSkinPack);
 
 function handleIndividualUpload(event) {
@@ -23,12 +21,10 @@ function handleIndividualUpload(event) {
     console.log("No file selected.");
     return;
   }
-
   if (file.type !== "image/png") {
     alert("Only PNG files are allowed.");
     return;
   }
-
   const reader = new FileReader();
   reader.onload = function (e) {
     console.log("File read complete.");
@@ -62,12 +58,20 @@ function handleIndividualUpload(event) {
         height: canvas.height,
         skin: dataUrl
       });
-      // Add walking animation using the updated method.
-      viewer.animations.add(new skinview3d.WalkingAnimation());
+      // Try to add a walking animation if available.
+      try {
+        if (typeof skinview3d.WalkingAnimation === "function") {
+          viewer.animations.add(new skinview3d.WalkingAnimation());
+        } else {
+          console.warn("WalkingAnimation is not available, skipping animation.");
+        }
+      } catch (animError) {
+        console.error("Error adding walking animation:", animError);
+      }
       console.log("Skinview3d initialized successfully.");
     } catch (err) {
       console.error("Error initializing skin viewer:", err);
-      // Fallback: if skinview3d fails, display a flat image.
+      // Fallback: If skinview3d fails, display a flat image instead.
       const fallbackImg = document.createElement("img");
       fallbackImg.src = dataUrl;
       fallbackImg.style.width = "150px";
@@ -86,15 +90,14 @@ function handleIndividualUpload(event) {
   };
 
   reader.readAsDataURL(file);
-
-  // Reset the file input to allow for the same file to be chosen again if needed.
+  // Reset the file input so that the same file can be chosen again if needed.
   event.target.value = "";
 }
 
 function generateSkinPack() {
   const packNameInput = document.getElementById("packName");
   const packName = packNameInput.value.trim() || "SkinPack";
-
+  
   if (skins.length === 0) {
     alert("Please add at least one skin!");
     return;
@@ -103,15 +106,13 @@ function generateSkinPack() {
   const zip = new JSZip();
   const skinsArray = [];
 
-  // Loop over each skin to add the image and create the entry in skins.json.
+  // Loop over each skin and add its image to the ZIP at the root.
   skins.forEach((skinObj, index) => {
     const skinName = skinObj.nameInput.value.trim() || "Skin" + (index + 1);
     const fileName = skinName + ".png";
-    // Remove the base64 header.
     const base64Data = skinObj.data.replace(/^data:image\/png;base64,/, "");
-    // Add the skin image at the root of the ZIP.
     zip.file(fileName, base64Data, { base64: true });
-
+    
     skinsArray.push({
       localization_name: skinName,
       geometry: `geometry.${packName}.${skinName}`,
@@ -120,7 +121,7 @@ function generateSkinPack() {
     });
   });
 
-  // Build manifest.json.
+  // Build manifest.json (minified).
   const manifest = {
     format_version: 1,
     header: {
@@ -145,7 +146,7 @@ function generateSkinPack() {
   };
 
   // Build texts/en_US.lang file.
-  // Each skin produces exactly two lines:
+  // For each skin, output exactly two lines:
   // skinpack.[skin_name]=[skin_name]
   // skin.[skin_name].[skin_name]=[skin_name]
   let langContent = "";
@@ -154,14 +155,11 @@ function generateSkinPack() {
     langContent += `skin.${skin.localization_name}.${skin.localization_name}=${skin.localization_name}\n`;
   });
 
-  // Add manifest and skins.json to the root.
   zip.file("manifest.json", JSON.stringify(manifest));
   zip.file("skins.json", JSON.stringify(skinsJSON));
-
-  // Create the texts folder and add en_US.lang.
   zip.folder("texts").file("en_US.lang", langContent);
 
-  // Generate and download the .mcpack.
+  // Generate the final .mcpack file (a ZIP blob) and trigger the download.
   zip.generateAsync({ type: "blob" }).then((content) => {
     const a = document.createElement("a");
     a.href = URL.createObjectURL(content);
