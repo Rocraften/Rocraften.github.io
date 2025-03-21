@@ -1,44 +1,65 @@
 // scripts/app.js
 
-let skins = [];
+let skins = []; // Array to store each skin { data, nameInput }
 
-document.getElementById("fileInput").addEventListener("change", handleFileUpload);
-document.getElementById("generatePack").addEventListener("click", generateSkinPack);
+document.getElementById("addSkinBtn").addEventListener("click", () => {
+  document.getElementById("individualInput").click();
+});
 
-function handleFileUpload(event) {
-  const files = event.target.files;
-  skins = []; // reset array for new uploads
-  const preview = document.getElementById("preview");
-  preview.innerHTML = ""; // clear previous previews
+document
+  .getElementById("individualInput")
+  .addEventListener("change", handleIndividualUpload);
 
-  Array.from(files).forEach((file, index) => {
-    if (file.type === "image/png") {
-      const reader = new FileReader();
-      reader.onload = function (e) {
-        // Create a container for each skin preview and its name input
-        const container = document.createElement("div");
-        container.classList.add("skin-item");
+document
+  .getElementById("generatePack")
+  .addEventListener("click", generateSkinPack);
 
-        // Create an image element for preview
-        const img = document.createElement("img");
-        img.src = e.target.result;
+function handleIndividualUpload(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  if (file.type !== "image/png") {
+    alert("Only PNG files are allowed.");
+    return;
+  }
+  const reader = new FileReader();
+  reader.onload = function (e) {
+    // Create container for this skin
+    const skinsContainer = document.getElementById("skinsContainer");
+    const container = document.createElement("div");
+    container.classList.add("skin-item");
 
-        // Create an input for the skin name
-        const input = document.createElement("input");
-        input.type = "text";
-        input.placeholder = "Enter skin name";
-        input.value = `Skin${index + 1}`;
+    // Create a canvas element for 3D preview
+    const canvas = document.createElement("canvas");
+    canvas.width = 150;
+    canvas.height = 200;
+    container.appendChild(canvas);
 
-        container.appendChild(img);
-        container.appendChild(input);
-        preview.appendChild(container);
+    // Create an input for the skin name
+    const input = document.createElement("input");
+    input.type = "text";
+    input.placeholder = "Enter skin name";
+    input.value = `Skin${skins.length + 1}`;
+    container.appendChild(input);
 
-        // Save the data and reference to the input
-        skins.push({ data: e.target.result, nameInput: input });
-      };
-      reader.readAsDataURL(file);
-    }
-  });
+    // Append the container to the skins container
+    skinsContainer.appendChild(container);
+
+    // Initialize skinview3d viewer on the canvas with the skin data URL
+    const viewer = new skinview3d.SkinViewer({
+      canvas: canvas,
+      width: canvas.width,
+      height: canvas.height,
+      skin: e.target.result,
+      animation: new skinview3d.WalkingAnimation(),
+    });
+
+    // Store the skin data and reference to its name input
+    skins.push({ data: e.target.result, nameInput: input });
+  };
+  reader.readAsDataURL(file);
+
+  // Reset the input so that the same file can be chosen again if needed
+  event.target.value = "";
 }
 
 function generateSkinPack() {
@@ -46,74 +67,70 @@ function generateSkinPack() {
   const packName = packNameInput.value.trim() || "SkinPack";
 
   if (skins.length === 0) {
-    alert("Please upload at least one skin!");
+    alert("Please add at least one skin!");
     return;
   }
 
   const zip = new JSZip();
   const skinsArray = [];
 
-  // Process and add each skin image at the root of the pack
+  // Process each skin: add image file at the root and create skins.json entry.
   skins.forEach((skinObj, index) => {
     const skinName = skinObj.nameInput.value.trim() || `Skin${index + 1}`;
     const fileName = `${skinName}.png`;
-
-    // Remove the base64 header from the image data
     const base64Data = skinObj.data.replace(/^data:image\/png;base64,/, "");
-    // Add the skin image file directly to the root of the zip
     zip.file(fileName, base64Data, { base64: true });
 
-    // Prepare the skin entry for skins.json
     skinsArray.push({
       localization_name: skinName,
       geometry: `geometry.${packName}.${skinName}`,
       texture: fileName,
-      type: "free"
+      type: "free",
     });
   });
 
-  // Build manifest.json (without extra description, matching your provided sample)
+  // Build manifest.json
   const manifest = {
     format_version: 1,
     header: {
       name: packName,
       uuid: generateUUID(),
-      version: [1, 0, 0]
+      version: [1, 0, 0],
     },
     modules: [
       {
         type: "skin_pack",
         uuid: generateUUID(),
-        version: [1, 0, 0]
-      }
-    ]
+        version: [1, 0, 0],
+      },
+    ],
   };
 
   // Build skins.json
   const skinsJSON = {
     skins: skinsArray,
     serialize_name: packName,
-    localization_name: packName
+    localization_name: packName,
   };
 
-  // Build texts/en_US.lang content.
-  // Format based on your sample:
-  // skinpack.SkinName=SkinName
-  // skin.SkinName.Skin=SkinName (repeated twice for each skin)
-  let langContent = `skinpack.${packName}=${packName}\n`;
+  // Build texts/en_US.lang file.
+  // Each skin produces exactly two lines:
+  // skinpack.[skinName]=[skinName]
+  // skin.[skinName].[skinName]=[skinName]
+  let langContent = "";
   skinsArray.forEach((skin) => {
-    langContent += `skin.${packName}.${skin.localization_name}=${skin.localization_name}\n`;
-    langContent += `skin.${packName}.${skin.localization_name}=${skin.localization_name}\n`;
+    langContent += `skinpack.${skin.localization_name}=${skin.localization_name}\n`;
+    langContent += `skin.${skin.localization_name}.${skin.localization_name}=${skin.localization_name}\n`;
   });
 
-  // Add files at the zip root
+  // Add manifest and skins.json to the root of the ZIP.
   zip.file("manifest.json", JSON.stringify(manifest));
   zip.file("skins.json", JSON.stringify(skinsJSON));
 
-  // Create the "texts" folder and add en_US.lang inside
+  // Create texts folder and add en_US.lang inside.
   zip.folder("texts").file("en_US.lang", langContent);
 
-  // Generate the .mcpack file and trigger a download
+  // Generate the .mcpack and force download.
   zip.generateAsync({ type: "blob" }).then((content) => {
     const a = document.createElement("a");
     a.href = URL.createObjectURL(content);
@@ -123,9 +140,8 @@ function generateSkinPack() {
 }
 
 function generateUUID() {
-  // Simple UUID generator
   return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, (c) => {
-    const r = Math.random() * 16 | 0;
-    return (c === "x" ? r : (r & 0x3 | 0x8)).toString(16);
+    const r = (Math.random() * 16) | 0;
+    return (c === "x" ? r : (r & 0x3) | 0x8).toString(16);
   });
 }
