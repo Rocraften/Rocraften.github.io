@@ -3,96 +3,65 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>My Minecraft Addons Portfolio</title>
-    <link rel="stylesheet" href="styles.css" />
-    <!-- Include particles.js for cool background effects -->
-    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <title>Rocraften Portfolio - Home</title>
+    <link rel="stylesheet" href="css/styles.css" />
+    <!-- AOS Animate On Scroll CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
   </head>
   <body>
-    <!-- Particle container (background animation) -->
-    <div id="particles-js"></div>
-
-    <!-- Header with navigation -->
+    <!-- Header & Navigation -->
     <header>
-      <nav>
-        <h1>My Minecraft Addons</h1>
-        <ul>
-          <li><a href="#home">Home</a></li>
-          <li><a href="#projects">Addons</a></li>
-          <li><a href="#about">About Me</a></li>
-          <li><a href="#contact">Contact</a></li>
+      <nav class="navbar">
+        <div class="logo">Rocraften</div>
+        <ul class="nav-links">
+          <li><a href="index.html" class="active">Home</a></li>
+          <li><a href="assets.html">Assets</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="login.html">Login</a></li>
         </ul>
       </nav>
+      <div class="hero">
+        <div class="hero-content" data-aos="fade-up">
+          <h1>Welcome to Rocraften's Portfolio</h1>
+          <p>Discover my cutting‑edge Minecraft addons, Roblox creations, Python projects—and more!</p>
+          <a href="assets.html" class="btn">Explore My Assets</a>
+        </div>
+      </div>
     </header>
 
-    <!-- Home Section -->
-    <section id="home">
-      <div class="intro">
-        <h2>Welcome to My Portfolio</h2>
-        <p>
-          I create amazing Minecraft addons that enhance gameplay with crazy cool effects and innovative designs.
-        </p>
-      </div>
-    </section>
-
-    <!-- Projects / Addons Section -->
-    <section id="projects">
-      <h2>My Minecraft Addons</h2>
-      <div class="projects-container">
-        <!-- Project Card 1 -->
-        <div class="project-card">
-          <img src="images/addon1.jpg" alt="Addon 1" />
-          <div class="project-info">
-            <h3>Addon Title 1</h3>
-            <p>A brief description of Addon 1.</p>
-            <a href="https://link-to-addon1.com" target="_blank">Learn More</a>
+    <!-- Main Content -->
+    <main>
+      <section id="features" class="section">
+        <div class="container">
+          <h2 data-aos="fade-up">What I Do</h2>
+          <div class="cards">
+            <div class="card" data-aos="fade-up" data-aos-delay="100">
+              <h3>Minecraft Addons</h3>
+              <p>Custom mods and innovative addons for Minecraft Bedrock and Java.</p>
+            </div>
+            <div class="card" data-aos="fade-up" data-aos-delay="200">
+              <h3>Roblox Creations</h3>
+              <p>Scripts, builds, and even entire game blueprints for Roblox.</p>
+            </div>
+            <div class="card" data-aos="fade-up" data-aos-delay="300">
+              <h3>Python Projects</h3>
+              <p>Automation and creative Python projects that push boundaries.</p>
+            </div>
           </div>
         </div>
-        <!-- Project Card 2 -->
-        <div class="project-card">
-          <img src="images/addon2.jpg" alt="Addon 2" />
-          <div class="project-info">
-            <h3>Addon Title 2</h3>
-            <p>A brief description of Addon 2.</p>
-            <a href="https://link-to-addon2.com" target="_blank">Learn More</a>
-          </div>
-        </div>
-        <!-- You can add more project cards as needed -->
-      </div>
-    </section>
-
-    <!-- About Me Section -->
-    <section id="about">
-      <h2>About Me</h2>
-      <div class="about-container">
-        <img src="images/myphoto.jpg" alt="My Photo" />
-        <div class="about-text">
-          <p>
-            Hello! I'm [Your Name], a passionate developer and Minecraft addon creator. I design unique mods that transform Minecraft gameplay and add fun new features. I love experimenting with code, visuals, and user experience.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact">
-      <h2>Contact Me</h2>
-      <div class="contact-container">
-        <p>Interested in my addons or collaborating on a project? Get in touch:</p>
-        <ul>
-          <li>Email: <a href="mailto:your.email@example.com">your.email@example.com</a></li>
-          <li>Discord: <a href="https://discordapp.com/users/yourdiscordid" target="_blank">YourDiscord#1234</a></li>
-          <li>Twitter: <a href="https://twitter.com/yourtwitter" target="_blank">@yourtwitter</a></li>
-        </ul>
-      </div>
-    </section>
+      </section>
+    </main>
 
     <!-- Footer -->
     <footer>
-      <p>&copy; 2023 Your Name. All rights reserved.</p>
+      <p>&copy; 2023 Rocraften. All Rights Reserved.</p>
     </footer>
 
-    <!-- Include custom JavaScript -->
-    <script src="script.js"></script>
+    <!-- AOS Script -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>
+      AOS.init({ once: true });
+    </script>
   </body>
 </html>
