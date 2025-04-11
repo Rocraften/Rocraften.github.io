@@ -1,50 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Rocraften | Home</title>
-    <link rel="stylesheet" href="css/styles.css" />
-    <!-- Include AOS (Animate on Scroll) for fade/pop effects -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
-  </head>
-  <body>
-    <!-- Navigation -->
-    <header>
-      <nav class="navbar">
-        <div class="logo">Rocraften</div>
-        <ul class="nav-links">
-          <li><a href="index.html" class="active">Home</a></li>
-          <li><a href="assets.html">Assets</a></li>
-          <li><a href="about.html">About</a></li>
-          <li><a href="contact.html">Contact</a></li>
-          <li><a href="upload.html">Upload</a></li>
-          <li><a href="login.html">Login</a></li>
-        </ul>
-      </nav>
-    </header>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enhanced AI Chat Assistant</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="loading">Loading AI Assistant and Model...</div>
 
-    <!-- Hero Section -->
-    <section class="hero" data-aos="fade-in">
-      <div class="hero-content">
-        <h1>Welcome to Rocraften's World</h1>
-        <p>
-          Explore innovative Minecraft addons, Roblox creations, Python projects, and more!
-        </p>
-        <a href="assets.html" class="btn">Discover My Assets</a>
-      </div>
-    </section>
+    <div class="chat-container" style="display: none;"> <div class="chat-header">
+            Enhanced AI Assistant
+        </div>
 
-    <!-- (Other sections remain as you already have them) -->
+        <div id="chat-messages">
+            <div id="typing-indicator" class="message bot-message" style="display: none;">
+                 <div class="message-content">
+                    <div class="typing-dot"></div>
+                    <div class="typing-dot"></div>
+                    <div class="typing-dot"></div>
+                </div>
+                </div>
+        </div>
 
-    <footer>
-      <p>&copy; 2023 Rocraften. All Rights Reserved.</p>
-    </footer>
+        <div class="chat-input">
+            <input type="text" id="message-input" placeholder="Type your message..." disabled> <button id="send-button" title="Send Message" disabled> <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M22 2L11 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M22 2L15 22L11 13L2 9L22 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
+        </div>
+    </div>
 
-    <!-- AOS Animation Script -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
-    <script>
-      AOS.init({ once: true });
-    </script>
-  </body>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/universal-sentence-encoder"></script>
+    <script src="main.js"></script>
+</body>
 </html>
