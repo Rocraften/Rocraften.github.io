@@ -1,0 +1,243 @@
+/* General Body and Layout */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    background-color: #f4f7f9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #333;
+}
+
+/* Loading Indicator */
+#loading {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #555;
+    padding: 20px;
+}
+
+/* Chat Container */
+.chat-container {
+    width: 90%;
+    max-width: 700px;
+    height: 85vh;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    display: flex; /* Use flex here now, JS will unhide */
+    flex-direction: column;
+    overflow: hidden;
+}
+
+/* Chat Header */
+.chat-header {
+    background-color: #007bff;
+    color: white;
+    padding: 18px;
+    text-align: center;
+    font-size: 1.3rem;
+    font-weight: 600;
+    flex-shrink: 0; /* Prevent header from shrinking */
+}
+
+/* Chat Messages Area */
+#chat-messages {
+    flex: 1; /* Take available space */
+    overflow-y: auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column; /* Stack messages vertically */
+}
+
+/* Individual Message Styling */
+.message {
+    margin-bottom: 12px; /* Base spacing */
+    display: flex;
+    align-items: flex-end; /* Align timestamp and bubble bottom */
+    max-width: 85%; /* Limit width */
+}
+
+.user-message {
+    justify-content: flex-end;
+    margin-left: auto; /* Push user messages right */
+}
+
+.bot-message {
+    justify-content: flex-start;
+    margin-right: auto; /* Push bot messages left */
+}
+
+.message-content {
+    padding: 12px 18px;
+    border-radius: 20px;
+    word-wrap: break-word;
+    line-height: 1.5;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    margin: 0 5px; /* Space between bubble and timestamp */
+    order: 1; /* Ensure content comes before timestamp visually if flex direction reversed */
+}
+
+/* Timestamp Styling */
+.timestamp {
+    font-size: 0.7rem;
+    color: #999;
+    margin: 0 5px; /* Space around timestamp */
+    white-space: nowrap;
+    align-self: flex-end; /* Align to bottom */
+    padding-bottom: 5px; /* Align roughly with bottom of text */
+    order: 2; /* Ensure timestamp comes after content visually */
+}
+
+.user-message .timestamp {
+    order: 0; /* Timestamp first for user */
+}
+.user-message .message-content {
+    order: 1; /* Bubble after timestamp for user */
+}
+
+
+.user-message .message-content {
+    background-color: #007bff;
+    color: white;
+    border-bottom-right-radius: 5px;
+}
+
+.bot-message .message-content {
+    background-color: #e9e9eb;
+    color: #333;
+    border-bottom-left-radius: 5px;
+}
+
+
+/* Code Block Styling */
+.bot-message .message-content pre {
+    background-color: #2d2d2d;
+    color: #f8f8f2;
+    padding: 15px;
+    padding-top: 25px; /* More padding at top for label */
+    border-radius: 8px;
+    overflow-x: auto;
+    margin: 12px 0;
+    font-family: 'Consolas', 'Monaco', 'Courier New', Courier, monospace; /* Better monospace fonts */
+    font-size: 0.9rem;
+    position: relative;
+    white-space: pre; /* Preserve whitespace */
+}
+
+.bot-message .message-content pre code {
+   display: block; /* Ensure code takes block layout */
+   /* white-space: pre; is handled by pre */
+}
+
+.bot-message .message-content .code-language-label {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    font-size: 0.75rem;
+    color: #aaa;
+    text-transform: uppercase;
+}
+
+/* Chat Input Area */
+.chat-input {
+    display: flex;
+    padding: 15px 20px;
+    border-top: 1px solid #e0e0e0;
+    background-color: #f8f9fa;
+    flex-shrink: 0; /* Prevent input area from shrinking */
+}
+
+#message-input {
+    flex: 1;
+    padding: 12px 18px;
+    border: 1px solid #ccc;
+    border-radius: 22px;
+    outline: none;
+    font-size: 1rem;
+    margin-right: 10px;
+    transition: border-color 0.2s ease;
+}
+#message-input:focus {
+    border-color: #007bff;
+}
+#message-input:disabled {
+   background-color: #f0f0f0; /* Slightly different disabled color */
+   cursor: not-allowed;
+}
+
+/* Send Button */
+#send-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 44px;
+    height: 44px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.2s ease, opacity 0.2s ease;
+    flex-shrink: 0; /* Prevent button shrinking */
+}
+
+#send-button:hover:not(:disabled) {
+    background-color: #0056b3;
+}
+#send-button:disabled {
+   background-color: #cccccc; /* More prominent disabled color */
+   cursor: not-allowed;
+   opacity: 0.7;
+}
+#send-button svg {
+    width: 20px;
+    height: 20px;
+    stroke: white; /* Ensure icon color is white */
+}
+
+/* Typing Indicator */
+#typing-indicator {
+    padding: 0; /* Remove wrapper padding */
+    margin-bottom: 18px; /* Consistent spacing */
+    min-height: 40px; /* Reserve space */
+    /* align-items: flex-end; Inherited */
+    /* justify-content: flex-start; Inherited */
+}
+#typing-indicator .message-content {
+     background-color: #e9e9eb;
+     color: #333;
+     padding: 10px 15px;
+     border-radius: 18px;
+     border-bottom-left-radius: 5px;
+     display: inline-flex; /* Make it wrap content */
+     align-items: center;
+     box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+     margin: 0 5px; /* Add margin consistent with bubbles */
+     /* order: 1; Inherited */
+}
+/* Remove timestamp space for typing indicator if not used */
+#typing-indicator .timestamp {
+    display: none;
+}
+
+
+.typing-dot {
+    width: 8px;
+    height: 8px;
+    background-color: #999;
+    border-radius: 50%;
+    margin: 0 2px;
+    animation: typing-animation 1.4s infinite ease-in-out both;
+}
+
+.typing-dot:nth-child(1) { animation-delay: 0.0s; }
+.typing-dot:nth-child(2) { animation-delay: 0.2s; }
+.typing-dot:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes typing-animation {
+    0%, 60%, 100% { transform: translateY(0); opacity: 0.5; }
+    30% { transform: translateY(-6px); opacity: 1; }
+}
