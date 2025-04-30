@@ -102,7 +102,7 @@
         }
         a:hover {
             color: #4682b4; /* SteelBlue - darker hover */
-            text-decoration: underline;
+            /* text-decoration: underline; */
         }
 
         /* --- Lists --- */
@@ -120,6 +120,28 @@
         ul li strong {
             color: var(--text-dark);
         }
+
+        /* --- Contact Icons --- */
+        #contact .social-links {
+            text-align: center; /* Center icons */
+            margin-top: 15px;
+        }
+        #contact .social-links a {
+            display: inline-block; /* Allows margins */
+            margin: 0 10px; /* Spacing between icons */
+            transition: transform 0.2s ease; /* Slight scale effect on hover */
+        }
+         #contact .social-links a:hover {
+            transform: scale(1.15); /* Enlarge icon slightly more on hover */
+         }
+        #contact .social-links img {
+            width: 32px; /* Icon size */
+            height: 32px; /* Icon size */
+            vertical-align: middle; /* Align icons nicely */
+            /* Removed inline background styles */
+            /* Icons will use their default SVG colors */
+        }
+
 
         /* --- Footer --- */
         footer {
@@ -146,7 +168,7 @@
             <a href="#about">About Me</a>
             <a href="#skills">Skills</a>
             <a href="#projects">Projects</a>
-            <a href="#redirects">Downloads</a>
+            <a href="#downloads">Downloads</a>
             <a href="#contact">Contact</a>
         </nav>
 
@@ -161,48 +183,62 @@
         <section id="skills">
             <h2>My Skills</h2>
             <ul>
-                <li><strong>Minecraft:</strong> I make a whole lot of minecraft stuff like addons, texture packs, skins and more!.</li>
-                <li><strong>Roblox:</strong> Small Scripting with Lua, Building, UI design and modeling..</li>
-                <li><strong>Python:</strong> I make games using pygame, I make apps, assets and a whole lot more.</li>
-                <li><strong>3D Modeling:</strong> I can model in software like Blender and Blockbench, I make a lot of stuff like renders I also make assets.</li>
-                <li><strong>Other Stuff:</strong> I also do some pixel art but it's not my strong suit..</li>
+                <li><strong>Minecraft:</strong> I create a wide variety of Minecraft content, including addons, texture packs, skins, and more.</li>
+                <li><strong>Roblox:</strong> Roblox development, including basic Lua scripting, building, UI design, and modeling.</li>
+                <li><strong>Python:</strong> Developing games with Pygame, creating applications, assets, and various other Python projects.</li>
+                <li><strong>3D Modeling:</strong> 3D modeling using software like Blender and Blockbench, creating renders and assets.</li>
+                <li><strong>Other Stuff:</strong> I also create some pixel art, though it's not my primary focus.</li>
             </ul>
         </section>
 
         <section id="projects">
-            <h2>Stuff I've made</h2>
+            <h2>Projects</h2> <!-- Changed heading -->
             <p>Here are some things I've worked on:</p>
-            <!-- Add links or descriptions of your projects. You could use list items too. -->
             <ul>
-                <li><strong>Experiments For Education</strong> I made this minecraft pack to add experiments to edu.</li>
-                <li><strong>TySource:</strong> I made this for the open source roblox cumunity it's a full tycoon for FREE!</li>
-                <li><strong>Don't Get Eaten:</strong> An open source python game using pygame.</li>
-                <li><strong>Project 4:</strong> I can make a donut in 2 seconds🍩</li>
+                <li><strong>Experiments For Education:</strong> A Minecraft addon designed to add educational experiments, compatible with the Education Edition.</li>
+                <li><strong>TySource:</strong> A free, open-source tycoon template developed for the Roblox community.</li>
+                <li><strong>Don't Get Eaten:</strong> An open-source game developed using Python and Pygame.</li>
+                <li><strong>Donut Master:</strong> Proficient in creating the classic Blender donut render quickly! 🍩</li>
             </ul>
         </section>
 
-        <section id="redirects">
-            <h2>Downloads / Links (Redirect System)</h2>
-            <p>Use these links for easy access to my latest downloads. They will automatically redirect you to the current version:</p>
-            <ul>
-                <li><a href="#my-addon">Download My Awesome Minecraft Addon</a></li>
-                <li><a href="#roblox-asset">Get My Cool Roblox Asset</a></li>
-                <li><a href="#another-link">Another Redirect Link</a></li>
-                <!-- Add more links here using the #hash format -->
-            </ul>
-            <p><small>These links use a simple redirect system built into this page.</small></p>
+        <section id="downloads">
+            <h2>Downloads</h2>
+            <p>Check out the Projects section or my profiles linked below for downloads!</p>
+            <!-- Example: <p><a href="redirect-mceducation.html">Download Experiments for Education Addon</a></p> -->
+            <!-- Example: <p><a href="https://link-to-download-page.com">Download My Other Thing</a></p> -->
         </section>
 
         <section id="contact">
             <h2>Get In Touch</h2>
-            <p>
-                You can find me on:
-                <!-- Replace # with actual links -->
-                <a href="#" target="_blank">Discord - Rocraften222</a> |
-                <a href="#" target="_blank">Twitter - Rocraften</a> |
-                <a href="#" target="_blank">GitHub - Rocraften</a>
-                <a href="#" target="_blank">Email - Rocraften@outlook.com</a>
-            </p>
+            <p>You can find me on:</p>
+             <div class="social-links">
+                 <!-- Replace the href="#" with your actual profile links -->
+                 <!-- Icons sourced from Simple Icons (simpleicons.org) via jsDelivr CDN -->
+                 <!-- Inline background styles removed -->
+
+                 <a href="https://discord.com" target="_blank" title="Discord: Rocraften222">
+                     <img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/discord.svg" alt="Discord Icon" />
+                 </a>
+                 <a href="https://twitter.com/Rocraften" target="_blank" title="Twitter: @Rocraften">
+                     <img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/x.svg" alt="X (Twitter) Icon" />
+                 </a>
+                  <a href="https://github.com/Rocraften" target="_blank" title="GitHub: Rocraften">
+                     <img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/github.svg" alt="GitHub Icon" />
+                 </a>
+                 <a href="https://www.roblox.com/" target="_blank" title="Roblox Profile"> <!-- Add specific profile link later -->
+                     <img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/roblox.svg" alt="Roblox Icon" />
+                 </a>
+                 <a href="https://www.planetminecraft.com/" target="_blank" title="Planet Minecraft Profile"> <!-- Add specific profile link later -->
+                     <img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/planetminecraft.svg" alt="Planet Minecraft Icon" />
+                 </a>
+                 <a href="https://www.xbox.com/" target="_blank" title="Xbox Profile"> <!-- Add specific profile link later -->
+                     <img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/xbox.svg" alt="Xbox Icon" />
+                 </a>
+                 <a href="mailto:Rocraften@outlook.com" title="Email: Rocraften@outlook.com">
+                     <img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/microsoftoutlook.svg" alt="Email Icon" />
+                 </a>
+            </div>
         </section>
 
         <footer>
@@ -213,44 +249,6 @@
     <script>
         // --- Simple Copyright Year ---
         document.getElementById('year').textContent = new Date().getFullYear();
-
-        // --- Redirect System ---
-
-        // IMPORTANT: This is where you define your redirect links!
-        // Map the part after the '#' in your link (the 'key')
-        // to the actual URL (the 'value') you want users to be sent to.
-        const redirectMap = {
-            // Key (from href="#key"):   Value (Actual URL)
-            'my-addon':        'https://www.example.com/path/to/your/addon/v1.2.zip', // <-- UPDATE THIS URL
-            'roblox-asset':    'https://www.roblox.com/library/123456789/your-asset', // <-- UPDATE THIS URL
-            'another-link':    'https://github.com/yourusername',                     // <-- UPDATE THIS URL
-            // Add more redirects here as needed:
-            // 'some-other-key': 'https://some-other-website.com/resource'
-        };
-
-        function handleRedirect() {
-            // Get the part of the URL after the # symbol
-            const hash = window.location.hash.substring(1); // Remove the '#'
-
-            // Check if the hash exists as a key in our redirectMap
-            if (redirectMap[hash]) {
-                console.log(`Redirecting to: ${redirectMap[hash]}`); // For debugging
-                // If it exists, change the browser's location to the target URL
-                window.location.href = redirectMap[hash];
-            } else if (hash) {
-                // Optional: Handle cases where the hash exists but isn't in the map
-                console.log(`Redirect key "${hash}" not found.`);
-                // You could optionally show a message to the user here
-            }
-        }
-
-        // Run the redirect function when the page finishes loading
-        document.addEventListener('DOMContentLoaded', handleRedirect);
-
-        // Run the redirect function if the hash changes *after* the page has loaded
-        // (e.g., user clicks another # link on the same page)
-        window.addEventListener('hashchange', handleRedirect);
-
     </script>
 
 </body>
