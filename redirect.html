@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redirecting...</title>
+    <style>
+        /* Using similar dark theme variables */
+        :root {
+            --dark-bg: #0b111c;
+            --dark-container-bg: #1c2738;
+            --text-on-dark: #cdd5e0;
+            --icy-blue-medium: #87ceeb;
+            --icy-blue-dark: #63b3ed;
+            --error-color: #f56565; /* Red for errors */
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--text-on-dark);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .redirect-container {
+            background-color: var(--dark-container-bg);
+            padding: 30px 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+            border: 1px solid #2d3748;
+            max-width: 500px;
+        }
+
+        h1 {
+            color: var(--icy-blue-medium);
+            margin-top: 0;
+            margin-bottom: 15px;
+            font-size: 1.8em;
+        }
+
+        p {
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+
+        #countdown {
+            font-weight: bold;
+            font-size: 1.2em;
+            color: var(--icy-blue-dark);
+        }
+
+        #destination-url {
+            font-family: monospace;
+            word-break: break-all; /* Wrap long URLs */
+            color: #a0aec0; /* Muted color */
+            font-size: 0.9em;
+            display: block; /* Make it take its own line */
+            margin-top: 5px;
+            margin-bottom: 15px;
+        }
+
+        #fallback-link {
+            color: var(--icy-blue-dark);
+            text-decoration: none;
+            border-bottom: 1px dashed var(--icy-blue-dark);
+            transition: color 0.3s ease, border-bottom 0.3s ease;
+        }
+        #fallback-link:hover {
+            color: var(--icy-blue-light);
+            border-bottom: 1px solid var(--icy-blue-light);
+        }
+
+        .message {
+             margin-top: 20px;
+        }
+
+        .error {
+            color: var(--error-color);
+            font-weight: bold;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="redirect-container">
+        <div id="loading-info">
+            <h1>Please wait...</h1>
+            <p class="message">
+                You will be redirected in
+                <span id="countdown">5</span> seconds.
+            </p>
+            <p>Destination:</p>
+            <span id="destination-url">Loading...</span>
+            <p class="message">
+                If you are not redirected automatically,
+                <a id="fallback-link" href="#" rel="noopener noreferrer">click here</a>.
+            </p>
+        </div>
+
+        <div id="error-info" style="display: none;">
+            <h1>Redirect Error</h1>
+            <p id="error-message" class="message error">
+                Invalid link or key not found. Please check the URL.
+            </p>
+             <p class="message">
+                Go back to <a id="home-link" href="/">homepage</a>. <!-- Adjust href="/" if your main page is not index.html at the root -->
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // --- Configuration ---
+        const countdownSeconds = 5; // How many seconds to wait
+
+        // --- IMPORTANT: Define your redirect keys and target URLs here ---
+        // Add as many as you need. The 'key' MUST BE ALL LOWERCASE.
+        const redirectMap = {
+            // Key (from ?page=key):   Value (Actual URL to redirect to)
+            'roblox':           'https://www.roblox.com/users/7615973079/profile',
+            'github':           'https://github.com/Rocraften',
+            'twitter':          'https://twitter.com/Rocraften',
+            'pmc':              'https://www.planetminecraft.com/member/rocraften',
+            'discord-profile':  'https://discord.com/users/1290046071774384215',
+            'xbox-profile':     'https://www.xbox.com/en-US/play/user/Rocraften',
+
+            // Add links for your downloads or projects here
+            'mcedu-addon':      'YOUR_MCEDU_ADDON_DOWNLOAD_LINK_HERE', // Remember to replace placeholders
+            'roblox-tycoon':    'YOUR_ROBLOX_TYCOON_LINK_HERE', // Remember to replace placeholders
+            'py-game':          'YOUR_PYTHON_GAME_LINK_HERE', // Remember to replace placeholders
+            'license.txt':      'https://www.mediafire.com/file/j9bq2u61y8trd2j/LICENSE.txt/file', // Corrected to lowercase key
+            // Example: 'mycoolmod-v1': 'https://example.com/downloads/mycoolmod-v1.zip',
+
+            // Add more redirects as needed:
+            // 'another-key': 'https://some-other-website.com/resource',
+        };
+        // --- End Configuration ---
+
+
+        // --- Redirect Logic ---
+        document.addEventListener('DOMContentLoaded', () => {
+            const loadingDiv = document.getElementById('loading-info');
+            const errorDiv = document.getElementById('error-info');
+            const countdownSpan = document.getElementById('countdown');
+            const destinationSpan = document.getElementById('destination-url');
+            const fallbackLink = document.getElementById('fallback-link');
+            const errorMessageSpan = document.getElementById('error-message');
+            const homeLink = document.getElementById('home-link'); // Get home link element
+
+            // Set home link dynamically (assuming index.html is one level up or at root)
+            // Adjust 'index.html' or '/' if your structure differs
+            let homePageUrl = 'index.html';
+            // Basic check if we are in a subdirectory
+            if (window.location.pathname.includes('/') && window.location.pathname !== '/') {
+                 homePageUrl = '../index.html'; // Go one level up
+            } else if (window.location.pathname === '/') {
+                 homePageUrl = '/'; // Already at root
+            }
+            homeLink.href = homePageUrl;
+
+
+            let secondsRemaining = countdownSeconds;
+
+            // Get the 'page' query parameter from the URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const pageKey = urlParams.get('page');
+
+            // Find the target URL from the map using a LOWERCASE key
+            const targetUrl = pageKey ? redirectMap[pageKey.toLowerCase()] : null; // Use lowercase key for consistency
+
+            if (targetUrl) {
+                // Valid key found, proceed with redirect
+                loadingDiv.style.display = 'block';
+                errorDiv.style.display = 'none';
+
+                // Display destination and set fallback link
+                destinationSpan.textContent = targetUrl;
+                fallbackLink.href = targetUrl;
+                countdownSpan.textContent = secondsRemaining;
+
+                // Start the countdown interval
+                const interval = setInterval(() => {
+                    secondsRemaining--;
+                    countdownSpan.textContent = secondsRemaining;
+
+                    if (secondsRemaining <= 0) {
+                        clearInterval(interval); // Stop the timer
+                        console.log(`Redirecting to: ${targetUrl}`);
+                        // Perform the redirect - replace() is better for history
+                        window.location.replace(targetUrl);
+                    }
+                }, 1000); // Run every 1 second (1000ms)
+
+            } else {
+                // Invalid or missing key
+                console.error("Redirect key missing or not found:", pageKey);
+                loadingDiv.style.display = 'none';
+                errorDiv.style.display = 'block';
+                if (!pageKey) {
+                    errorMessageSpan.textContent = "Redirect key is missing in the URL (?page=...).";
+                } else {
+                     errorMessageSpan.textContent = `The redirect key "${pageKey}" was not found. Please check the link.`;
+                }
+            }
+        });
+    </script>
+
+</body>
+</html>
