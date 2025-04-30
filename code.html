@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Name - Portfolio</title>
+    <style>
+        /* --- Basic Reset & Font --- */
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: sans-serif;
+            background-color: #f0f8ff; /* AliceBlue - a very light blue */
+            color: #333;
+            scroll-behavior: smooth; /* Smooth scrolling for anchor links */
+        }
+
+        /* --- Icy Blue Theme --- */
+        :root {
+            --icy-blue-light: #e0f2f7; /* Light cyan/blue background */
+            --icy-blue-medium: #afeeee; /* PaleTurquoise - main accent */
+            --icy-blue-dark: #87ceeb;  /* SkyBlue - darker accent/hover */
+            --text-dark: #2c3e50;    /* Dark blue-gray text */
+            --text-light: #ffffff;   /* White text */
+        }
+
+        body {
+            background-color: var(--icy-blue-light);
+            color: var(--text-dark);
+        }
+
+        /* --- Container --- */
+        .container {
+            max-width: 960px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #ffffff; /* White content background */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        /* --- Header --- */
+        header {
+            background-color: var(--icy-blue-medium);
+            color: var(--text-dark);
+            padding: 20px;
+            text-align: center;
+            border-radius: 8px 8px 0 0;
+            border-bottom: 4px solid var(--icy-blue-dark);
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2.5em;
+        }
+        header p {
+            margin: 5px 0 0;
+            font-size: 1.2em;
+            color: #5a788a; /* Slightly muted dark blue */
+        }
+
+
+        /* --- Navigation (Optional) --- */
+        nav {
+            background-color: var(--icy-blue-dark);
+            padding: 10px 0;
+            text-align: center;
+            border-radius: 0 0 8px 8px; /* Rounded bottom if header is separate */
+            margin-bottom: 20px; /* Space below nav */
+        }
+        nav a {
+            color: var(--text-light);
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+        nav a:hover {
+            color: var(--icy-blue-light);
+        }
+
+
+        /* --- Sections --- */
+        section {
+            padding: 20px;
+            margin-bottom: 20px;
+            background-color: #f8f8f8; /* Light gray for sections */
+            border-left: 5px solid var(--icy-blue-medium);
+            border-radius: 0 5px 5px 0;
+        }
+        section h2 {
+            color: var(--icy-blue-dark);
+            margin-top: 0;
+            border-bottom: 2px solid var(--icy-blue-light);
+            padding-bottom: 5px;
+        }
+
+        /* --- Links --- */
+        a {
+            color: var(--icy-blue-dark);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        a:hover {
+            color: #4682b4; /* SteelBlue - darker hover */
+            text-decoration: underline;
+        }
+
+        /* --- Lists --- */
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        ul li {
+            background-color: var(--icy-blue-light);
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 4px;
+            border-left: 3px solid var(--icy-blue-dark);
+        }
+        ul li strong {
+            color: var(--text-dark);
+        }
+
+        /* --- Footer --- */
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            padding: 15px;
+            font-size: 0.9em;
+            color: #777;
+            border-top: 1px solid #eee;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>Your Name / Username</h1>
+            <p>Minecraft Modder | Roblox Developer | Python Coder | 3D Modeler</p>
+        </header>
+
+        <!-- Optional Navigation -->
+        <nav>
+            <a href="#about">About Me</a>
+            <a href="#skills">Skills</a>
+            <a href="#projects">Projects</a>
+            <a href="#redirects">Downloads</a>
+            <a href="#contact">Contact</a>
+        </nav>
+
+        <section id="about">
+            <h2>About Me</h2>
+            <p>
+                Welcome to my personal space on the web! I'm passionate about creating things, whether it's in Minecraft, Roblox, through code, or in 3D models.
+                <!-- Add more about yourself here! What drives you? What are your goals? -->
+            </p>
+        </section>
+
+        <section id="skills">
+            <h2>My Skills</h2>
+            <ul>
+                <li><strong>Minecraft:</strong> Addon creation, resource packs, maybe modding (Java/Bedrock specific?).</li>
+                <li><strong>Roblox:</strong> Scripting with Lua, building environments, UI design.</li>
+                <li><strong>Python:</strong> Scripting, automation, maybe specific libraries (e.g., Django, Flask, Pandas)?</li>
+                <li><strong>3D Modeling:</strong> Software used (e.g., Blender, Maya), types of models (characters, environments, assets).</li>
+                <li><strong>Other Stuff:</strong> List any other relevant skills here (e.g., Game Design, Pixel Art, Video Editing, other programming languages).</li>
+            </ul>
+        </section>
+
+        <section id="projects">
+            <h2>Projects / Creations</h2>
+            <p>Here are some things I've worked on:</p>
+            <!-- Add links or descriptions of your projects. You could use list items too. -->
+            <ul>
+                <li><strong>Project 1:</strong> Description of your awesome Minecraft addon/map.</li>
+                <li><strong>Project 2:</strong> Description of a Roblox game or asset you created.</li>
+                <li><strong>Project 3:</strong> Description of a Python script or application.</li>
+                <li><strong>Project 4:</strong> Showcase a 3D model you're proud of (maybe link to Sketchfab/Artstation if you use them).</li>
+            </ul>
+        </section>
+
+        <section id="redirects">
+            <h2>Downloads / Links (Redirect System)</h2>
+            <p>Use these links for easy access to my latest downloads. They will automatically redirect you to the current version:</p>
+            <ul>
+                <li><a href="#my-addon">Download My Awesome Minecraft Addon</a></li>
+                <li><a href="#roblox-asset">Get My Cool Roblox Asset</a></li>
+                <li><a href="#another-link">Another Redirect Link</a></li>
+                <!-- Add more links here using the #hash format -->
+            </ul>
+            <p><small>These links use a simple redirect system built into this page.</small></p>
+        </section>
+
+        <section id="contact">
+            <h2>Get In Touch</h2>
+            <p>
+                You can find me on:
+                <!-- Replace # with actual links -->
+                <a href="#" target="_blank">Discord (Username#1234)</a> |
+                <a href="#" target="_blank">Twitter</a> |
+                <a href="#" target="_blank">GitHub</a>
+                <!-- Add other platforms or an email address if you want -->
+            </p>
+        </section>
+
+        <footer>
+            <p>&copy; <span id="year"></span> Your Name. All rights reserved.</p>
+        </footer>
+    </div> <!-- /container -->
+
+    <script>
+        // --- Simple Copyright Year ---
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // --- Redirect System ---
+
+        // IMPORTANT: This is where you define your redirect links!
+        // Map the part after the '#' in your link (the 'key')
+        // to the actual URL (the 'value') you want users to be sent to.
+        const redirectMap = {
+            // Key (from href="#key"):   Value (Actual URL)
+            'my-addon':        'https://www.example.com/path/to/your/addon/v1.2.zip', // <-- UPDATE THIS URL
+            'roblox-asset':    'https://www.roblox.com/library/123456789/your-asset', // <-- UPDATE THIS URL
+            'another-link':    'https://github.com/yourusername',                     // <-- UPDATE THIS URL
+            // Add more redirects here as needed:
+            // 'some-other-key': 'https://some-other-website.com/resource'
+        };
+
+        function handleRedirect() {
+            // Get the part of the URL after the # symbol
+            const hash = window.location.hash.substring(1); // Remove the '#'
+
+            // Check if the hash exists as a key in our redirectMap
+            if (redirectMap[hash]) {
+                console.log(`Redirecting to: ${redirectMap[hash]}`); // For debugging
+                // If it exists, change the browser's location to the target URL
+                window.location.href = redirectMap[hash];
+            } else if (hash) {
+                // Optional: Handle cases where the hash exists but isn't in the map
+                console.log(`Redirect key "${hash}" not found.`);
+                // You could optionally show a message to the user here
+            }
+        }
+
+        // Run the redirect function when the page finishes loading
+        document.addEventListener('DOMContentLoaded', handleRedirect);
+
+        // Run the redirect function if the hash changes *after* the page has loaded
+        // (e.g., user clicks another # link on the same page)
+        window.addEventListener('hashchange', handleRedirect);
+
+    </script>
+
+</body>
+</html>
