@@ -9,33 +9,42 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --icy-bg: #f0f4f8;
-            --icy-surface: rgba(255, 255, 255, 0.75);
-            --icy-border: #d1e0ec;
-            --text-on-light: #0c1e31;
-            --text-on-light-secondary: #2a4c6e;
+            --theme-transition-duration: 0.3s;
+            --bg: #f0f4f8;
+            --surface: rgba(255, 255, 255, 0.75);
+            --border: #d1e0ec;
+            --text-primary: #0c1e31;
+            --text-secondary: #2a4c6e;
+            --social-icon-color: #000000;
             --accent-blue-light: #87CEEB;
             --accent-blue-medium: #00BFFF;
             --accent-blue-dark: #1E90FF;
             --glow-color: #00BFFF;
             --discord-color: #5865F2;
-            --x-color: #000000;
-            --github-color: #000000;
-            --roblox-color: #000000;
             --cursor-size: 40px;
             --cursor-grow-scale: 1.2;
+        }
+
+        [data-theme="dark"] {
+            --bg: #0f172a;
+            --surface: rgba(30, 41, 59, 0.7);
+            --border: #334155;
+            --text-primary: #cbd5e1;
+            --text-secondary: #94a3b8;
+            --social-icon-color: #ffffff;
         }
 
         body, html {
             margin: 0;
             padding: 0;
             font-family: 'Inter', sans-serif;
-            background-color: var(--icy-bg);
-            color: var(--text-on-light);
+            background-color: var(--bg);
+            color: var(--text-primary);
             scroll-behavior: smooth;
             cursor: none;
             font-weight: 400;
             line-height: 1.6;
+            transition: background-color var(--theme-transition-duration) ease, color var(--theme-transition-duration) ease;
         }
 
         body {
@@ -44,13 +53,21 @@
             background-position: center center;
             background-attachment: fixed;
         }
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-color: var(--bg);
+            opacity: 0.85;
+            z-index: -1;
+            transition: background-color var(--theme-transition-duration) ease;
+        }
 
         #snow-container {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
             pointer-events: none;
             z-index: 9998;
             overflow: hidden;
@@ -70,7 +87,8 @@
 
         @keyframes snowfall {
             0% { transform: translateY(0) translateX(0); opacity: 0; }
-            20% { opacity: 0.8; }
+            10% { opacity: 0.8; }
+            80% { opacity: 0.8; }
             100% { transform: translateY(105vh) translateX(20px); opacity: 0; }
         }
         
@@ -101,76 +119,86 @@
         }
         
         header {
-            background-color: rgba(209, 224, 236, 0.7);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
-            padding-top: 15px;
-            padding-bottom: 15px;
+            padding: 15px 0;
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             z-index: 1000;
             border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-            transition: box-shadow 0.3s ease-in-out;
-            -webkit-mask-image: linear-gradient(to bottom, black 0%, black calc(100% - 15px), transparent 100%),
-                                 linear-gradient(to right, black 5px, transparent 5px, transparent 10px, black 10px),
-                                 linear-gradient(to right, black 10px, transparent 10px, transparent 20px, black 20px);
-            -webkit-mask-size: 100% 100%, 10px 15px, 20px 15px;
-            -webkit-mask-repeat: no-repeat, repeat-x, repeat-x;
-            -webkit-mask-position: 0 0, bottom left, bottom left;
-            mask-image: linear-gradient(to bottom, black 0%, black calc(100% - 15px), transparent 100%);
-            mask-size: 100% 100%;
-            mask-repeat: no-repeat;
-            mask-position: 0 0;
+            -webkit-mask-image: linear-gradient(black 0 0), linear-gradient(black 0 0);
+            -webkit-mask-clip: text, padding-box;
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            padding-bottom: 25px;
+            background-color: var(--surface);
+            transition: background-color var(--theme-transition-duration) ease;
         }
 
         header .content-wrapper {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            flex-wrap: wrap;
         }
         
         .logo-area .logo-link img {
             height: 65px;
             width: auto;
-            transition: transform 0.3s ease-out;
+            transition: transform 0.3s ease-out, filter 0.3s ease-out;
+            filter: drop-shadow(0 0 8px rgba(0, 191, 255, 0.6));
         }
+        
         .logo-area .logo-link:hover img {
             transform: scale(1.05);
+            filter: drop-shadow(0 0 12px rgba(0, 191, 255, 0.8));
+        }
+        
+        .header-controls {
+            display: flex;
+            align-items: center;
+            gap: 25px;
         }
 
         header nav a {
-            color: var(--text-on-light-secondary);
+            color: var(--text-secondary);
             text-decoration: none;
-            margin: 0 0 0 25px;
             font-weight: 600;
             font-size: 1em;
             padding: 6px 0px;
-            transition: color 0.3s ease, border-bottom-color 0.3s ease;
+            transition: color 0.3s ease, border-bottom-color 0.3s ease, transform 0.2s ease-out;
             position: relative;
             border-bottom: 3px solid transparent;
         }
-        header nav a:hover {
-            color: var(--accent-blue-dark);
-        }
+        header nav a:hover { color: var(--accent-blue-dark); }
         header nav a.active {
             color: var(--accent-blue-dark);
             border-bottom-color: var(--accent-blue-dark);
         }
-
-        main {
-            padding-top: 140px;
-        }
         
-        section {
-            padding-top: 60px;
-            padding-bottom: 60px;
+        #theme-switcher {
+            background: none;
+            border: none;
+            padding: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
+        #theme-switcher:hover { transform: rotate(15deg); }
+        #theme-switcher svg {
+            width: 24px;
+            height: 24px;
+            color: var(--text-primary);
+            transition: color var(--theme-transition-duration) ease;
+        }
+
+        main { padding-top: 140px; }
+        section { padding: 60px 0; }
 
         section h2 {
-            color: var(--text-on-light);
+            color: var(--text-primary);
             margin-top: 0;
             border-bottom: 3px solid var(--accent-blue-medium);
             padding-bottom: 15px;
@@ -178,16 +206,20 @@
             font-size: 2.5em;
             font-weight: 700;
             text-align: left;
+            transition: color var(--theme-transition-duration) ease;
         }
 
-        a, button, input, label, select, textarea, img {
+        a, button {
             cursor: none !important;
+            transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
-        
+        a:active, button:active {
+            transform: scale(0.95);
+        }
         a {
             color: var(--accent-blue-dark);
             text-decoration: none;
-            transition: color 0.3s ease;
+            transition: color 0.3s ease, transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             font-weight: 500;
         }
         a:hover {
@@ -204,47 +236,37 @@
             background-color: var(--accent-blue-dark);
             color: #fff;
             border-radius: 6px;
-            transition: background-color 0.3s ease, transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             text-decoration: none;
+            transition: background-color 0.3s ease, transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
         .project-download-link:hover {
             background-color: var(--accent-blue-medium);
             color: #fff;
             text-decoration: none;
-            transform: translateY(-3px);
+            transform: translateY(-3px) scale(1.0);
+        }
+        .project-download-link:active {
+             transform: translateY(-3px) scale(0.95);
         }
 
-        ul {
-            list-style: none;
-            padding: 0;
-            display: grid;
-            gap: 25px;
-        }
-
-        #skills ul, #projects ul {
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-        }
+        ul { list-style: none; padding: 0; display: grid; gap: 25px; }
+        #skills ul, #projects ul { grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); }
 
         ul li {
-            background-color: var(--icy-surface);
+            background-color: var(--surface);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
-            margin-bottom: 0;
             padding: 25px 30px;
             border-radius: 12px;
-            border: 1px solid var(--icy-border);
-            color: var(--text-on-light-secondary);
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
             box-shadow: 0 5px 15px rgba(42, 76, 110, 0.1);
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease, border-color 0.3s ease;
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease, border-color 0.3s ease, background-color var(--theme-transition-duration) ease, color var(--theme-transition-duration) ease, border var(--theme-transition-duration) ease;
         }
-        
-        ul li.project-item.hidden {
-            display: none;
-        }
-        
+        ul li.project-item.hidden { display: none; }
         #skills ul li:hover, #projects ul li:hover {
             transform: translateY(-10px);
             box-shadow: 0 15px 30px rgba(42, 76, 110, 0.15);
@@ -252,28 +274,17 @@
         }
 
         ul li strong {
-            color: var(--text-on-light);
+            color: var(--text-primary);
             font-size: 1.25em;
             font-weight: 600;
             display: block;
             margin-bottom: 12px;
+            transition: color var(--theme-transition-duration) ease;
         }
-        
-        #projects ul li strong {
-            margin-bottom: 0;
-        }
+        #projects ul li strong { margin-bottom: 0; }
+        ul li p { margin: 0; font-size: 0.95em; }
 
-        ul li p {
-            margin-top: 0;
-            margin-bottom: 0;
-            font-size: 0.95em;
-        }
-
-        .view-all-container {
-            text-align: center;
-            margin-top: 40px;
-        }
-
+        .view-all-container { text-align: center; margin-top: 40px; }
         #viewAllProjectsBtn {
             font-family: 'Inter', sans-serif;
             font-weight: 600;
@@ -283,17 +294,17 @@
             color: #fff;
             border: none;
             border-radius: 8px;
-            transition: background-color 0.3s ease, transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: background-color 0.3s ease, transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
         #viewAllProjectsBtn:hover {
             background-color: var(--accent-blue-medium);
-            transform: translateY(-3px);
+            transform: translateY(-3px) scale(1.0);
+        }
+         #viewAllProjectsBtn:active {
+            transform: translateY(-3px) scale(0.95);
         }
         
-        #contact .social-links {
-            text-align: center;
-            margin-top: 30px;
-        }
+        #contact .social-links { text-align: center; margin-top: 30px; }
         #contact .social-links a {
             display: inline-block;
             margin: 0 15px;
@@ -303,7 +314,7 @@
             transform: scale(1.15);
             filter: drop-shadow(0 0 12px var(--glow-color));
         }
-        
+        #contact .social-links a:active { transform: scale(1.05); }
         #contact .social-links svg, #contact .social-links img.img-icon {
             width: 36px;
             height: 36px;
@@ -311,22 +322,16 @@
         }
 
         #contact .social-links a.discord-link svg { fill: var(--discord-color); }
-        #contact .social-links a.x-link svg { fill: var(--x-color); }
-        #contact .social-links a.github-link svg { fill: var(--github-color); }
-        #contact .social-links a.roblox-link svg { fill: var(--roblox-color); }
+        #contact .social-links a.x-link svg, #contact .social-links a.github-link svg, #contact .social-links a.roblox-link svg { fill: var(--social-icon-color); transition: fill var(--theme-transition-duration) ease; }
 
         footer {
             background-color: rgba(12, 30, 49, 0.8);
             text-align: center;
             padding: 40px 30px;
             font-size: 0.9em;
-            color: var(--icy-bg);
+            color: #f0f4f8;
         }
-        .dev-tools {
-            margin-top: 20px;
-            border-top: 1px solid rgba(255, 255, 255, 0.2);
-            padding-top: 20px;
-        }
+        .dev-tools { margin-top: 20px; border-top: 1px solid rgba(255, 255, 255, 0.2); padding-top: 20px; }
         .dev-tools button {
             font-family: 'Inter', sans-serif;
             font-weight: 500;
@@ -334,15 +339,11 @@
             margin: 0 10px;
             padding: 8px 15px;
             background-color: rgba(255, 255, 255, 0.1);
-            color: var(--icy-bg);
+            color: #f0f4f8;
             border: 1px solid rgba(255, 255, 255, 0.3);
             border-radius: 5px;
-            transition: background-color 0.3s ease;
         }
-        .dev-tools button:hover {
-            background-color: rgba(255, 255, 255, 0.2);
-        }
-
+        .dev-tools button:hover { background-color: rgba(255, 255, 255, 0.2); }
     </style>
 </head>
 <body>
@@ -352,15 +353,19 @@
 
     <header>
         <div class="content-wrapper">
-            <div class="logo-area">
-                <a href="#" class="logo-link"><img src="https://i.ibb.co/SDgs6XH2/Rocraften-Title.png" alt="Rocraften Logo"></a>
+            <a href="#" class="logo-link"><img src="https://i.ibb.co/SDgs6XH2/Rocraften-Title.png" alt="Rocraften Logo"></a>
+            <div class="header-controls">
+                <nav>
+                    <a href="#about" class="active">About</a>
+                    <a href="#skills">Skills</a>
+                    <a href="#projects">Projects</a>
+                    <a href="#contact">Contact</a>
+                </nav>
+                <button id="theme-switcher" title="Toggle dark/light mode">
+                    <svg id="theme-icon-sun" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" /></svg>
+                    <svg id="theme-icon-moon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z" /></svg>
+                </button>
             </div>
-            <nav>
-                <a href="#about" class="active">About</a>
-                <a href="#skills">Skills</a>
-                <a href="#projects">Projects</a>
-                <a href="#contact">Contact</a>
-            </nav>
         </div>
     </header>
 
@@ -368,7 +373,7 @@
         <section id="about">
             <div class="content-wrapper">
                 <h2>About Me</h2>
-                <p style="font-size: 1.15em; color: var(--text-on-light); max-width: 800px;">
+                <p style="font-size: 1.15em; color: var(--text-primary); max-width: 800px; transition: color var(--theme-transition-duration) ease;">
                     Hey, I'm Rocraften. I just like to create things. Whether it's for Minecraft, Roblox, or just some random idea, I enjoy building stuff that people can use and have fun with. This is my spot on the web to show it off.
                 </p>
             </div>
@@ -390,51 +395,26 @@
         <section id="projects">
             <div class="content-wrapper">
                 <h2>Featured Projects</h2>
-                <p style="margin-bottom: 30px; color: var(--text-on-light-secondary); max-width: 800px;">
+                <p style="margin-bottom: 30px; color: var(--text-secondary); max-width: 800px; transition: color var(--theme-transition-duration) ease;">
                     Here's a list of some of the stuff I've made. Go ahead and grab whatever you want.
                 </p>
                 <ul>
-                    <li class="project-item">
-                        <strong>[BEDROCK] Fullbright</strong>
-                        <a href="https://www.planetminecraft.com/mod/fullbright-bedrock-behavior-pack/" target="_blank" class="project-download-link">View on Planet Minecraft</a>
-                    </li>
-                    <li class="project-item">
-                        <strong>[BEDROCK] Starter Kit</strong>
-                        <a href="https://www.planetminecraft.com/mod/starter-kit-bedrock-behavior-pack/" target="_blank" class="project-download-link">View on Planet Minecraft</a>
-                    </li>
-                    <li class="project-item">
-                        <strong>[BEDROCK] Minecraft Redstone Edition</strong>
-                        <a href="https://www.planetminecraft.com/texture-pack/minecraft-redstone-edition/" target="_blank" class="project-download-link">View on Planet Minecraft</a>
-                    </li>
-                    <li class="project-item hidden">
-                        <strong>[BEDROCK] Build Height Override</strong>
-                        <a href="https://www.planetminecraft.com/mod/bedrock-build-height-override/" target="_blank" class="project-download-link">View on Planet Minecraft</a>
-                    </li>
-                    <li class="project-item hidden">
-                        <strong>[MCEDU] Experiments</strong>
-                        <a href="https://www.planetminecraft.com/texture-pack/experiments-for-education/" target="_blank" class="project-download-link">View on Planet Minecraft</a>
-                    </li>
-                    <li class="project-item hidden">
-                        <strong>[BEDROCK] Saturation Shaders</strong>
-                        <a href="https://www.planetminecraft.com/texture-pack/bedrock-saturation-shaders/" target="_blank" class="project-download-link">View on Planet Minecraft</a>
-                    </li>
-                    <li class="project-item hidden">
-                        <strong>[MCEDU] Skin Support</strong>
-                        <a href="https://www.planetminecraft.com/texture-pack/skin-support-for-mee/" target="_blank" class="project-download-link">View on Planet Minecraft</a>
-                    </li>
+                    <li class="project-item"><strong>[BEDROCK] Fullbright</strong><a href="https://www.planetminecraft.com/mod/fullbright-bedrock-behavior-pack/" target="_blank" class="project-download-link">View on Planet Minecraft</a></li>
+                    <li class="project-item"><strong>[BEDROCK] Starter Kit</strong><a href="https://www.planetminecraft.com/mod/starter-kit-bedrock-behavior-pack/" target="_blank" class="project-download-link">View on Planet Minecraft</a></li>
+                    <li class="project-item"><strong>[BEDROCK] Minecraft Redstone Edition</strong><a href="https://www.planetminecraft.com/texture-pack/minecraft-redstone-edition/" target="_blank" class="project-download-link">View on Planet Minecraft</a></li>
+                    <li class="project-item hidden"><strong>[BEDROCK] Build Height Override</strong><a href="https://www.planetminecraft.com/mod/bedrock-build-height-override/" target="_blank" class="project-download-link">View on Planet Minecraft</a></li>
+                    <li class="project-item hidden"><strong>[MCEDU] Experiments</strong><a href="https://www.planetminecraft.com/texture-pack/experiments-for-education/" target="_blank" class="project-download-link">View on Planet Minecraft</a></li>
+                    <li class="project-item hidden"><strong>[BEDROCK] Saturation Shaders</strong><a href="https://www.planetminecraft.com/texture-pack/bedrock-saturation-shaders/" target="_blank" class="project-download-link">View on Planet Minecraft</a></li>
+                    <li class="project-item hidden"><strong>[MCEDU] Skin Support</strong><a href="https://www.planetminecraft.com/texture-pack/skin-support-for-mee/" target="_blank" class="project-download-link">View on Planet Minecraft</a></li>
                 </ul>
-                <div class="view-all-container">
-                    <button id="viewAllProjectsBtn">View All Projects</button>
-                </div>
+                <div class="view-all-container"><button id="viewAllProjectsBtn">View All Projects</button></div>
             </div>
         </section>
 
         <section id="contact">
             <div class="content-wrapper">
                 <h2>Get In Touch</h2>
-                <p style="margin-bottom: 25px; color: var(--text-on-light-secondary); text-align: center;">
-                    Wanna see what I'm up to or just say hi? You can find me here.
-                </p>
+                <p style="margin-bottom: 25px; color: var(--text-secondary); text-align: center; transition: color var(--theme-transition-duration) ease;">Wanna see what I'm up to or just say hi? You can find me here.</p>
                  <div class="social-links">
                      <a href="https://discord.com/users/1290046071774384215" target="_blank" title="Discord: Rocraften222" class="discord-link"><svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Discord</title><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"/></svg></a>
                      <a href="https://twitter.com/Rocraften" target="_blank" title="X (Twitter): @Rocraften" class="x-link"><svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>X</title><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/></svg></a>
@@ -482,9 +462,7 @@
             document.addEventListener('mouseleave', () => { cursor.style.opacity = '0'; });
             document.addEventListener('mouseenter', () => { cursor.style.opacity = '1'; });
 
-            const interactiveElements = document.querySelectorAll(
-                'a, button, input, label, select, textarea'
-            );
+            const interactiveElements = document.querySelectorAll('a, button, input, label, select, textarea');
             interactiveElements.forEach(el => {
                 el.addEventListener('mouseenter', () => cursor.classList.add('cursor-grow'));
                 el.addEventListener('mouseleave', () => cursor.classList.remove('cursor-grow'));
@@ -496,10 +474,7 @@
                 let flake = document.createElement('div');
                 flake.className = 'snowflake';
                 let horizontalPosition = Math.random() * 100;
-                if(Math.random() > 0.5) {
-                    horizontalPosition = Math.random() < 0.5 ? Math.random() * 33 : 67 + Math.random() * 33;
-                }
-                flake.style.left = horizontalPosition + '%';
+                flake.style.left = (Math.random() < 0.5 ? Math.random() * 33 : 67 + Math.random() * 33) + '%';
                 flake.style.animationDuration = (Math.random() * 5 + 8) + 's';
                 flake.style.animationDelay = (Math.random() * 10) + 's';
                 flake.style.width = flake.style.height = (Math.random() * 5 + 5) + 'px';
@@ -513,8 +488,7 @@
             function changeNavOnScroll() {
                 let currentSectionId = '';
                 sections.forEach(section => {
-                    const sectionTop = section.offsetTop;
-                    if (window.scrollY >= sectionTop - (headerElement.offsetHeight + 100)) {
+                    if (window.scrollY >= section.offsetTop - headerElement.offsetHeight - 100) {
                         currentSectionId = section.getAttribute('id');
                     }
                 });
@@ -526,38 +500,57 @@
                 });
             }
             window.addEventListener('scroll', changeNavOnScroll);
-            window.addEventListener('load', changeNavOnScroll);
-
+            
             const viewAllBtn = document.getElementById('viewAllProjectsBtn');
             viewAllBtn.addEventListener('click', () => {
-                const hiddenProjects = document.querySelectorAll('.project-item.hidden');
-                hiddenProjects.forEach(project => {
-                    project.classList.remove('hidden');
-                });
+                document.querySelectorAll('.project-item.hidden').forEach(p => p.classList.remove('hidden'));
                 viewAllBtn.parentElement.style.display = 'none';
             });
 
-            const clearCacheBtn = document.getElementById('clearCacheBtn');
-            clearCacheBtn.addEventListener('click', () => {
-                window.location.reload(true);
-            });
-
-            const clearCookiesBtn = document.getElementById('clearCookiesBtn');
-            clearCookiesBtn.addEventListener('click', () => {
+            document.getElementById('clearCacheBtn').addEventListener('click', () => window.location.reload(true));
+            document.getElementById('clearCookiesBtn').addEventListener('click', () => {
                 const cookies = document.cookie.split(";");
-                if (cookies.length === 0 || (cookies.length === 1 && cookies[0] === "")) {
-                    alert("No cookies to clear for this site.");
-                    return;
-                }
-                for (let i = 0; i < cookies.length; i++) {
-                    const cookie = cookies[i];
-                    const eqPos = cookie.indexOf("=");
-                    const name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
-                    document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/";
-                }
-                alert("Site cookies have been cleared. The page will now reload.");
+                if (!cookies[0]) { alert("No cookies to clear."); return; }
+                cookies.forEach(c => {
+                    const eqPos = c.indexOf("=");
+                    const name = eqPos > -1 ? c.substr(0, eqPos) : c;
+                    document.cookie = name.trim() + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/";
+                });
+                alert("Site cookies cleared. Reloading page.");
                 window.location.reload();
             });
+
+            const themeSwitcher = document.getElementById('theme-switcher');
+            const sunIcon = document.getElementById('theme-icon-sun');
+            const moonIcon = document.getElementById('theme-icon-moon');
+            const body = document.body;
+
+            const setTheme = (theme) => {
+                body.setAttribute('data-theme', theme);
+                localStorage.setItem('theme', theme);
+                if (theme === 'dark') {
+                    sunIcon.style.display = 'none';
+                    moonIcon.style.display = 'block';
+                } else {
+                    sunIcon.style.display = 'block';
+                    moonIcon.style.display = 'none';
+                }
+            };
+
+            themeSwitcher.addEventListener('click', () => {
+                const currentTheme = body.getAttribute('data-theme');
+                setTheme(currentTheme === 'dark' ? 'light' : 'dark');
+            });
+
+            const savedTheme = localStorage.getItem('theme');
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            if (savedTheme) {
+                setTheme(savedTheme);
+            } else {
+                setTheme(prefersDark ? 'dark' : 'light');
+            }
+
+            changeNavOnScroll();
         });
     </script>
 </body>
