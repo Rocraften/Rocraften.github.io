@@ -1,560 +1,194 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rocraften - Portfolio</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        body, html {
-            margin: 0;
-            padding: 0;
-            font-family: 'Inter', sans-serif;
-            background-color: var(--dark-bg, #0f172a); 
-            color: var(--text-on-dark, #cbd5e1);    
-            scroll-behavior: smooth;
-            cursor: none;
-            font-weight: 400;
-            line-height: 1.6;
-        }
-
-        :root {
-            --dark-bg: #0f172a;                          
-            --dark-bg-rgb: 15, 23, 42;
-            --dark-surface: #1e293b;                     
-            --dark-surface-rgb: 30, 41, 59;
-            --dark-border: #334155; 
-            --text-on-dark: #cbd5e1;                     
-            --text-on-dark-secondary: #94a3b8;           
-            --text-on-light: #0f172a; 
-
-            --accent-blue-light: #7dd3fc;                
-            --accent-blue-light-rgb: 125, 211, 252;
-            --accent-blue-medium: #38bdf8;               
-            --accent-blue-medium-rgb: 56, 189, 248;
-            --accent-blue-dark: #0ea5e9;                 
-            --accent-blue-dark-rgb: 14, 165, 233;
-            
-            --glow-color: #afeeee; 
-
-            --discord-color: #5865F2;
-            --x-color: #ffffff; 
-            --github-color: #ffffff;
-            --roblox-color: #FFFFFF;
-
-            --cursor-size: 18px;
-            --cursor-grow-scale: 1.7;
-            --cursor-color: var(--accent-blue-light);
-            --cursor-border-color: var(--accent-blue-dark);
-        }
-
-        body {
-            background-color: var(--dark-bg);
-            color: var(--text-on-dark);
-        }
-
-        #custom-cursor {
-            position: fixed;
-            width: var(--cursor-size);
-            height: var(--cursor-size);
-            background-color: rgba(var(--accent-blue-light-rgb), 0.7);
-            border: 1px solid var(--accent-blue-medium);
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 9999;
-            transform: translate(-50%, -50%);
-            transition: transform 0.1s cubic-bezier(0.175, 0.885, 0.32, 1.275),
-                        width 0.1s ease-out,
-                        height 0.1s ease-out,
-                        background-color 0.1s ease-out,
-                        border-color 0.1s ease-out;
-            left: -100px;
-            top: -100px;
-            opacity: 0;
-        }
-
-        #custom-cursor.cursor-grow {
-            transform: translate(-50%, -50%) scale(var(--cursor-grow-scale));
-            background-color: rgba(var(--accent-blue-medium-rgb), 0.8);
-            border-color: var(--accent-blue-light);
-        }
-
-        .content-wrapper {
-            max-width: 1024px; 
-            margin: 0 auto;
-            padding-left: 30px; 
-            padding-right: 30px;
-        }
-
-        header {
-            background-color: rgba(var(--dark-surface-rgb), 0.85);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            color: var(--text-on-dark);
-            padding-top: 18px; 
-            padding-bottom: 18px;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 1000;
-            box-shadow: 0 1px 3px rgba(var(--dark-bg-rgb), 0.1), 0 1px 2px rgba(var(--dark-bg-rgb), 0.06);
-            transition: box-shadow 0.3s ease-in-out;
-        }
-        
-        header::after {
-            content: '';
-            position: absolute;
-            bottom: -15px; 
-            left: 0;
-            width: 100%;
-            height: 15px; 
-            background: linear-gradient(to bottom, rgba(var(--dark-bg-rgb), 0.05), rgba(var(--dark-bg-rgb), 0));
-            opacity: 0;
-            transition: opacity 0.3s ease-in-out;
-            pointer-events: none;
-        }
-
-        header.header-scrolled {
-            box-shadow: 0 4px 6px -1px rgba(var(--dark-bg-rgb), 0.1), 0 2px 4px -1px rgba(var(--dark-bg-rgb), 0.06);
-        }
-        
-        header.header-scrolled::after {
-            opacity: 1;
-        }
-
-        header .content-wrapper {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-        }
-
-        .logo-link {
-            color: var(--text-on-dark);
-            text-decoration: none;
-            cursor: none !important;
-        }
-        .logo-link h1 {
-            margin: 0;
-            font-size: 1.75em; 
-            font-weight: 600;
-            transition: color 0.2s ease;
-        }
-        .logo-link:hover h1 {
-            color: var(--accent-blue-light);
-        }
-
-        header nav {
-            text-align: right;
-        }
-        header nav a {
-            color: var(--text-on-dark-secondary);
-            text-decoration: none;
-            margin: 0 0 0 20px; 
-            font-weight: 500;
-            font-size: 0.95em;
-            padding: 6px 0px; 
-            border-radius: 0; 
-            transition: color 0.2s ease, border-bottom-color 0.2s ease;
-            cursor: none !important;
-            display: inline-block;
-            position: relative;
-            border-bottom: 2px solid transparent;
-        }
-        header nav a:hover {
-            color: var(--accent-blue-light);
-            border-bottom-color: var(--accent-blue-light);
-        }
-         header nav a.active {
-            color: var(--accent-blue-medium);
-            border-bottom-color: var(--accent-blue-medium);
-        }
-
-
-        section {
-            background-color: var(--dark-bg); 
-            padding-top: 80px; 
-            padding-bottom: 80px;
-        }
-        section + section {
-             border-top: 1px solid var(--dark-border);
-        }
-
-        section h2 {
-            color: var(--text-on-dark);
-            margin-top: 0;
-            border-bottom: 2px solid var(--accent-blue-dark);
-            padding-bottom: 12px;
-            margin-bottom: 40px; 
-            font-size: 2.25em; 
-            font-weight: 600;
-            text-align: left;
-        }
-
-        a, button, input[type="button"], input[type="submit"],
-        .social-links a img, .social-links a svg,
-        label,
-        select, textarea, input[type="text"], input[type="email"], input[type="password"], input[type="number"], input[type="search"],
-        .logo-link
-        {
-            cursor: none !important;
-        }
-
-        a {
-            color: var(--accent-blue-medium);
-            text-decoration: none;
-            transition: color 0.2s ease;
-            font-weight: 500;
-        }
-        a:hover, section a:hover:not(header nav a):not(.project-download-link) {
-            color: var(--accent-blue-light);
-            text-decoration: underline;
-        }
-        .project-download-link {
-            display: inline-block;
-            margin-top: 15px;
-            font-weight: 500;
-            font-size: 0.9em;
-            padding: 10px 20px;
-            background-color: var(--accent-blue-dark);
-            color: #fff; 
-            border-radius: 6px;
-            transition: background-color 0.2s ease, transform 0.2s ease-out;
-            text-decoration: none;
-        }
-        .project-download-link:hover {
-            background-color: var(--accent-blue-medium);
-            color: #fff;
-            text-decoration: none;
-            transform: translateY(-2px);
-        }
-
-        ul {
-            list-style: none;
-            padding: 0;
-            display: grid;
-            gap: 25px; 
-        }
-        
-        #skills ul {
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        }
-        #projects ul {
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-        }
-
-        ul li {
-            background-color: var(--dark-surface);
-            margin-bottom: 0; 
-            padding: 25px 30px; 
-            border-radius: 8px; 
-            border: 1px solid var(--dark-border);
-            color: var(--text-on-dark-secondary);
-            transition: transform 0.2s ease-out, box-shadow 0.2s ease-out, border-color 0.2s ease-out;
-            box-shadow: 0 2px 4px rgba(var(--dark-bg-rgb), 0.05);
-        }
-        #skills ul li:hover,
-        #projects ul li:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(var(--dark-bg-rgb), 0.1), 0 6px 6px rgba(var(--dark-bg-rgb), 0.08);
-            border-color: var(--accent-blue-medium);
-        }
-
-
-        ul li strong {
-            color: var(--text-on-dark);
-            font-size: 1.25em; 
-            font-weight: 600;
-            display: block;
-            margin-bottom: 12px;
-        }
-        ul li p {
-            margin-top: 0;
-            margin-bottom: 12px;
-            font-size: 0.95em;
-        }
-        ul li p:last-of-type {
-            margin-bottom: 0;
-        }
-
-        #contact .social-links {
-            text-align: center;
-            margin-top: 30px;
-        }
-        #contact .social-links a {
-            display: inline-block;
-            margin: 0 15px;
-            color: var(--text-on-dark-secondary);
-            transition: transform 0.2s ease, filter 0.3s ease; /* Ensure filter transition is present */
-            vertical-align: middle;
-            line-height: 0;
-        }
-        #contact .social-links a:hover {
-            transform: scale(1.15);
-            filter: drop-shadow(0 0 8px var(--glow-color)); /* Restored glow effect */
-        }
-        
-        #contact .social-links svg { /* General SVG styling */
-            width: 32px; 
-            height: 32px;
-        }
-        
-        #contact .social-links a.discord-link svg { fill: var(--discord-color); }
-        #contact .social-links a.x-link svg { fill: var(--x-color); }
-        #contact .social-links a.github-link svg { fill: var(--github-color); }
-        #contact .social-links a.roblox-link svg { fill: var(--roblox-color); }
-
-        #contact .social-links img.img-icon { /* Image icon styling */
-             width: 32px;
-             height: 32px;
-             object-fit: contain;
-             transition: filter 0.2s ease; /* Keep transition for image hover */
-        }
-         #contact .social-links a:hover img.img-icon { /* Keep existing image hover if desired */
-            /* Example: filter: brightness(1.2); */
-         }
-
-
-        footer {
-            background-color: var(--dark-bg);
-            text-align: center;
-            padding-top: 40px;
-            padding-bottom: 40px;
-            font-size: 0.9em;
-            color: var(--text-on-dark-secondary);
-            border-top: 1px solid var(--dark-border);
-        }
-
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Icy Tundra Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Rubik', sans-serif;
+}
+body {
+  background: linear-gradient(to bottom, #0a192f, #102A43);
+  color: #f0f9ff;
+  overflow-x: hidden;
+}
+header {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1000;
+}
+nav {
+  display: flex;
+  justify-content: center;
+  padding: 15px 20px;
+  background: rgba(16, 42, 67, 0.8);
+  backdrop-filter: blur(8px);
+  border-bottom: 2px solid rgba(168, 233, 255, 0.3);
+}
+nav a {
+  margin: 0 15px;
+  color: #a8e9ff;
+  text-decoration: none;
+  position: relative;
+  transition: color 0.3s ease;
+}
+nav a::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -5px;
+  left: 0;
+  background-color: #a8e9ff;
+  transition: width 0.3s ease;
+}
+nav a:hover::after {
+  width: 100%;
+}
+section {
+  padding: 120px 20px 60px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+h1, h2 {
+  text-align: center;
+  margin-bottom: 30px;
+}
+.projects {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
+.project-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(168, 233, 255, 0.3);
+  border-radius: 15px;
+  padding: 20px;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.project-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(168, 233, 255, 0.2);
+}
+.project-card h3 {
+  margin-bottom: 15px;
+}
+.project-card a {
+  display: inline-block;
+  padding: 10px 20px;
+  background: rgba(168, 233, 255, 0.2);
+  color: #a8e9ff;
+  text-decoration: none;
+  border-radius: 8px;
+  transition: background 0.3s ease;
+}
+.project-card a:hover {
+  background: rgba(168, 233, 255, 0.4);
+}
+#snow-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+</style>
 </head>
 <body>
+<canvas id="snow-canvas"></canvas>
+<header>
+  <nav>
+    <a href="#home">Home</a>
+    <a href="#projects">Projects</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
 
-    <header>
-        <div class="content-wrapper">
-            <div class="logo-area">
-                <a href="#" class="logo-link"><h1>Rocraften</h1></a>
-            </div>
-            <nav>
-                <a href="#about">About Me</a>
-                <a href="#skills">Skills</a>
-                <a href="#projects">Projects</a>
-                <a href="#contact">Contact</a>
-            </nav>
-        </div>
-    </header>
+<section id="home">
+  <h1>Welcome to the Frozen Zone</h1>
+  <p style="text-align:center; max-width:600px; margin:0 auto;">Where pixels freeze and creativity thaws. Step carefully, the ice is thin but the ideas are solid.</p>
+</section>
 
-    <section id="about">
-        <div class="content-wrapper">
-            <h2>About Me</h2>
-            <p style="font-size: 1.1em; color: var(--text-on-dark);"> 
-                Welcome to my personal space on the web! I'm passionate about creating things, whether it's in Minecraft, Roblox, through code, or in 3D models.
-            </p>
-        </div>
-    </section>
+<section id="projects">
+  <h2>Projects</h2>
+  <div class="projects">
+    <div class="project-card">
+      <h3>Project One</h3>
+      <a href="#">View</a>
+    </div>
+    <div class="project-card">
+      <h3>Project Two</h3>
+      <a href="#">View</a>
+    </div>
+    <div class="project-card">
+      <h3>Project Three</h3>
+      <a href="#">View</a>
+    </div>
+    <div class="project-card">
+      <h3>Project Four</h3>
+      <a href="#">View</a>
+    </div>
+  </div>
+</section>
 
-    <section id="skills">
-        <div class="content-wrapper">
-            <h2>My Skills</h2>
-            <ul>
-                 <li><strong>Minecraft:</strong> I create a wide variety of Minecraft content, including addons, texture packs, skins, and more.</li>
-                 <li><strong>Roblox:</strong> Roblox development, including basic Lua scripting, building, UI design, and modeling.</li>
-                 <li><strong>Python:</strong> Developing games with Pygame, creating applications, assets, and various other Python projects.</li>
-                 <li><strong>3D Modeling:</strong> 3D modeling using software like Blender and Blockbench, creating renders and assets.</li>
-                 <li><strong>Other Stuff:</strong> I also create some pixel art, though it's not my primary focus.</li>
-            </ul>
-        </div>
-    </section>
+<section id="contact">
+  <h2>Contact</h2>
+  <p style="text-align:center;">Email me at <a href="mailto:you@example.com" style="color:#a8e9ff;">you@example.com</a></p>
+</section>
 
-    <section id="projects">
-        <div class="content-wrapper">
-            <h2>Featured Projects</h2>
-            <p style="margin-bottom: 30px; color: var(--text-on-dark-secondary);">Here are some of the projects I'm proud to have worked on:</p>
-            <ul>
-                <li>
-                    <strong>[BEDROCK] Fullbright</strong>
-                    <p>Hey, where are you? Oh wait it's to dark.. Well with this ADDON installed, holding any of the following items will automatically activate fullbright mode!</p>
-                    <p><a href="https://www.planetminecraft.com/mod/fullbright-bedrock-behavior-pack/" target="_blank" class="project-download-link">View on Planet Minecraft</a></p>
-                </li>
-                <li>
-                    <strong>[BEDROCK] Starter Kit</strong>
-                    <p>Welcome to the Starter Kit! This pack provides new players with a customizable starter kit when they join the game.</p>
-                    <p><a href="https://www.planetminecraft.com/mod/starter-kit-bedrock-behavior-pack/" target="_blank" class="project-download-link">View on Planet Minecraft</a></p>
-                </li>
-                <li>
-                    <strong>[BEDROCK] Minecraft Redstone Edition</strong>
-                    <p>Hey, are you a redstone guy? Well if you are then this is the pack for you!! With this pack you can get into the technical stuff on bedrock without going to the hospital for brain treatment :)</p>
-                    <p><a href="https://www.planetminecraft.com/texture-pack/minecraft-redstone-edition/" target="_blank" class="project-download-link">View on Planet Minecraft</a></p>
-                </li>
-                <li>
-                    <strong>[BEDROCK] Build Height Override</strong>
-                    <p>Hey, do you want to build something big? Like really really big! Well with this pack you can do that! You can build all the way to 512 or all the way down to -512!</p>
-                    <p><a href="https://www.planetminecraft.com/mod/bedrock-build-height-override/" target="_blank" class="project-download-link">View on Planet Minecraft</a></p>
-                </li>
-                <li>
-                    <strong>[MCEDU] Experiments</strong>
-                    <p>Have you ever downloaded a pack and imported it into MC:EDU only to realize it doesn’t work, or found yourself on a download page just to be told you need experiments? Well, look no further—this texture pack adds experiments to Minecraft Education Edition!</p>
-                    <p><a href="https://www.planetminecraft.com/texture-pack/experiments-for-education/" target="_blank" class="project-download-link">View on Planet Minecraft</a></p>
-                </li>
-                 <li>
-                    <strong>[BEDROCK] Saturation Shaders</strong>
-                    <p>Step right this way. Do you want your game to look like the late 50's? Well then this is the place to be! My friend I'll show a pack so great you might even wonder why it hasn't yet become the first and only wonder of the world! Well fat chance of that! unless.. You were to SUBSCRIBE!! But for real 99.9.9.9.9.9% if that's even possible that's the amount of you that view and even download my content and yet don't subscribe (I'm keeping my self from crying) Anyway, lets move on from that awkward moment and on to- "THE SHOW-CASE"</p>
-                    <p><a href="https://www.planetminecraft.com/texture-pack/bedrock-saturation-shaders/" target="_blank" class="project-download-link">View on Planet Minecraft</a></p>
-                </li>
-                <li>
-                    <strong>[MCEDU] Skin Support</strong>
-                    <p>So MEE (Minecraft Education Edition) just updated and your off to play the update with your friends all of you put on your skins and one of you starts hosting and you join and realize you can't see other peoples skins! Now before you would fix this by turning off only show trusted skins... but that was before the 1.21.10 update, they removed it and that means no more skins in multiplayer only you can see your skin :(</p>
-                    <p>Answer: I made a pack to add back skin support to MEE and guess what it's just a texture pack!</p>
-                    <p><a href="https://www.planetminecraft.com/texture-pack/skin-support-for-mee/" target="_blank" class="project-download-link">View on Planet Minecraft</a></p>
-                </li>
-            </ul>
-        </div>
-    </section>
-
-    <section id="contact">
-        <div class="content-wrapper">
-            <h2>Get In Touch</h2>
-            <p style="margin-bottom: 25px; color: var(--text-on-dark-secondary);">Feel free to reach out or connect with me on these platforms:</p>
-             <div class="social-links">
-                 <a href="https://discord.com/users/1290046071774384215" target="_blank" title="Discord: Rocraften222" class="discord-link">
-                     <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Discord</title><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"/></svg>
-                 </a>
-                 <a href="https://twitter.com/Rocraften" target="_blank" title="X (Twitter): @Rocraften" class="x-link">
-                    <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>X</title><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/></svg>
-                 </a>
-                  <a href="https://github.com/Rocraften" target="_blank" title="GitHub: Rocraften" class="github-link">
-                    <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>GitHub</title><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
-                 </a>
-                 <a href="https://www.roblox.com/users/7615973079/profile" target="_blank" title="Roblox Profile" class="roblox-link">
-                     <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Roblox</title><path d="M18.926 23.998 0 18.892 5.075.002 24 5.108ZM15.348 10.09l-5.282-1.453-1.414 5.273 5.282 1.453z"/></svg>
-                 </a>
-                 <a href="https://www.planetminecraft.com/member/rocraften" target="_blank" title="Planet Minecraft Profile">
-                     <img src="https://earthmaker.world/img/logo.webp" alt="Planet Minecraft Icon" class="img-icon pmc-logo"/>
-                 </a>
-                 <a href="https://www.xbox.com/en-US/play/user/Rocraften" target="_blank" title="Xbox Profile">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Xbox_one_logo.svg/1200px-Xbox_one_logo.svg.png" alt="Xbox Icon" class="img-icon xbox-logo" />
-                 </a>
-                 <a href="mailto:Rocraften@outlook.com" title="Email: Rocraften@outlook.com">
-                    <img src="https://icons.iconarchive.com/icons/dtafalonso/win-10x/512/Email-icon.png" alt="Email Icon" class="img-icon email-logo" />
-                 </a>
-            </div>
-        </div>
-    </section>
-
-    <footer>
-        <div class="content-wrapper">
-            <p>&copy; <span id="year"></span> Rocraften. All rights reserved.</p>
-        </div>
-    </footer>
-
-    <div id="custom-cursor"></div>
-
-    <script>
-        document.getElementById('year').textContent = new Date().getFullYear();
-
-        const cursor = document.getElementById('custom-cursor');
-        let cursorVisible = false;
-        let mouseX = -100, mouseY = -100;
-
-        function updateCursorPosition(e) {
-            mouseX = e.clientX;
-            mouseY = e.clientY;
-            if (!cursorVisible) {
-                cursor.style.opacity = '1';
-                cursorVisible = true;
-            }
-        }
-        document.addEventListener('mousemove', updateCursorPosition);
-
-        function animateCursor() {
-            if (cursorVisible) {
-                cursor.style.left = mouseX + 'px';
-                cursor.style.top = mouseY + 'px';
-            }
-            requestAnimationFrame(animateCursor);
-        }
-        animateCursor();
-
-
-        document.addEventListener('mouseleave', () => {
-            cursor.style.opacity = '0';
-            cursorVisible = false;
-        });
-        document.addEventListener('mouseenter', (e) => {
-            if (e.clientX !== 0 && e.clientY !== 0) {
-                 cursor.style.opacity = '1';
-                 cursorVisible = true;
-                 mouseX = e.clientX;
-                 mouseY = e.clientY;
-            }
-        });
-
-        const interactiveElements = document.querySelectorAll(
-            'a, button, input[type="button"], input[type="submit"], .social-links a img, .social-links a svg, label, select, textarea, input:not([type="hidden"]), .logo-link'
-        );
-
-        interactiveElements.forEach(el => {
-            el.addEventListener('mouseenter', () => {
-                cursor.classList.add('cursor-grow');
-            });
-            el.addEventListener('mouseleave', () => {
-                cursor.classList.remove('cursor-grow');
-            });
-        });
-
-        const headerElement = document.querySelector('header');
-        function handleHeaderScroll() {
-            if (window.scrollY > 20) { 
-                headerElement.classList.add('header-scrolled');
-            } else {
-                headerElement.classList.remove('header-scrolled');
-            }
-        }
-        window.addEventListener('scroll', handleHeaderScroll);
-        
-        function adjustBodyPadding() {
-            if (headerElement) {
-                const headerHeight = headerElement.offsetHeight;
-                document.body.style.paddingTop = headerHeight + 'px';
-            } else {
-                 document.body.style.paddingTop = '70px'; 
-            }
-        }
-        
-        const navLinks = document.querySelectorAll('header nav a');
-        const sections = document.querySelectorAll('section');
-
-        function changeNavOnScroll() {
-            let currentSectionId = '';
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                if (window.scrollY >= sectionTop - (headerElement.offsetHeight + 50)) {
-                    currentSectionId = section.getAttribute('id');
-                }
-            });
-
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href') === '#' + currentSectionId) {
-                    link.classList.add('active');
-                }
-            });
-        }
-        window.addEventListener('scroll', changeNavOnScroll);
-
-
-        window.addEventListener('load', () => {
-            adjustBodyPadding();
-            handleHeaderScroll(); 
-            changeNavOnScroll();
-        });
-        window.addEventListener('resize', () => {
-            adjustBodyPadding();
-            changeNavOnScroll();
-        });
-    </script>
-
+<script>
+const canvas = document.getElementById('snow-canvas');
+const ctx = canvas.getContext('2d');
+let snowflakes = [];
+function resizeCanvas() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+window.addEventListener('resize', resizeCanvas);
+resizeCanvas();
+function createSnowflakes() {
+  const x = Math.random() * canvas.width;
+  const y = Math.random() * canvas.height;
+  const radius = Math.random() * 3 + 2;
+  const speed = Math.random() * 1 + 0.5;
+  snowflakes.push({x, y, radius, speed});
+}
+function drawSnowflakes() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.fillStyle = '#f0f9ff';
+  ctx.beginPath();
+  for (let flake of snowflakes) {
+    ctx.moveTo(flake.x, flake.y);
+    ctx.arc(flake.x, flake.y, flake.radius, 0, Math.PI * 2);
+  }
+  ctx.fill();
+  updateSnowflakes();
+}
+function updateSnowflakes() {
+  for (let flake of snowflakes) {
+    flake.y += flake.speed;
+    if (flake.y > canvas.height) {
+      flake.y = 0;
+      flake.x = Math.random() * canvas.width;
+    }
+  }
+}
+function snow() {
+  drawSnowflakes();
+  requestAnimationFrame(snow);
+}
+setInterval(createSnowflakes, 100);
+snow();
+</script>
 </body>
 </html>
