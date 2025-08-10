@@ -1,4 +1,3 @@
-<!-- Index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,14 +10,14 @@
     <style>
         :root {
             --icy-bg: #f0f4f8;
-            --icy-surface: rgba(255, 255, 255, 0.7);
+            --icy-surface: rgba(255, 255, 255, 0.75);
             --icy-border: #d1e0ec;
             --text-on-light: #0c1e31;
             --text-on-light-secondary: #2a4c6e;
             --accent-blue-light: #87CEEB;
             --accent-blue-medium: #00BFFF;
             --accent-blue-dark: #1E90FF;
-            --glow-color: #87CEEB;
+            --glow-color: #00BFFF;
             --discord-color: #5865F2;
             --x-color: #000000;
             --github-color: #000000;
@@ -70,17 +69,9 @@
         }
 
         @keyframes snowfall {
-            0% {
-                transform: translateY(0) translateX(0);
-                opacity: 0;
-            }
-            20% {
-                opacity: 0.8;
-            }
-            100% {
-                transform: translateY(105vh) translateX(20px);
-                opacity: 0;
-            }
+            0% { transform: translateY(0) translateX(0); opacity: 0; }
+            20% { opacity: 0.8; }
+            100% { transform: translateY(105vh) translateX(20px); opacity: 0; }
         }
         
         #custom-cursor {
@@ -113,8 +104,8 @@
             background-color: rgba(209, 224, 236, 0.7);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
-            padding-top: 10px;
-            padding-bottom: 10px;
+            padding-top: 15px;
+            padding-bottom: 15px;
             position: fixed;
             top: 0;
             left: 0;
@@ -122,20 +113,16 @@
             z-index: 1000;
             border-bottom: 1px solid rgba(255, 255, 255, 0.2);
             transition: box-shadow 0.3s ease-in-out;
-        }
-        
-        header::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 25px;
-            background-image: url('https://i.imgur.com/gsuj9bN.png');
-            background-repeat: repeat-x;
-            background-size: auto 100%;
-            pointer-events: none;
-            z-index: 1001;
+            -webkit-mask-image: linear-gradient(to bottom, black 0%, black calc(100% - 15px), transparent 100%),
+                                 linear-gradient(to right, black 5px, transparent 5px, transparent 10px, black 10px),
+                                 linear-gradient(to right, black 10px, transparent 10px, transparent 20px, black 20px);
+            -webkit-mask-size: 100% 100%, 10px 15px, 20px 15px;
+            -webkit-mask-repeat: no-repeat, repeat-x, repeat-x;
+            -webkit-mask-position: 0 0, bottom left, bottom left;
+            mask-image: linear-gradient(to bottom, black 0%, black calc(100% - 15px), transparent 100%);
+            mask-size: 100% 100%;
+            mask-repeat: no-repeat;
+            mask-position: 0 0;
         }
 
         header .content-wrapper {
@@ -143,13 +130,12 @@
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
-            margin-top: 15px;
         }
         
         .logo-area .logo-link img {
-            height: 50px;
+            height: 65px;
             width: auto;
-            transition: transform 0.2s ease;
+            transition: transform 0.3s ease-out;
         }
         .logo-area .logo-link:hover img {
             transform: scale(1.05);
@@ -162,9 +148,9 @@
             font-weight: 600;
             font-size: 1em;
             padding: 6px 0px;
-            transition: color 0.2s ease, border-bottom-color 0.2s ease;
+            transition: color 0.3s ease, border-bottom-color 0.3s ease;
             position: relative;
-            border-bottom: 2px solid transparent;
+            border-bottom: 3px solid transparent;
         }
         header nav a:hover {
             color: var(--accent-blue-dark);
@@ -175,7 +161,7 @@
         }
 
         main {
-            padding-top: 120px;
+            padding-top: 140px;
         }
         
         section {
@@ -201,7 +187,7 @@
         a {
             color: var(--accent-blue-dark);
             text-decoration: none;
-            transition: color 0.2s ease;
+            transition: color 0.3s ease;
             font-weight: 500;
         }
         a:hover {
@@ -218,14 +204,14 @@
             background-color: var(--accent-blue-dark);
             color: #fff;
             border-radius: 6px;
-            transition: background-color 0.2s ease, transform 0.2s ease-out;
+            transition: background-color 0.3s ease, transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             text-decoration: none;
         }
         .project-download-link:hover {
             background-color: var(--accent-blue-medium);
             color: #fff;
             text-decoration: none;
-            transform: translateY(-2px);
+            transform: translateY(-3px);
         }
 
         ul {
@@ -248,15 +234,20 @@
             border-radius: 12px;
             border: 1px solid var(--icy-border);
             color: var(--text-on-light-secondary);
-            transition: transform 0.2s ease-out, box-shadow 0.2s ease-out, border-color 0.2s ease-out;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            box-shadow: 0 5px 15px rgba(42, 76, 110, 0.1);
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease, border-color 0.3s ease;
         }
+        
+        ul li.project-item.hidden {
+            display: none;
+        }
+        
         #skills ul li:hover, #projects ul li:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 12px 24px rgba(42, 76, 110, 0.15);
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(42, 76, 110, 0.15);
             border-color: var(--accent-blue-medium);
         }
 
@@ -277,6 +268,27 @@
             margin-bottom: 0;
             font-size: 0.95em;
         }
+
+        .view-all-container {
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        #viewAllProjectsBtn {
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            font-size: 1em;
+            padding: 12px 25px;
+            background-color: var(--accent-blue-dark);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            transition: background-color 0.3s ease, transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        #viewAllProjectsBtn:hover {
+            background-color: var(--accent-blue-medium);
+            transform: translateY(-3px);
+        }
         
         #contact .social-links {
             text-align: center;
@@ -285,11 +297,11 @@
         #contact .social-links a {
             display: inline-block;
             margin: 0 15px;
-            transition: transform 0.2s ease, filter 0.3s ease;
+            transition: transform 0.3s ease, filter 0.3s ease;
         }
         #contact .social-links a:hover {
-            transform: scale(1.2);
-            filter: drop-shadow(0 0 10px var(--glow-color));
+            transform: scale(1.15);
+            filter: drop-shadow(0 0 12px var(--glow-color));
         }
         
         #contact .social-links svg, #contact .social-links img.img-icon {
@@ -306,10 +318,31 @@
         footer {
             background-color: rgba(12, 30, 49, 0.8);
             text-align: center;
-            padding: 30px;
+            padding: 40px 30px;
             font-size: 0.9em;
             color: var(--icy-bg);
         }
+        .dev-tools {
+            margin-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            padding-top: 20px;
+        }
+        .dev-tools button {
+            font-family: 'Inter', sans-serif;
+            font-weight: 500;
+            font-size: 0.85em;
+            margin: 0 10px;
+            padding: 8px 15px;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--icy-bg);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        .dev-tools button:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
     </style>
 </head>
 <body>
@@ -361,35 +394,38 @@
                     Here's a list of some of the stuff I've made. Go ahead and grab whatever you want.
                 </p>
                 <ul>
-                    <li>
+                    <li class="project-item">
                         <strong>[BEDROCK] Fullbright</strong>
                         <a href="https://www.planetminecraft.com/mod/fullbright-bedrock-behavior-pack/" target="_blank" class="project-download-link">View on Planet Minecraft</a>
                     </li>
-                    <li>
+                    <li class="project-item">
                         <strong>[BEDROCK] Starter Kit</strong>
                         <a href="https://www.planetminecraft.com/mod/starter-kit-bedrock-behavior-pack/" target="_blank" class="project-download-link">View on Planet Minecraft</a>
                     </li>
-                    <li>
+                    <li class="project-item">
                         <strong>[BEDROCK] Minecraft Redstone Edition</strong>
                         <a href="https://www.planetminecraft.com/texture-pack/minecraft-redstone-edition/" target="_blank" class="project-download-link">View on Planet Minecraft</a>
                     </li>
-                    <li>
+                    <li class="project-item hidden">
                         <strong>[BEDROCK] Build Height Override</strong>
                         <a href="https://www.planetminecraft.com/mod/bedrock-build-height-override/" target="_blank" class="project-download-link">View on Planet Minecraft</a>
                     </li>
-                    <li>
+                    <li class="project-item hidden">
                         <strong>[MCEDU] Experiments</strong>
                         <a href="https://www.planetminecraft.com/texture-pack/experiments-for-education/" target="_blank" class="project-download-link">View on Planet Minecraft</a>
                     </li>
-                    <li>
+                    <li class="project-item hidden">
                         <strong>[BEDROCK] Saturation Shaders</strong>
                         <a href="https://www.planetminecraft.com/texture-pack/bedrock-saturation-shaders/" target="_blank" class="project-download-link">View on Planet Minecraft</a>
                     </li>
-                    <li>
+                    <li class="project-item hidden">
                         <strong>[MCEDU] Skin Support</strong>
                         <a href="https://www.planetminecraft.com/texture-pack/skin-support-for-mee/" target="_blank" class="project-download-link">View on Planet Minecraft</a>
                     </li>
                 </ul>
+                <div class="view-all-container">
+                    <button id="viewAllProjectsBtn">View All Projects</button>
+                </div>
             </div>
         </section>
 
@@ -400,27 +436,13 @@
                     Wanna see what I'm up to or just say hi? You can find me here.
                 </p>
                  <div class="social-links">
-                     <a href="https://discord.com/users/1290046071774384215" target="_blank" title="Discord: Rocraften222" class="discord-link">
-                         <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Discord</title><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"/></svg>
-                     </a>
-                     <a href="https://twitter.com/Rocraften" target="_blank" title="X (Twitter): @Rocraften" class="x-link">
-                        <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>X</title><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/></svg>
-                     </a>
-                      <a href="https://github.com/Rocraften" target="_blank" title="GitHub: Rocraften" class="github-link">
-                        <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>GitHub</title><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
-                     </a>
-                     <a href="https://www.roblox.com/users/7615973079/profile" target="_blank" title="Roblox Profile" class="roblox-link">
-                         <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Roblox</title><path d="M18.926 23.998 0 18.892 5.075.002 24 5.108ZM15.348 10.09l-5.282-1.453-1.414 5.273 5.282 1.453z"/></svg>
-                     </a>
-                     <a href="https://www.planetminecraft.com/member/rocraften" target="_blank" title="Planet Minecraft Profile">
-                         <img src="https://earthmaker.world/img/logo.webp" alt="Planet Minecraft Icon" class="img-icon pmc-logo"/>
-                     </a>
-                     <a href="https://www.xbox.com/en-US/play/user/Rocraften" target="_blank" title="Xbox Profile">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Xbox_one_logo.svg/1200px-Xbox_one_logo.svg.png" alt="Xbox Icon" class="img-icon xbox-logo" />
-                     </a>
-                     <a href="mailto:Rocraften@outlook.com" title="Email: Rocraften@outlook.com">
-                        <img src="https://icons.iconarchive.com/icons/dtafalonso/win-10x/512/Email-icon.png" alt="Email Icon" class="img-icon email-logo" />
-                     </a>
+                     <a href="https://discord.com/users/1290046071774384215" target="_blank" title="Discord: Rocraften222" class="discord-link"><svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Discord</title><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"/></svg></a>
+                     <a href="https://twitter.com/Rocraften" target="_blank" title="X (Twitter): @Rocraften" class="x-link"><svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>X</title><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/></svg></a>
+                     <a href="https://github.com/Rocraften" target="_blank" title="GitHub: Rocraften" class="github-link"><svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>GitHub</title><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></a>
+                     <a href="https://www.roblox.com/users/7615973079/profile" target="_blank" title="Roblox Profile" class="roblox-link"><svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Roblox</title><path d="M18.926 23.998 0 18.892 5.075.002 24 5.108ZM15.348 10.09l-5.282-1.453-1.414 5.273 5.282 1.453z"/></svg></a>
+                     <a href="https://www.planetminecraft.com/member/rocraften" target="_blank" title="Planet Minecraft Profile"><img src="https://earthmaker.world/img/logo.webp" alt="Planet Minecraft Icon" class="img-icon pmc-logo"/></a>
+                     <a href="https://www.xbox.com/en-US/play/user/Rocraften" target="_blank" title="Xbox Profile"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Xbox_one_logo.svg/1200px-Xbox_one_logo.svg.png" alt="Xbox Icon" class="img-icon xbox-logo" /></a>
+                     <a href="mailto:Rocraften@outlook.com" title="Email: Rocraften@outlook.com"><img src="https://icons.iconarchive.com/icons/dtafalonso/win-10x/512/Email-icon.png" alt="Email Icon" class="img-icon email-logo" /></a>
                 </div>
             </div>
         </section>
@@ -429,81 +451,114 @@
     <footer>
         <div class="content-wrapper">
             <p>&copy; <span id="year"></span> Rocraften. All rights reserved.</p>
+            <div class="dev-tools">
+                <button id="clearCacheBtn" title="Forces a reload of the page from the server, bypassing browser cache.">Force Refresh</button>
+                <button id="clearCookiesBtn" title="Clears all cookies associated with this site.">Clear Site Cookies</button>
+            </div>
         </div>
     </footer>
 
     <script>
-        document.getElementById('year').textContent = new Date().getFullYear();
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('year').textContent = new Date().getFullYear();
 
-        const cursor = document.getElementById('custom-cursor');
-        let mouseX = -100, mouseY = -100;
-        
-        function onMouseMove(e) {
-            mouseX = e.clientX;
-            mouseY = e.clientY;
-            cursor.style.opacity = '1';
-        }
-        document.addEventListener('mousemove', onMouseMove);
-        
-        function animateCursor() {
-            cursor.style.left = mouseX + 'px';
-            cursor.style.top = mouseY + 'px';
-            requestAnimationFrame(animateCursor);
-        }
-        animateCursor();
-
-        document.addEventListener('mouseleave', () => { cursor.style.opacity = '0'; });
-        document.addEventListener('mouseenter', () => { cursor.style.opacity = '1'; });
-
-        const interactiveElements = document.querySelectorAll(
-            'a, button, input, label, select, textarea'
-        );
-        interactiveElements.forEach(el => {
-            el.addEventListener('mouseenter', () => cursor.classList.add('cursor-grow'));
-            el.addEventListener('mouseleave', () => cursor.classList.remove('cursor-grow'));
-        });
-        
-        const snowContainer = document.getElementById('snow-container');
-        const flakesCount = 50; 
-        for (let i = 0; i < flakesCount; i++) {
-            let flake = document.createElement('div');
-            flake.className = 'snowflake';
+            const cursor = document.getElementById('custom-cursor');
+            let mouseX = -100, mouseY = -100;
             
-            let horizontalPosition = Math.random() * 100;
-            if(Math.random() > 0.5) {
-                horizontalPosition = Math.random() < 0.5 ? Math.random() * 33 : 67 + Math.random() * 33;
+            function onMouseMove(e) {
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+                cursor.style.opacity = '1';
             }
-            flake.style.left = horizontalPosition + '%';
+            document.addEventListener('mousemove', onMouseMove);
+            
+            function animateCursor() {
+                cursor.style.left = mouseX + 'px';
+                cursor.style.top = mouseY + 'px';
+                requestAnimationFrame(animateCursor);
+            }
+            animateCursor();
 
-            flake.style.animationDuration = (Math.random() * 5 + 8) + 's';
-            flake.style.animationDelay = (Math.random() * 10) + 's';
-            flake.style.width = flake.style.height = (Math.random() * 5 + 5) + 'px';
-            snowContainer.appendChild(flake);
-        }
+            document.addEventListener('mouseleave', () => { cursor.style.opacity = '0'; });
+            document.addEventListener('mouseenter', () => { cursor.style.opacity = '1'; });
 
-        const headerElement = document.querySelector('header');
-        const navLinks = document.querySelectorAll('header nav a');
-        const sections = document.querySelectorAll('section');
-
-        function changeNavOnScroll() {
-            let currentSectionId = '';
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                if (window.scrollY >= sectionTop - (headerElement.offsetHeight + 100)) {
-                    currentSectionId = section.getAttribute('id');
+            const interactiveElements = document.querySelectorAll(
+                'a, button, input, label, select, textarea'
+            );
+            interactiveElements.forEach(el => {
+                el.addEventListener('mouseenter', () => cursor.classList.add('cursor-grow'));
+                el.addEventListener('mouseleave', () => cursor.classList.remove('cursor-grow'));
+            });
+            
+            const snowContainer = document.getElementById('snow-container');
+            const flakesCount = 50; 
+            for (let i = 0; i < flakesCount; i++) {
+                let flake = document.createElement('div');
+                flake.className = 'snowflake';
+                let horizontalPosition = Math.random() * 100;
+                if(Math.random() > 0.5) {
+                    horizontalPosition = Math.random() < 0.5 ? Math.random() * 33 : 67 + Math.random() * 33;
                 }
+                flake.style.left = horizontalPosition + '%';
+                flake.style.animationDuration = (Math.random() * 5 + 8) + 's';
+                flake.style.animationDelay = (Math.random() * 10) + 's';
+                flake.style.width = flake.style.height = (Math.random() * 5 + 5) + 'px';
+                snowContainer.appendChild(flake);
+            }
+
+            const headerElement = document.querySelector('header');
+            const navLinks = document.querySelectorAll('header nav a');
+            const sections = document.querySelectorAll('section');
+
+            function changeNavOnScroll() {
+                let currentSectionId = '';
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    if (window.scrollY >= sectionTop - (headerElement.offsetHeight + 100)) {
+                        currentSectionId = section.getAttribute('id');
+                    }
+                });
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === '#' + currentSectionId) {
+                        link.classList.add('active');
+                    }
+                });
+            }
+            window.addEventListener('scroll', changeNavOnScroll);
+            window.addEventListener('load', changeNavOnScroll);
+
+            const viewAllBtn = document.getElementById('viewAllProjectsBtn');
+            viewAllBtn.addEventListener('click', () => {
+                const hiddenProjects = document.querySelectorAll('.project-item.hidden');
+                hiddenProjects.forEach(project => {
+                    project.classList.remove('hidden');
+                });
+                viewAllBtn.parentElement.style.display = 'none';
             });
 
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href') === '#' + currentSectionId) {
-                    link.classList.add('active');
-                }
+            const clearCacheBtn = document.getElementById('clearCacheBtn');
+            clearCacheBtn.addEventListener('click', () => {
+                window.location.reload(true);
             });
-        }
-        window.addEventListener('scroll', changeNavOnScroll);
-        window.addEventListener('load', changeNavOnScroll);
+
+            const clearCookiesBtn = document.getElementById('clearCookiesBtn');
+            clearCookiesBtn.addEventListener('click', () => {
+                const cookies = document.cookie.split(";");
+                if (cookies.length === 0 || (cookies.length === 1 && cookies[0] === "")) {
+                    alert("No cookies to clear for this site.");
+                    return;
+                }
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i];
+                    const eqPos = cookie.indexOf("=");
+                    const name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+                    document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/";
+                }
+                alert("Site cookies have been cleared. The page will now reload.");
+                window.location.reload();
+            });
+        });
     </script>
-
 </body>
 </html>
