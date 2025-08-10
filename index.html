@@ -15,64 +15,86 @@
   --ice-2: #bfeeff;
   --accent: #6fe6ff;
   --muted: #9fb3c4;
+  --glass: rgba(255,255,255,0.04);
   --glass-2: rgba(255,255,255,0.06);
   --card-border: rgba(150,200,220,0.06);
+  --cursor-size: 16px;
   --cursor-glow: rgba(115,205,255,0.25);
 }
 *{box-sizing:border-box}
 html,body{height:100%}
 body{
   margin:0;
-  font-family:'Inter',sans-serif;
-  background:linear-gradient(180deg,var(--bg-dark), var(--bg-mid) 45%);
-  color:var(--ice-1);
-  overflow-x:hidden;
+  font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  background: linear-gradient(180deg,var(--bg-dark), var(--bg-mid) 45%);
+  color: var(--ice-1);
+  line-height:1.5;
+  cursor: none;
+}
+body::before{
+  content:'';
+  position:fixed;
+  inset:0;
+  background-image: radial-gradient(rgba(255,255,255,0.02) 1px, transparent 1px);
+  background-size: 30px 30px;
+  opacity:0.35;
+  pointer-events:none;
+  mix-blend-mode:overlay;
 }
 .wrapper{max-width:1100px;margin:0 auto;padding:24px;}
-header{position:fixed;left:0;right:0;top:0;z-index:1200;display:flex;justify-content:center;padding:18px 16px;pointer-events:none;}
-.nav-ice{width:100%;max-width:1150px;display:flex;align-items:center;justify-content:space-between;padding:14px 20px;border-radius:12px;background:linear-gradient(180deg,rgba(255,255,255,0.03),rgba(255,255,255,0.02));backdrop-filter:blur(8px) saturate(110%);-webkit-backdrop-filter:blur(8px) saturate(110%);box-shadow:0 6px 30px rgba(3,9,18,0.6),inset 0 1px 0 rgba(255,255,255,0.02);border:1px solid rgba(180,230,255,0.06);position:relative;pointer-events:auto;overflow:visible;}
-.snow-cap{position:absolute;left:0;right:0;top:-28px;height:48px;pointer-events:none;background:radial-gradient(40px 12px at 10% 60%,rgba(255,255,255,0.06) 0%,transparent 40%),radial-gradient(50px 14px at 30% 55%,rgba(255,255,255,0.06) 0%,transparent 38%),radial-gradient(30px 10px at 50% 62%,rgba(255,255,255,0.06) 0%,transparent 40%),linear-gradient(180deg,rgba(255,255,255,0.95),rgba(255,255,255,0.85));border-top-left-radius:14px;border-top-right-radius:14px;transform:translateY(-4px);filter:blur(0.4px) saturate(120%);mix-blend-mode:screen;opacity:0.95;}
-.snow-cap::after{content:'';position:absolute;left:0;right:0;bottom:0;height:16px;background:linear-gradient(180deg,rgba(255,255,255,0.2),rgba(255,255,255,0));mask-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="800" height="40" viewBox="0 0 800 40"><path d="M0 20 C40 10 60 30 120 14 C180 -4 240 30 320 20 C400 10 460 34 520 12 C580 -8 640 24 700 20 C760 16 800 24 800 24 L800 40 L0 40 Z" fill="black"/></svg>');mask-size:cover;opacity:0.9;pointer-events:none;}
-.logo{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--ice-1);font-weight:700;font-size:1.2rem;pointer-events:auto;}
+header{position:fixed;left:0;right:0;top:0;z-index:1200;display:flex;justify-content:center;padding:18px 16px;pointer-events:none}
+.nav-ice{width:100%;max-width:1150px;display:flex;align-items:center;justify-content:space-between;padding:14px 20px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));backdrop-filter: blur(8px) saturate(110%);-webkit-backdrop-filter: blur(8px) saturate(110%);box-shadow: 0 6px 30px rgba(3,9,18,0.6), inset 0 1px 0 rgba(255,255,255,0.02);border: 1px solid rgba(180,230,255,0.06);position:relative;pointer-events:auto;overflow:visible}
+.snow-cap{position:absolute;left:0;right:0;top:-28px;height:48px;pointer-events:none;background: radial-gradient(40px 12px at 10% 60%, rgba(255,255,255,0.06) 0%, transparent 40%), radial-gradient(50px 14px at 30% 55%, rgba(255,255,255,0.06) 0%, transparent 38%), radial-gradient(30px 10px at 50% 62%, rgba(255,255,255,0.06) 0%, transparent 40%), linear-gradient(180deg, rgba(255,255,255,0.95), rgba(255,255,255,0.85));border-top-left-radius:14px;border-top-right-radius:14px;transform:translateY(-4px);filter:blur(0.4px) saturate(120%);mix-blend-mode:screen;opacity:0.95}
+.logo{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--ice-1);font-weight:700;font-size:1.2rem;pointer-events:auto}
 .logo svg{width:36px;height:36px;flex-shrink:0;filter:drop-shadow(0 6px 14px rgba(0,0,0,0.6))}
-nav.primary{display:flex;gap:14px;align-items:center;pointer-events:auto;}
-nav.primary a{color:var(--muted);text-decoration:none;font-weight:600;font-size:0.95rem;padding:8px 10px;border-radius:8px;transition:all .18s ease;display:inline-block;}
-nav.primary a:hover{color:var(--ice-1);transform:translateY(-2px);box-shadow:0 6px 18px rgba(65,200,255,0.06),inset 0 -2px 6px rgba(255,255,255,0.02);}
-nav.primary a.active{color:var(--accent);background:linear-gradient(90deg,rgba(110,230,255,0.04),rgba(110,230,255,0.02));box-shadow:0 6px 24px rgba(50,180,240,0.04),inset 0 1px 0 rgba(255,255,255,0.02);}
+nav.primary{display:flex;gap:14px;align-items:center;pointer-events:auto}
+nav.primary a{color:var(--muted);text-decoration:none;font-weight:600;font-size:0.95rem;padding:8px 10px;border-radius:8px;transition:all .18s ease;display:inline-block}
+nav.primary a:hover{color:var(--ice-1);transform:translateY(-2px);box-shadow:0 6px 18px rgba(65,200,255,0.06),inset 0 -2px 6px rgba(255,255,255,0.02)}
+nav.primary a.active{color:var(--accent);background:linear-gradient(90deg, rgba(110,230,255,0.04), rgba(110,230,255,0.02));box-shadow:0 6px 24px rgba(50,180,240,0.04), inset 0 1px 0 rgba(255,255,255,0.02)}
 main{padding-top:140px;padding-bottom:80px}
 section{padding:56px 0;border-top:1px solid rgba(255,255,255,0.02)}
-.section-head{display:flex;align-items:flex-end;gap:18px;margin-bottom:22px;}
+.section-head{display:flex;align-items:flex-end;gap:18px;margin-bottom:22px}
 h2{margin:0;color:var(--ice-1);font-size:1.9rem;border-bottom:2px solid rgba(120,220,255,0.06);padding-bottom:10px;font-weight:700}
 .lead{color:var(--muted);font-size:1.03rem;max-width:820px}
 .about p{font-size:1.02rem;color:var(--muted);max-width:900px;margin-top:12px}
 #skills ul{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;padding:0;margin:0;list-style:none}
-#skills li{background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));border:1px solid var(--card-border);padding:18px;border-radius:12px;color:var(--ice-1);box-shadow:0 6px 18px rgba(0,0,0,0.45);min-height:84px}
+#skills li{background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border:1px solid var(--card-border);padding:18px;border-radius:12px;color:var(--ice-1);box-shadow: 0 6px 18px rgba(0,0,0,0.45);min-height:84px}
 #skills strong{display:block;font-size:1.05rem;margin-bottom:8px;color:var(--ice-1)}
-.projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:22px;align-items:start}
-.proj-card{border-radius:12px;padding:18px;background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));border:1px solid var(--card-border);box-shadow:0 8px 30px rgba(3,9,18,0.6);transition:transform .18s cubic-bezier(.16,.85,.24,1),box-shadow .18s;position:relative;overflow:hidden;min-height:120px}
-.proj-card:hover{transform:translateY(-8px);box-shadow:0 20px 60px rgba(2,8,18,0.75)}
-.proj-card::before{content:'';position:absolute;left:-40%;top:-40%;width:180%;height:180%;background:conic-gradient(from 180deg at 50% 50%,rgba(120,220,255,0.03),rgba(255,255,255,0.02));transform:rotate(6deg);pointer-events:none}
-.proj-meta{position:relative;z-index:3;display:flex;flex-direction:column;gap:10px;align-items:flex-start}
+.projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:22px;align-items:start}
+.proj-card{border-radius:12px;padding:16px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border:1px solid var(--card-border);box-shadow:0 8px 30px rgba(3,9,18,0.6);transition:transform .18s cubic-bezier(.16,.85,.24,1),box-shadow .18s;position:relative;overflow:hidden;min-height:160px;display:flex;flex-direction:column}
+.proj-thumb{width:100%;height:140px;object-fit:cover;border-radius:8px;margin-bottom:12px;border:1px solid rgba(255,255,255,0.02)}
+.proj-meta{position:relative;z-index:3;display:flex;flex-direction:column;gap:10px;align-items:flex-start;flex:1}
 .proj-title{font-weight:700;color:var(--ice-1);font-size:1.05rem}
 .proj-actions{margin-top:auto;display:flex;gap:10px}
-.btn{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:10px;font-weight:700;font-size:0.95rem;text-decoration:none;color:var(--bg-dark);background:linear-gradient(180deg,var(--accent),#8be8ff);box-shadow:0 8px 28px rgba(80,200,255,0.12);border:none;cursor:pointer;}
-.btn.subtle{background:transparent;color:var(--muted);border:1px solid rgba(255,255,255,0.03);font-weight:600;}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:10px;font-weight:700;font-size:0.95rem;text-decoration:none;color:var(--bg-dark);background:linear-gradient(180deg,var(--accent),#8be8ff);box-shadow:0 8px 28px rgba(80,200,255,0.12);border:none;cursor:pointer}
+.btn.subtle{background:transparent;color:var(--muted);border:1px solid rgba(255,255,255,0.03);font-weight:600}
 .social-links{display:flex;flex-wrap:wrap;gap:12px;margin-top:16px}
 .social-links a{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:10px;background:var(--glass-2);border:1px solid rgba(255,255,255,0.02);text-decoration:none;color:var(--ice-1)}
 .social-links img{width:22px;height:22px;object-fit:contain}
 footer{padding:48px 0;color:var(--muted);text-align:center;border-top:1px solid rgba(255,255,255,0.02)}
-#custom-cursor{position:fixed;left:-100px;top:-100px;width:16px;height:16px;border-radius:50%;background:radial-gradient(circle at 35% 35%,rgba(255,255,255,0.9),rgba(255,255,255,0.35) 10%,rgba(0,0,0,0) 60%);box-shadow:0 0 18px 6px var(--cursor-glow);pointer-events:none;z-index:2000;transform:translate(-50%,-50%) scale(1);transition:transform .12s linear,width .12s linear,height .12s linear,opacity .12s;opacity:0}
+#custom-cursor{position:fixed;left:-100px;top:-100px;width:var(--cursor-size);height:var(--cursor-size);border-radius:50%;background:radial-gradient(circle at 35% 35%, rgba(255,255,255,0.9), rgba(255,255,255,0.35) 10%, rgba(0,0,0,0) 60%);box-shadow: 0 0 18px 6px var(--cursor-glow);pointer-events:none;z-index:2000;transform:translate(-50%,-50%) scale(1);transition:transform .12s linear,width .12s linear,height .12s linear,opacity .12s;opacity:0}
 #custom-cursor.cursor-grow{transform:translate(-50%,-50%) scale(1.8);width:34px;height:34px;opacity:1;box-shadow:0 0 30px 10px rgba(110,230,255,0.22)}
+@media (max-width:900px){.proj-thumb{height:120px}.projects-grid{grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}}
 @media (max-width:720px){.nav-ice{padding:12px 14px}h2{font-size:1.4rem}main{padding-top:120px}.snow-cap{display:none}}
 </style>
 </head>
 <body>
-<canvas id="snow-canvas"></canvas>
+<canvas id="snow-canvas" style="position:fixed;left:0;top:0;width:100%;height:100%;z-index:100;pointer-events:none"></canvas>
 <header>
   <div class="nav-ice">
     <div class="snow-cap" aria-hidden="true"></div>
-    <a class="logo" href="#"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M12 2L16.9 6.9L12 12L7.1 6.9L12 2Z" fill="#bff0ff"/><path d="M12 12L19 9L16 16L12 22L8 16L5 9L12 12Z" fill="#9fe8ff"/></svg><span>Rocraften</span></a>
-    <nav class="primary" role="navigation" aria-label="Primary"><a href="#about" class="nav-link">About</a><a href="#skills" class="nav-link">Skills</a><a href="#projects" class="nav-link">Projects</a><a href="#contact" class="nav-link">Contact</a></nav>
+    <a class="logo" href="#" aria-label="Home">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M12 2L16.9 6.9L12 12L7.1 6.9L12 2Z" fill="#bff0ff"/><path d="M12 12L19 9L16 16L12 22L8 16L5 9L12 12Z" fill="#9fe8ff"/></svg>
+      <span>Rocraften</span>
+    </a>
+    <nav class="primary" role="navigation" aria-label="Primary">
+      <a href="#about" class="nav-link">About</a>
+      <a href="#skills" class="nav-link">Skills</a>
+      <a href="#projects" class="nav-link">Projects</a>
+      <a href="#contact" class="nav-link">Contact</a>
+    </nav>
   </div>
 </header>
 <div id="custom-cursor" aria-hidden="true"></div>
@@ -80,36 +102,132 @@ footer{padding:48px 0;color:var(--muted);text-align:center;border-top:1px solid 
   <div class="wrapper">
     <section id="about" class="about">
       <div class="section-head"><h2>About Me</h2></div>
-      <p class="lead">Hey — I’m Rocraften. I build things you can play with: Minecraft addons, texture packs, Roblox content, and small games. I like messy creativity more than perfection. If it's fun, useful, or a little weird, I want to try it.</p>
-      <p>I do 3D models, pixel art, and Python projects when the mood hits. This place is a tidy map of that chaos — feel free to poke around.</p>
+      <p class="lead">Hey — I’m Rocraften. I make stuff you can mess with: Minecraft addons, texture packs, Roblox bits, and small games. I like making things that feel fun and useful, not perfect.</p>
+      <p>I model in Blender and Blockbench, dab in pixel art sometimes, and write small Python projects when I’m bored. This site is a tidy map of that mess — look around, grab anything that looks cool.</p>
     </section>
+
     <section id="skills">
-      <div class="section-head"><h2>Skills</h2></div>
-      <ul><li><strong>Minecraft</strong> — addons, behavior packs, texture packs, skins, and experiments for education.</li><li><strong>Roblox</strong> — building, UI, and Lua basics for fun experiences and small games.</li><li><strong>Python</strong> — games, tools, and tiny utilities (Pygame stuff included).</li><li><strong>3D Modeling</strong> — Blender & Blockbench for props, renders, and in-game assets.</li><li><strong>Pixel Art</strong> — occasional pixel work when the project calls for it.</li></ul>
+      <div class="section-head"><h2>My Skills</h2></div>
+      <ul>
+        <li><strong>Minecraft</strong> — addons, behavior packs, texture packs, skins, and MC:EDU experiments.</li>
+        <li><strong>Roblox</strong> — building, UI, basic Lua scripting, and modeling.</li>
+        <li><strong>Python</strong> — small games (Pygame), tools, and utilities.</li>
+        <li><strong>3D Modeling</strong> — Blender & Blockbench for props and in-game assets.</li>
+        <li><strong>Pixel Art</strong> — occasional pixel work when the project needs it.</li>
+      </ul>
     </section>
+
     <section id="projects">
       <div class="section-head"><h2>Featured Projects</h2></div>
-      <p class="lead" style="margin-bottom:20px;color:var(--muted)">Just the essentials — titles and direct links. Click any card to view the project page.</p>
+      <p class="lead" style="margin-bottom:20px;color:var(--muted)">Titles and direct links only — quick and clean.</p>
       <div class="projects-grid" aria-live="polite">
-        <article class="proj-card"><div class="proj-meta"><div class="proj-title">[BEDROCK] Fullbright</div><div class="proj-actions"><a class="btn" href="https://www.planetminecraft.com/mod/fullbright-bedrock-behavior-pack/" target="_blank" rel="noopener">View</a><a class="btn subtle" href="https://www.planetminecraft.com/mod/fullbright-bedrock-behavior-pack/" target="_blank" rel="noopener">PlanetMinecraft</a></div></div></article>
-        <article class="proj-card"><div class="proj-meta"><div class="proj-title">[BEDROCK] Starter Kit</div><div class="proj-actions"><a class="btn" href="https://www.planetminecraft.com/mod/starter-kit-bedrock-behavior-pack/" target="_blank" rel="noopener">View</a><a class="btn subtle" href="https://www.planetminecraft.com/mod/starter-kit-bedrock-behavior-pack/" target="_blank" rel="noopener">PlanetMinecraft</a></div></div></article>
-        <article class="proj-card"><div class="proj-meta"><div class="proj-title">[BEDROCK] Minecraft Redstone Edition</div><div class="proj-actions"><a class="btn" href="https://www.planetminecraft.com/texture-pack/minecraft-redstone-edition/" target="_blank" rel="noopener">View</a><a class="btn subtle" href="https://www.planetminecraft.com/texture-pack/minecraft-redstone-edition/" target="_blank" rel="noopener">PlanetMinecraft</a></div></div></article>
-        <article class="proj-card"><div class="proj-meta"><div class="proj-title">[BEDROCK] Build Height Override</div><div class="proj-actions"><a class="btn" href="https://www.planetminecraft.com/mod/bedrock-build-height-override/" target="_blank" rel="noopener">View</a><a class="btn subtle" href="https://www.planetminecraft.com/mod/bedrock-build-height-override/" target="_blank" rel="noopener">PlanetMinecraft</a></div></div></article>
-        <article class="proj-card"><div class="proj-meta"><div class="proj-title">[MCEDU] Experiments</div><div class="proj-actions"><a class="btn" href="https://www.planetminecraft.com/texture-pack/experiments-for-education/" target="_blank" rel="noopener">View</a><a class="btn subtle" href="https://www.planetminecraft.com/texture-pack/experiments-for-education/" target="_blank" rel="noopener">PlanetMinecraft</a></div></div></article>
-        <article class="proj-card"><div class="proj-meta"><div class="proj-title">[BEDROCK] Saturation Shaders</div><div class="proj-actions"><a class="btn" href="https://www.planetminecraft.com/texture-pack/bedrock-saturation-shaders/" target="_blank" rel="noopener">View</a><a class="btn subtle" href="https://www.planetminecraft.com/texture-pack/bedrock-saturation-shaders/" target="_blank" rel="noopener">PlanetMinecraft</a></div></div></article>
-        <article class="proj-card"><div class="proj-meta"><div class="proj-title">[MCEDU] Skin Support</div><div class="proj-actions"><a class="btn" href="https://www.planetminecraft.com/texture-pack/skin-support-for-mee/" target="_blank" rel="noopener">View</a><a class="btn subtle" href="https://www.planetminecraft.com/texture-pack/skin-support-for-mee/" target="_blank" rel="noopener">PlanetMinecraft</a></div></div></article>
+        <article class="proj-card">
+          <img class="proj-thumb" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='600' height='400'><rect width='100%' height='100%' fill='%230b2a3a'/><text x='50%' y='50%' font-family='Inter,Arial' font-size='72' fill='%23bfeeff' text-anchor='middle' dominant-baseline='middle'>FB</text></svg>" alt="[BEDROCK] Fullbright thumbnail">
+          <div class="proj-meta">
+            <div class="proj-title">[BEDROCK] Fullbright</div>
+            <div class="proj-actions">
+              <a class="btn" href="https://www.planetminecraft.com/mod/fullbright-bedrock-behavior-pack/" target="_blank" rel="noopener">View</a>
+              <a class="btn subtle" href="https://www.planetminecraft.com/mod/fullbright-bedrock-behavior-pack/" target="_blank" rel="noopener">PlanetMinecraft</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="proj-card">
+          <img class="proj-thumb" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='600' height='400'><rect width='100%' height='100%' fill='%23102a3a'/><text x='50%' y='50%' font-family='Inter,Arial' font-size='72' fill='%23dff8ff' text-anchor='middle' dominant-baseline='middle'>SK</text></svg>" alt="[BEDROCK] Starter Kit thumbnail">
+          <div class="proj-meta">
+            <div class="proj-title">[BEDROCK] Starter Kit</div>
+            <div class="proj-actions">
+              <a class="btn" href="https://www.planetminecraft.com/mod/starter-kit-bedrock-behavior-pack/" target="_blank" rel="noopener">View</a>
+              <a class="btn subtle" href="https://www.planetminecraft.com/mod/starter-kit-bedrock-behavior-pack/" target="_blank" rel="noopener">PlanetMinecraft</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="proj-card">
+          <img class="proj-thumb" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='600' height='400'><rect width='100%' height='100%' fill='%23082a3a'/><text x='50%' y='50%' font-family='Inter,Arial' font-size='64' fill='%236fe6ff' text-anchor='middle' dominant-baseline='middle'>RS</text></svg>" alt="[BEDROCK] Minecraft Redstone Edition thumbnail">
+          <div class="proj-meta">
+            <div class="proj-title">[BEDROCK] Minecraft Redstone Edition</div>
+            <div class="proj-actions">
+              <a class="btn" href="https://www.planetminecraft.com/texture-pack/minecraft-redstone-edition/" target="_blank" rel="noopener">View</a>
+              <a class="btn subtle" href="https://www.planetminecraft.com/texture-pack/minecraft-redstone-edition/" target="_blank" rel="noopener">PlanetMinecraft</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="proj-card">
+          <img class="proj-thumb" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='600' height='400'><rect width='100%' height='100%' fill='%23192f3f'/><text x='50%' y='50%' font-family='Inter,Arial' font-size='64' fill='%23bff0ff' text-anchor='middle' dominant-baseline='middle'>BH</text></svg>" alt="[BEDROCK] Build Height Override thumbnail">
+          <div class="proj-meta">
+            <div class="proj-title">[BEDROCK] Build Height Override</div>
+            <div class="proj-actions">
+              <a class="btn" href="https://www.planetminecraft.com/mod/bedrock-build-height-override/" target="_blank" rel="noopener">View</a>
+              <a class="btn subtle" href="https://www.planetminecraft.com/mod/bedrock-build-height-override/" target="_blank" rel="noopener">PlanetMinecraft</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="proj-card">
+          <img class="proj-thumb" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='600' height='400'><rect width='100%' height='100%' fill='%230b2a3a'/><text x='50%' y='50%' font-family='Inter,Arial' font-size='64' fill='%23aef1ff' text-anchor='middle' dominant-baseline='middle'>EX</text></svg>" alt="[MCEDU] Experiments thumbnail">
+          <div class="proj-meta">
+            <div class="proj-title">[MCEDU] Experiments</div>
+            <div class="proj-actions">
+              <a class="btn" href="https://www.planetminecraft.com/texture-pack/experiments-for-education/" target="_blank" rel="noopener">View</a>
+              <a class="btn subtle" href="https://www.planetminecraft.com/texture-pack/experiments-for-education/" target="_blank" rel="noopener">PlanetMinecraft</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="proj-card">
+          <img class="proj-thumb" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='600' height='400'><rect width='100%' height='100%' fill='%23102a3a'/><text x='50%' y='50%' font-family='Inter,Arial' font-size='64' fill='%23cfffff' text-anchor='middle' dominant-baseline='middle'>SS</text></svg>" alt="[BEDROCK] Saturation Shaders thumbnail">
+          <div class="proj-meta">
+            <div class="proj-title">[BEDROCK] Saturation Shaders</div>
+            <div class="proj-actions">
+              <a class="btn" href="https://www.planetminecraft.com/texture-pack/bedrock-saturation-shaders/" target="_blank" rel="noopener">View</a>
+              <a class="btn subtle" href="https://www.planetminecraft.com/texture-pack/bedrock-saturation-shaders/" target="_blank" rel="noopener">PlanetMinecraft</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="proj-card">
+          <img class="proj-thumb" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='600' height='400'><rect width='100%' height='100%' fill='%230b2a3a'/><text x='50%' y='50%' font-family='Inter,Arial' font-size='60' fill='%23dff8ff' text-anchor='middle' dominant-baseline='middle'>SSP</text></svg>" alt="[MCEDU] Skin Support thumbnail">
+          <div class="proj-meta">
+            <div class="proj-title">[MCEDU] Skin Support</div>
+            <div class="proj-actions">
+              <a class="btn" href="https://www.planetminecraft.com/texture-pack/skin-support-for-mee/" target="_blank" rel="noopener">View</a>
+              <a class="btn subtle" href="https://www.planetminecraft.com/texture-pack/skin-support-for-mee/" target="_blank" rel="noopener">PlanetMinecraft</a>
+            </div>
+          </div>
+        </article>
+
       </div>
     </section>
+
     <section id="contact">
       <div class="section-head"><h2>Get In Touch</h2></div>
-      <p class="lead" style="margin-bottom:12px;color:var(--muted)">If you want to chat, collab, or yell into the void about textures — here’s where to find me. I respond best on Discord and Planet Minecraft.</p>
+      <p class="lead" style="margin-bottom:12px;color:var(--muted)">Want to collab, ask about a pack, or just say hi? Best places to reach me are Discord and Planet Minecraft. I check those most.</p>
       <div class="social-links" aria-label="social links">
-        <a class="discord-link" href="https://discord.com/users/1290046071774384215" target="_blank" rel="noopener" title="Discord"><svg viewBox="0 0 24 24" width="20" height="20" xmlns="http://www.w3.org/2000/svg"><path fill="#5865F2" d="..."/></svg></a>
-        <a class="x-link" href="https://twitter.com/Rocraften" target="_blank" rel="noopener" title="X / Twitter"><svg width="20" height="20"><path fill="#fff" d="..."/></svg></a>
-        <a class="github-link" href="https://github.com/Rocraften" target="_blank" rel="noopener" title="GitHub"><svg width="20" height="20"><path fill="#fff" d="..."/></svg></a>
-        <a class="roblox-link" href="https://www.roblox.com/users/7615973079/profile" target="_blank" rel="noopener" title="Roblox"><svg width="20" height="20"><path fill="#fff" d="..."/></svg></a>
-        <a href="https://www.planetminecraft.com/member/rocraften" target="_blank" rel="noopener" title="Planet Minecraft"><img src="https://earthmaker.world/img/logo.webp" alt="PMC"/></a>
-        <a href="mailto:Rocraften@outlook.com" title="Email"><img src="https://icons.iconarchive.com/icons/dtafalonso/win-10x/512/Email-icon.png" alt="Email"/></a>
+        <a class="discord-link" href="https://discord.com/users/1290046071774384215" target="_blank" rel="noopener" title="Discord">
+          <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Discord</title><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"/></svg>
+        </a>
+
+        <a class="x-link" href="https://twitter.com/Rocraften" target="_blank" rel="noopener" title="X (Twitter)">
+          <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>X</title><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932Z"/></svg>
+        </a>
+
+        <a class="github-link" href="https://github.com/Rocraften" target="_blank" rel="noopener" title="GitHub">
+          <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>GitHub</title><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+        </a>
+
+        <a class="roblox-link" href="https://www.roblox.com/users/7615973079/profile" target="_blank" rel="noopener" title="Roblox">
+          <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Roblox</title><path d="M18.926 23.998 0 18.892 5.075.002 24 5.108ZM15.348 10.09l-5.282-1.453-1.414 5.273 5.282 1.453z"/></svg>
+        </a>
+
+        <a href="https://www.planetminecraft.com/member/rocraften" target="_blank" rel="noopener" title="Planet Minecraft">
+          <img src="https://earthmaker.world/img/logo.webp" alt="PlanetMinecraft" />
+        </a>
+
+        <a href="mailto:Rocraften@outlook.com" title="Email">
+          <img src="https://icons.iconarchive.com/icons/dtafalonso/win-10x/512/Email-icon.png" alt="Email" />
+        </a>
       </div>
     </section>
   </div>
@@ -119,74 +237,112 @@ footer{padding:48px 0;color:var(--muted);text-align:center;border-top:1px solid 
     <p>&copy; <span id="year"></span> Rocraften. All rights reserved.</p>
   </div>
 </footer>
+
 <script>
-document.getElementById('year').textContent=new Date().getFullYear();
-const navLinks=document.querySelectorAll('nav.primary a');
-const sections=document.querySelectorAll('main section');
+document.getElementById('year').textContent = new Date().getFullYear();
+
+const navLinks = document.querySelectorAll('nav.primary a');
+const sections = document.querySelectorAll('main section');
 function updateNav(){
-  let id='';
-  sections.forEach(s=>{
-    const rect=s.getBoundingClientRect();
-    if(rect.top-120<=0)id=s.id;
+  let id = '';
+  sections.forEach(s => {
+    const rect = s.getBoundingClientRect();
+    if(rect.top - 120 <= 0) id = s.id;
   });
-  navLinks.forEach(a=>a.classList.toggle('active',a.getAttribute('href')=='#'+id));
+  navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + id));
 }
-window.addEventListener('scroll',updateNav);
-window.addEventListener('load',updateNav);
-window.addEventListener('resize',updateNav);
-const navIce=document.querySelector('.nav-ice');
-window.addEventListener('scroll',()=>{
-  navIce.style.boxShadow=window.scrollY>30?'0 10px 40px rgba(0,0,0,0.6)':'0 6px 30px rgba(3,9,18,0.6)';
+window.addEventListener('scroll', updateNav);
+window.addEventListener('load', updateNav);
+window.addEventListener('resize', updateNav);
+
+const navIce = document.querySelector('.nav-ice');
+window.addEventListener('scroll', () => {
+  navIce.style.boxShadow = window.scrollY > 30 ? '0 10px 40px rgba(0,0,0,0.6)' : '0 6px 30px rgba(3,9,18,0.6)';
 });
-const customCursor=document.getElementById('custom-cursor');
-let mouseX=-100,mouseY=-100,cursorVisible=false;
-document.addEventListener('mousemove',e=>{
-  mouseX=e.clientX;mouseY=e.clientY;
-  if(!cursorVisible){customCursor.style.opacity='1';cursorVisible=true;}
-  customCursor.style.left=mouseX+'px';
-  customCursor.style.top=mouseY+'px';
+
+const customCursor = document.getElementById('custom-cursor');
+let mouseX = -100, mouseY = -100, cursorVisible = false;
+document.addEventListener('mousemove', (e) => {
+  mouseX = e.clientX; mouseY = e.clientY;
+  if(!cursorVisible){ customCursor.style.opacity = '1'; cursorVisible = true; }
+  customCursor.style.left = mouseX + 'px';
+  customCursor.style.top = mouseY + 'px';
 });
-document.addEventListener('mouseenter',()=>{customCursor.style.opacity='1';cursorVisible=true});
-document.addEventListener('mouseleave',()=>{customCursor.style.opacity='0';cursorVisible=false});
-document.querySelectorAll('a,button,input,select,textarea,.logo').forEach(el=>{
-  el.addEventListener('mouseenter',()=>customCursor.classList.add('cursor-grow'));
-  el.addEventListener('mouseleave',()=>customCursor.classList.remove('cursor-grow'));
+document.addEventListener('mouseenter', () => { customCursor.style.opacity = '1'; cursorVisible = true; });
+document.addEventListener('mouseleave', () => { customCursor.style.opacity = '0'; cursorVisible = false; });
+
+document.querySelectorAll('a,button,input,select,textarea,.logo').forEach(el => {
+  el.addEventListener('mouseenter', () => customCursor.classList.add('cursor-grow'));
+  el.addEventListener('mouseleave', () => customCursor.classList.remove('cursor-grow'));
 });
+
 (function(){
-  const canvas=document.getElementById('snow-canvas');
-  const ctx=canvas.getContext('2d');
-  let width=canvas.width=innerWidth;
-  let height=canvas.height=innerHeight;
-  const flakes=[];
-  const img=new Image();img.src='https://i.imgur.com/2CzE6iD.png';
-  const COUNT=Math.floor((width*height)/9000);
+  const canvas = document.getElementById('snow-canvas');
+  const ctx = canvas.getContext('2d');
+  let width = canvas.width = innerWidth;
+  let height = canvas.height = innerHeight;
+  const flakes = [];
+  const img = new Image();
+  img.crossOrigin = 'anonymous';
+  img.src = 'https://icon2.cleanpng.com/20180621/hqt/kisspng-granville-island-digital-marketing-vancouver-whist-gelo-5b2bfe38d943d6.8762311515296097848899.jpg';
+  const COUNT = Math.max(30, Math.floor((width * height) / 14000));
   for(let i=0;i<COUNT;i++){
-    flakes.push({x:Math.random()*width,y:Math.random()*height,r:0.6+Math.random()*2.6,d:Math.random()*0.8+0.2,vx:(Math.random()-0.5)*0.3,vy:0.2+Math.random()*0.8,opacity:0.2+Math.random()*0.65});
+    flakes.push({
+      x: Math.random() * width,
+      y: Math.random() * height,
+      r: 0.6 + Math.random() * 2.6,
+      d: Math.random() * 0.8 + 0.2,
+      vx: (Math.random() - 0.5) * 0.4,
+      vy: 0.3 + Math.random() * 0.9,
+      opacity: 0.25 + Math.random() * 0.6
+    });
   }
-  function resize(){width=canvas.width=innerWidth;height=canvas.height=innerHeight;}
-  window.addEventListener('resize',resize);
-  let wind=0;
+  function resize(){
+    width = canvas.width = innerWidth;
+    height = canvas.height = innerHeight;
+  }
+  window.addEventListener('resize', resize);
+  let wind = 0;
   function animate(){
     ctx.clearRect(0,0,width,height);
-    flakes.forEach(f=>{
-      wind+=0.0002;
-      f.x+=f.vx+Math.sin(wind+f.d)*0.3;
-      f.y+=f.vy*(0.6+f.r/3);
-      if(f.y>height+10){f.x=Math.random()*width;f.y=-10-Math.random()*50;f.vy=0.2+Math.random()*0.8;}
-      if(f.x>width+20)f.x=-20;
-      if(f.x<-20)f.x=width+20;
-      ctx.globalAlpha=f.opacity*(1 - f.y/height);
-      const size=f.r*6;
-      ctx.drawImage(img,f.x-size/2,f.y-size/2,size,size);
-    });
-    ctx.globalAlpha=1;
+    for(let f of flakes){
+      wind += 0.00015;
+      f.x += f.vx + Math.sin(wind + f.d) * 0.35;
+      f.y += f.vy * (0.6 + f.r / 3);
+      if(f.y > height + 20){
+        f.x = Math.random() * width;
+        f.y = -30 - Math.random() * 120;
+        f.vy = 0.3 + Math.random() * 0.9;
+      }
+      if(f.x > width + 40) f.x = -40;
+      if(f.x < -40) f.x = width + 40;
+      const alpha = f.opacity * Math.max(0, 1 - (f.y / height));
+      ctx.globalAlpha = alpha;
+      const size = Math.max(12, f.r * 8);
+      if(img.complete){
+        ctx.drawImage(img, f.x - size/2, f.y - size/2, size, size);
+      } else {
+        ctx.fillStyle = 'rgba(255,255,255,' + alpha + ')';
+        ctx.beginPath();
+        ctx.arc(f.x, f.y, Math.max(1.5, f.r * 2.5), 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+    ctx.globalAlpha = 1;
     requestAnimationFrame(animate);
   }
   animate();
 })();
-document.querySelectorAll('.proj-card').forEach(card=>{
-  const link=card.querySelector('.proj-actions a.btn');
-  if(link){card.style.cursor='pointer';card.addEventListener('click',e=>{if(e.target.closest('.btn.subtle'))return;window.open(link.href,'_blank','noopener');});}
+
+document.querySelectorAll('.proj-card').forEach(card => {
+  const link = card.querySelector('.proj-actions a.btn');
+  if(link){
+    card.style.cursor = 'pointer';
+    card.addEventListener('click', (e) => {
+      if(e.target.closest('.btn.subtle')) return;
+      window.open(link.href, '_blank', 'noopener');
+    });
+  }
 });
 </script>
 </body>
