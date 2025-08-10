@@ -122,7 +122,7 @@
             background-color: var(--surface);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
-            padding: 15px 0;
+            padding: 10px 0;
             position: fixed;
             top: 0;
             left: 0;
@@ -149,11 +149,14 @@
             transform: scale(1.05);
             filter: drop-shadow(0 0 12px rgba(0, 191, 255, 0.8));
         }
+        .logo-area .logo-link:active img {
+            transform: scale(0.98);
+        }
         
         .header-controls {
             display: flex;
             align-items: center;
-            gap: 25px;
+            gap: 30px;
         }
 
         header nav a {
@@ -161,7 +164,8 @@
             text-decoration: none;
             font-weight: 600;
             font-size: 1em;
-            padding: 6px 0px;
+            padding: 6px 0;
+            margin: 0 0 0 30px;
             transition: color 0.3s ease, border-bottom-color 0.3s ease, transform 0.2s ease-out;
             position: relative;
             border-bottom: 3px solid transparent;
@@ -181,7 +185,7 @@
             justify-content: center;
             transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
-        #theme-switcher:hover { transform: rotate(15deg); }
+        #theme-switcher:hover { transform: rotate(25deg); }
         #theme-switcher svg {
             width: 24px;
             height: 24px;
@@ -204,10 +208,7 @@
             transition: color var(--theme-transition-duration) ease;
         }
 
-        a, button {
-            cursor: none !important;
-            transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
+        a, button { cursor: none !important; }
         a:active, button:active {
             transform: scale(0.95);
         }
@@ -238,10 +239,10 @@
             background-color: var(--accent-blue-medium);
             color: #fff;
             text-decoration: none;
-            transform: translateY(-3px) scale(1.0);
+            transform: translateY(-3px);
         }
         .project-download-link:active {
-             transform: translateY(-3px) scale(0.95);
+             transform: translateY(-1px) scale(0.95);
         }
 
         ul { list-style: none; padding: 0; display: grid; gap: 25px; }
@@ -293,10 +294,10 @@
         }
         #viewAllProjectsBtn:hover {
             background-color: var(--accent-blue-medium);
-            transform: translateY(-3px) scale(1.0);
+            transform: translateY(-3px);
         }
          #viewAllProjectsBtn:active {
-            transform: translateY(-3px) scale(0.95);
+            transform: translateY(-1px) scale(0.95);
         }
         
         #contact .social-links { text-align: center; margin-top: 30px; }
@@ -309,7 +310,10 @@
             transform: scale(1.15);
             filter: drop-shadow(0 0 12px var(--glow-color));
         }
-        #contact .social-links a:active { transform: scale(1.05); }
+        #contact .social-links a:active { 
+            transform: scale(1.05);
+            transition: transform 0.1s ease;
+        }
         #contact .social-links svg, #contact .social-links img.img-icon {
             width: 36px;
             height: 36px;
@@ -337,6 +341,7 @@
             color: #f0f4f8;
             border: 1px solid rgba(255, 255, 255, 0.3);
             border-radius: 5px;
+            transition: background-color 0.2s ease, transform 0.1s ease;
         }
         .dev-tools button:hover { background-color: rgba(255, 255, 255, 0.2); }
     </style>
