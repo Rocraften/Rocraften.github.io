@@ -1,15 +1,69 @@
 <!-- Index.html -->
-<section id="contact" class="contact">
-  <h2>Contact Me</h2>
-  <div class="contact-info">
-    <div class="contact-item">
-      <strong>Email:</strong> Rocraften@outlook.com
-    </div>
-    <div class="contact-item">
-      <strong>Discord:</strong> Rocraften
-    </div>
-    <div class="contact-item">
-      <strong>Twitter:</strong> <a href="https://twitter.com/yourprofile" target="_blank">@rocraften</a>
-    </div>
-  </div>
-</section>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rocraften Portfolio</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <canvas id="snow"></canvas>
+
+    <header>
+        <nav class="navbar">
+            <img src="https://i.ibb.co/SDgs6XH2/Rocraften-Title.png" alt="Rocraften Logo" class="logo">
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact Me</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="home" class="home">
+        <h1>Welcome to My Portfolio</h1>
+        <p>Here you'll find my work, creations, and ideas brought to life.</p>
+    </section>
+
+    <section id="about" class="about">
+        <h2>About Me</h2>
+        <p>I'm Rocraften, a developer who enjoys building creative and unique projects. This site is where I share my work and what I’ve been up to.</p>
+    </section>
+
+    <section id="projects" class="projects">
+        <h2>My Projects</h2>
+        <div class="project-grid">
+            <div class="project-card">
+                <h3>Project One</h3>
+                <p>Description of project one.</p>
+            </div>
+            <div class="project-card">
+                <h3>Project Two</h3>
+                <p>Description of project two.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact">
+        <h2>Contact Me</h2>
+        <div class="contact-container">
+            <div class="contact-item">
+                <img src="https://img.icons8.com/ios-filled/50/ffffff/email-open.png" alt="Email Icon">
+                <span>example@email.com</span>
+            </div>
+            <div class="contact-item">
+                <img src="https://img.icons8.com/ios-filled/50/ffffff/discord-logo.png" alt="Discord Icon">
+                <span>YourDiscord#1234</span>
+            </div>
+            <div class="contact-item">
+                <img src="https://img.icons8.com/ios-filled/50/ffffff/twitter.png" alt="Twitter Icon">
+                <a href="https://twitter.com/yourprofile" target="_blank">@yourprofile</a>
+            </div>
+        </div>
+    </section>
+
+    <script src="index.js"></script>
+</body>
+</html>
