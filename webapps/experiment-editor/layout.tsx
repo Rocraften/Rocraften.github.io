@@ -8,8 +8,8 @@ export const metadata: Metadata = {
     type: "website",
     title: "MCEDU Experiments Web Editor",
     description: "A temporary fix to enable Minecraft Educaition experimental features directly in your browser.",
-    images: ["https://jaylydev.github.io/favicon.ico"],
-    url: "https://jaylydev.github.io",
+    images: ["https://rocraften.github.io/favicon.ico"],
+    url: "https://rocraften.github.io",
   },
   twitter: {
     card: "summary_large_image",
