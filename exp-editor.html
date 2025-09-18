@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Experiment Editor - Rocraften</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body data-theme="dark">
+
+    <div id="custom-cursor"></div>
+
+    <header>
+        <div class="content-wrapper">
+            <a href="../index.html" class="logo-link">
+                <img src="https://i.ibb.co/S7DJbXHK/Rocraften-Title.png" alt="Logo">
+            </a>
+            <div class="header-controls">
+                <nav>
+                    <a href="../index.html#about">About</a>
+                    <a href="../index.html#skills">Skills</a>
+                    <a href="../index.html#projects">Projects</a>
+                    <a href="exp-editor.html" class="active">Experiment Editor</a>
+                    <a href="../index.html#contact">Contact</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section id="editor-tool">
+            <div class="content-wrapper">
+                <h2>Experiment Editor</h2>
+                <div class="editor-card">
+                    <p class="editor-description">
+                        Upload a <strong>.mcworld</strong> file to beging editor experimental features.
+                    </p>
+                    
+                    <div class="file-input-wrapper">
+                        <label for="file">Select .mcworld file</label>
+                        <input type="file" id="file" accept=".mcworld" title="Select your world...">
+                        <span id="file-name">No file chosen</span>
+                    </div>
+
+                    <p id="message" class="editor-message"></p>
+                    <div id="experiments" class="experiments-grid"></div>
+
+                    <div class="editor-actions">
+                        <button id="download" class="project-download-link" style="display: none;">Download Edited World</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer>
+        <div class="content-wrapper">
+            <p>&copy; <span id="year"></span> Rocraften. All rights reserved.</p>
+        </div>
+    </footer>
+    
+    <script src="../index.js" defer></script>
+    <script src="api/exp-editor/nbt.js"></script>
+    <script src="api/exp-editor/main.js"></script>
+</body>
+</html>
