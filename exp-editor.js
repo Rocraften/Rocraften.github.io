@@ -5,6 +5,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const experimentsGrid = document.getElementById('experiments');
     const downloadButton = document.getElementById('download');
 
+    if (typeof JSZip === 'undefined' || typeof NBTify === 'undefined') {
+        showMessage('A required library (JSZip or NBTify) failed to load. Check your internet connection or browser console (F12) for errors.', 'error');
+        return;
+    }
+
     let experimentsData = null;
     let currentZip = null;
     let originalLevelDat = null;
