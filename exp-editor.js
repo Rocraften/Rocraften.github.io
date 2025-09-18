@@ -1,16 +1,14 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const fileInput = document.getElementById('file-input-real');
-    const fileNameDisplay = document.getElementById('file-name-display');
-    const messageArea = document.getElementById('message-area');
-    const experimentsContainer = document.getElementById('experiments-container');
-    const experimentsGrid = document.getElementById('experiments-grid');
-    const downloadButton = document.getElementById('download-button');
+    const fileInput = document.getElementById('file');
+    const fileNameDisplay = document.getElementById('file-name');
+    const messageArea = document.getElementById('message');
+    const experimentsGrid = document.getElementById('experiments');
+    const downloadButton = document.getElementById('download');
 
     let experimentsData = null;
     let currentZip = null;
     let originalLevelDat = null;
     let originalFileName = 'world.mcworld';
-
     const experimentsJsonUrl = './api/exp-editor/experiments.json';
 
     fetch(experimentsJsonUrl)
@@ -24,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
             experimentsData = data;
         })
         .catch(error => {
-            showMessage(`Failed to load local experiments.json: ${error}. Make sure the file exists at /api/exp-editor/experiments.json`, 'error');
+            showMessage(`Failed to load experiments.json: ${error}. Make sure it's at /api/exp-editor/experiments.json`, 'error');
         });
 
     fileInput.addEventListener('change', (event) => {
@@ -103,7 +101,7 @@ document.addEventListener('DOMContentLoaded', () => {
             experimentsGrid.appendChild(wrapper);
         });
 
-        experimentsContainer.style.display = 'block';
+        experimentsGrid.style.display = 'grid';
         downloadButton.style.display = 'inline-block';
     }
     
@@ -142,7 +140,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const link = document.createElement('a');
             link.href = URL.createObjectURL(newZipBlob);
-            link.download = originalFileName.replace('.mcworld', '_modified.mcworld');
+            link.download = originalFileName.replace('.mcworld', '_edited.mcworld');
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
@@ -156,7 +154,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     function resetState() {
-        experimentsContainer.style.display = 'none';
+        experimentsGrid.style.display = 'none';
         downloadButton.style.display = 'none';
         experimentsGrid.innerHTML = '';
         currentZip = null;
