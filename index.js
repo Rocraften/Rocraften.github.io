@@ -26,18 +26,6 @@ document.addEventListener('DOMContentLoaded', () => {
         el.addEventListener('mouseenter', () => cursor.classList.add('cursor-grow'));
         el.addEventListener('mouseleave', () => cursor.classList.remove('cursor-grow'));
     });
-    
-    const snowContainer = document.getElementById('snow-container');
-    const flakesCount = 30; 
-    for (let i = 0; i < flakesCount; i++) {
-        let flake = document.createElement('div');
-        flake.className = 'snowflake';
-        flake.style.left = (Math.random() < 0.5 ? Math.random() * 33 : 67 + Math.random() * 33) + '%';
-        flake.style.animationDuration = (Math.random() * 5 + 7) + 's';
-        flake.style.animationDelay = (Math.random() * 10) + 's';
-        flake.style.width = flake.style.height = (Math.random() * 5 + 5) + 'px';
-        snowContainer.appendChild(flake);
-    }
 
     const headerElement = document.querySelector('header');
     const navLinks = document.querySelectorAll('header nav a');
