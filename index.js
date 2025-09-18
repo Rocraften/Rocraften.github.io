@@ -45,26 +45,48 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
-    window.addEventListener('scroll', changeNavOnScroll);
+    if (sections.length > 0) {
+        window.addEventListener('scroll', changeNavOnScroll);
+        changeNavOnScroll();
+    }
     
     const viewAllBtn = document.getElementById('viewAllProjectsBtn');
-    viewAllBtn.addEventListener('click', () => {
-        document.querySelectorAll('.project-item.hidden').forEach(p => p.classList.remove('hidden'));
-        viewAllBtn.parentElement.style.display = 'none';
-    });
-
-    document.getElementById('clearCacheBtn').addEventListener('click', () => window.location.reload(true));
-    document.getElementById('clearCookiesBtn').addEventListener('click', () => {
-        const cookies = document.cookie.split(";");
-        if (!cookies[0]) { alert("No cookies to clear."); return; }
-        cookies.forEach(c => {
-            const eqPos = c.indexOf("=");
-            const name = eqPos > -1 ? c.substr(0, eqPos) : c;
-            document.cookie = name.trim() + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/";
+    if (viewAllBtn) {
+        viewAllBtn.addEventListener('click', () => {
+            document.querySelectorAll('.project-item.hidden').forEach(p => p.classList.remove('hidden'));
+            viewAllBtn.parentElement.style.display = 'none';
         });
-        alert("Site cookies cleared. Reloading page.");
-        window.location.reload();
-    });
+    }
 
-    changeNavOnScroll();
+    const clearCacheBtn = document.getElementById('clearCacheBtn');
+    if (clearCacheBtn) {
+        clearCacheBtn.addEventListener('click', () => window.location.reload(true));
+    }
+    
+    const clearCookiesBtn = document.getElementById('clearCookiesBtn');
+    if (clearCookiesBtn) {
+        clearCookiesBtn.addEventListener('click', () => {
+            const cookies = document.cookie.split(";");
+            if (!cookies[0]) { alert("No cookies to clear."); return; }
+            cookies.forEach(c => {
+                const eqPos = c.indexOf("=");
+                const name = eqPos > -1 ? c.substr(0, eqPos) : c;
+                document.cookie = name.trim() + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/";
+            });
+            alert("Site cookies cleared. Reloading page.");
+            window.location.reload();
+        });
+    }
+
+    const fileInput = document.getElementById('file');
+    if (fileInput) {
+        fileInput.addEventListener('change', (event) => {
+            const fileNameEl = document.getElementById('file-name');
+            if (event.target.files.length > 0) {
+                fileNameEl.textContent = event.target.files[0].name;
+            } else {
+                fileNameEl.textContent = 'No file chosen';
+            }
+        });
+    }
 });
