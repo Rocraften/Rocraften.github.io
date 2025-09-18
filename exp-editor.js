@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentZip = null;
     let originalLevelDat = null;
     let originalFileName = 'world.mcworld';
+
     const experimentsJsonUrl = './api/exp-editor/experiments.json';
 
     fetch(experimentsJsonUrl)
@@ -63,7 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const levelDatBuffer = await levelDatFile.async('arraybuffer');
             originalLevelDat = levelDatBuffer;
 
-            const parsedNbt = await nbtify.read(levelDatBuffer, { endian: "little" });
+            const parsedNbt = await NBTify.read(levelDatBuffer, { endian: "little" });
             
             renderExperiments(parsedNbt.data);
             showMessage('File loaded successfully! Toggle experiments below.', 'success');
@@ -114,7 +115,7 @@ document.addEventListener('DOMContentLoaded', () => {
         showMessage('Generating modified world...', 'info');
 
         try {
-            const parsedNbt = await nbtify.read(originalLevelDat, { endian: "little" });
+            const parsedNbt = await NBTify.read(originalLevelDat, { endian: "little" });
             const levelData = parsedNbt.data;
 
             if (!levelData.experiments) {
@@ -126,14 +127,14 @@ document.addEventListener('DOMContentLoaded', () => {
             experimentCheckboxes.forEach(checkbox => {
                 const experimentId = checkbox.dataset.experimentId;
                 const isEnabled = checkbox.checked;
-                levelData.experiments[experimentId] = new nbtify.Int8(isEnabled ? 1 : 0);
+                levelData.experiments[experimentId] = new NBTify.Int8(isEnabled ? 1 : 0);
                 if (isEnabled) enabledCount++;
             });
 
-            levelData.experiments.experiments_ever_used = new nbtify.Int8(enabledCount > 0 ? 1 : 0);
-            levelData.experiments.saved_with_toggled_experiments = new nbtify.Int8(enabledCount > 0 ? 1 : 0);
+            levelData.experiments.experiments_ever_used = new NBTify.Int8(enabledCount > 0 ? 1 : 0);
+            levelData.experiments.saved_with_toggled_experiments = new NBTify.Int8(enabledCount > 0 ? 1 : 0);
 
-            const modifiedBuffer = await nbtify.write(parsedNbt, { endian: "little" });
+            const modifiedBuffer = await NBTify.write(parsedNbt, { endian: "little" });
 
             currentZip.file('level.dat', modifiedBuffer.buffer);
             const newZipBlob = await currentZip.generateAsync({ type: 'blob' });
