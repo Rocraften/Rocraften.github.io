@@ -4,9 +4,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const messageArea = document.getElementById('message');
     const experimentsGrid = document.getElementById('experiments');
     const downloadButton = document.getElementById('download');
+    const yearSpan = document.getElementById('year');
+
+    if (yearSpan) {
+        yearSpan.textContent = new Date().getFullYear();
+    }
 
     if (typeof JSZip === 'undefined' || typeof NBTify === 'undefined') {
-        showMessage('A required library (JSZip or NBTify) failed to load. Check your internet connection or browser console (F12) for errors.', 'error');
+        showMessage('A required library failed to load. Please check your internet connection.', 'error');
         return;
     }
 
@@ -28,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
             experimentsData = data;
         })
         .catch(error => {
-            showMessage(`Failed to load experiments.json: ${error}. Make sure it's at /api/exp-editor/experiments.json`, 'error');
+            showMessage(`Failed to load experiments.json: ${error}. Make sure it exists at /api/exp-editor/experiments.json`, 'error');
         });
 
     fileInput.addEventListener('change', (event) => {
@@ -91,10 +96,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         experimentsData.experiments.forEach(exp => {
             const isEnabled = currentExperiments[exp.id]?.valueOf() === 1;
-
             const wrapper = document.createElement('div');
             wrapper.className = 'experiment-toggle';
-
             wrapper.innerHTML = `
                 <label for="${exp.id}">
                     <span>${exp.title}</span>
