@@ -1,153 +1,150 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>ICEBound EDU Data Stores List</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      line-height: 1.6;
-      background-color: #0c1a3c;
-      color: #e0eaff;
-      margin: 20px;
-    }
-    h1 {
-      color: #00aaff;
-      border-bottom: 2px solid #00aaff;
-      padding-bottom: 5px;
-    }
-    details {
-      margin-bottom: 15px;
-      background-color: #112b54;
-      border: 1px solid #345;
-      border-radius: 5px;
-      padding: 10px;
-    }
-    summary {
-      font-weight: bold;
-      font-size: 1.1em;
-      cursor: pointer;
-    }
-    ul {
-      list-style: none;
-      padding-left: 15px;
-    }
-    li::before {
-      content: "";
-    }
-    .end {
-      font-style: italic;
-      text-align: center;
-      margin-top: 30px;
-      color: #aadfff;
-    }
-    .return-button {
-      display: block;
-      text-align: center;
-      margin: 30px auto 0;
-    }
-    .return-button a {
-      text-decoration: none;
-      background-color: #00aaff;
-      color: #fff;
-      padding: 10px 20px;
-      border-radius: 5px;
-      transition: background-color 0.3s;
-    }
-    .return-button a:hover {
-      background-color: #0077cc;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MCEDU OFFICIAL DATA LIST</title>
+    <h1 style="color:white;">MCEDU OFFICIAL DATA LIST</h1>
+    <h4 style="color:white;">Last Updated: 01-21-2026</h4>
+    <p style="color:white;"><small><i>'Type' refers to where a piece of data is stored, 'Context' refers to what system the data is handled by and in somecases where it comes from.</i></small></p>
+    <br>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: #0c1a3c;
+            padding: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #fff;
+        }
+
+        th,
+        td {
+            padding: 12px 16px;
+            text-align: left;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        th {
+            background: #f5f5f5;
+            font-weight: 600;
+            font-size: 14px;
+            color: #333;
+        }
+
+        td {
+            font-size: 14px;
+            color: #333;
+        }
+
+        tbody tr:hover {
+            background: #fafafa;
+        }
+    </style>
 </head>
 <body>
-
-  <h1>ICEBound EDU Data Stores List</h1>
-
-  <details open>
-    <summary>Account Data</summary>
-    <ul>
-      <li>account.displayname – Database Account Displayname</li>
-      <li>account.usertype – Database Account Usertype</li>
-      <li>account.login – Database Account Login Data</li>
-      <li>account.login.location – Database Account Login Location</li>
-      <li>account.login.ip – Database Account Login IP</li>
-      <li>account.login.application – Database Account Login Application</li>
-      <li>account.login.date – Database Account Login Date</li>
-      <li>account.login.status – Database Account Login Status</li>
-      <li>account.login.error – Database Account Login Error</li>
-      <li>account.login.requestid – Database Account Login Request ID</li>
-      <li>account.login.agenttype – Database Account Login Agent Type</li>
-      <li>account.login.authenticationrequirement – Database Account Login Authentication Requirement</li>
-      <li>account.deleted.date – Database Account Deleted Date</li>
-      <li>account.deleted.objectid – Database Deleted Account Object ID</li>
-      <li>account.deleted.displayname – Database Deleted Account Displayname</li>
-      <li>account.deleted.usertype – Database Deleted Account Usertype</li>
-      <li>bot.account.creation – MC Account Creation</li>
-      <li>bot.account.password – MC Account Password</li>
-      <li>bot.account.username – MC Account Username</li>
-      <li>bot.account.renew – MC Account Renewal</li>
-      <li>bot.account.deletion – MC Account Deletion</li>
-      <li>bot.account.guilds – MC Account Guilds</li>
-      <li>bot.account.friends – MC Account Friends</li>
-      <li>bot.account.guild.invitestatus – MC Account Guild Invite Status</li>
-      <li>bot.account.friend.invitestatus – MC Account Friend Invite Status</li>
-    </ul>
-  </details>
-
-  <details>
-    <summary>Guild Data</summary>
-    <ul>
-      <li>guild.name – Guild Name</li>
-      <li>guild.id – Guild ID</li>
-      <li>guild.owner – Guild Owner</li>
-      <li>guild.members – Guild Members</li>
-      <li>guild.created – Guild Created</li>
-      <li>guild.deleted – Guild Deleted</li>
-      <li>guild.accepted – Guild Invite Accepted</li>
-      <li>guild.declined – Guild Invite Declined</li>
-    </ul>
-  </details>
-
-  <details>
-    <summary>Friend Data</summary>
-    <ul>
-      <li>friend.name – Friend Name</li>
-      <li>friend.id – Friend ID</li>
-      <li>friend.accepted – Friend Accepted</li>
-      <li>friend.declined – Friend Declined</li>
-    </ul>
-  </details>
-
-  <details>
-    <summary>Profile Data</summary>
-    <ul>
-      <li>profile.username – Profile Username</li>
-      <li>profile.discriminator – Profile Discriminator</li>
-      <li>profile.avatar – Profile Avatar</li>
-      <li>profile.badges – Profile Badges</li>
-      <li>profile.joindate – Profile Join Date</li>
-      <li>profile.guild – Profile Guild</li>
-      <li>profile.mainaccount – Profile Main Account</li>
-      <li>profile.renewals – Profile Renewals</li>
-      <li>profile.voiceactivity – Profile Voice Activity</li>
-      <li>profile.friends – Profile Friends</li>
-    </ul>
-  </details>
-
-  <details>
-    <summary>AI Data</summary>
-    <ul>
-      <li>ai.chat.messagedata – AI Chat Message Data</li>
-      <li>ai.chat.date – AI Chat Message Date</li>
-      <li>ai.chat.user – AI Chat Message User</li>
-    </ul>
-  </details>
-
-  <div class="end">END</div>
-
-  <div class="return-button">
-    <a href="https://rocraften.github.io">Return to Main Website</a>
-  </div>
-
+    <table>
+        <thead>
+            <tr>
+                <th>Data</th>
+                <th>Description</th>
+                <th>Type</th>
+                <th>Contex</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>discord.displayname</td>
+                <td>Account Displayname</td>
+                <td>Storage</td>
+                <td>Bot</td>
+            </tr>
+            <tr>
+                <td>account.usertype</td>
+                <td>Account Usertype</td>
+                <td>Database</td>
+                <td>Microsoft</td>
+            </tr>
+            <tr>
+                <td>account.login</td>
+                <td>Account Login Data</td>
+                <td>Database</td>
+                <td>Microsoft</td>
+            </tr>
+            <tr>
+                <td>account.login.location</td>
+                <td>Account Login Location (Roughly based off IP)</td>
+                <td>Database</td>
+                <td>Microsoft</td>
+            </tr>
+            <tr>
+                <td>account.login.ip</td>
+                <td>Account Login IP (Used for enforcing alts and bans)</td>
+                <td>Database</td>
+                <td>Microsoft</td>
+            </tr>
+            <tr>
+                <td>account.login.date</td>
+                <td>Account Login Date</td>
+                <td>Database</td>
+                <td>Microsoft</td>
+            </tr>
+            <tr>
+                <td>account.login.error</td>
+                <td>Account Login Error (Used for troubleshooting)</td>
+                <td>Database</td>
+                <td>Microsoft</td>
+            </tr>
+            <tr>
+                <td>account.login.requestid</td>
+                <td>Account Login Request ID (The ID created when attempting to login to an account)</td>
+                <td>Database</td>
+                <td>Microsoft</td>
+            </tr>
+            <tr>
+                <td>account.deleted.displayname</td>
+                <td>Deleted Account Displayname (Kept for 24 hours then deleted)</td>
+                <td>Storage</td>
+                <td>Bot</td>
+            </tr>
+            <tr>
+                <td>account.password</td>
+                <td>Minecraft Account Password (Email Password)</td>
+                <td>Database</td>
+                <td>Microsoft</td>
+            </tr>
+            <tr>
+                <td>account.username</td>
+                <td>Minecraft Account Username</td>
+                <td>Database</td>
+                <td>Microsoft</td>
+            </tr>
+            <tr>
+                <td>account.renewtime</td>
+                <td>Account Renewal Time (Time since last renew)</td>
+                <td>Storage</td>
+                <td>Bot</td>
+            </tr>
+        </tbody>
+    </table>
+    <footer>
+        <style>
+         a:link {
+         color: #00aaff;
+         background-color: transparent;
+         text-decoration: none;
+        }
+        </style>
+        <br>
+        <p style="color:white;"><small>To request your data removed contact <a href="mailto:Rocraften@outlook.com">Rocraften@outlook.com</a>, security related data will not be removed. MCEDU &copy; 2026. All rights reserved.</small></p>
 </body>
 </html>
