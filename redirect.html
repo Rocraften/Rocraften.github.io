@@ -3,21 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Redirecting...</title>
-
-    <!-- AdSense Script Included -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4019638265348327"
-         crossorigin="anonymous"></script>
-
+    <title>Teleporting...</title>
     <style>
-        /* Using similar dark theme variables */
         :root {
             --dark-bg: #0b111c;
             --dark-container-bg: #1c2738;
             --text-on-dark: #cdd5e0;
             --icy-blue-medium: #87ceeb;
             --icy-blue-dark: #63b3ed;
-            --error-color: #f56565; /* Red for errors */
+            --error-color: #f56565;
         }
 
         body, html {
@@ -40,7 +34,6 @@
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
             border: 1px solid #2d3748;
             max-width: 500px;
-             /* Margin for spacing */
              margin: 20px;
         }
 
@@ -75,7 +68,7 @@
 
         #fallback-paragraph {
             margin-top: 20px;
-            display: none; /* Initially hidden */
+            display: none;
         }
 
 
@@ -97,10 +90,8 @@
             <h1>Please wait...</h1>
             <p class="message">
                 You will be redirected in
-                <!-- Updated initial countdown number -->
-                <span id="countdown">10</span> seconds.
+                <span id="countdown">5</span> seconds.
             </p>
-             <!-- Fallback link paragraph is initially hidden via CSS -->
             <p id="fallback-paragraph" class="message">
                 If you are not redirected automatically,
                 <a id="fallback-link" href="#" rel="noopener noreferrer">click here</a>.
@@ -113,40 +104,24 @@
                 Invalid link or key not found. Please check the URL.
             </p>
              <p class="message">
-                Go back to <a id="home-link" href="/">homepage</a>. <!-- Adjust href="/" if needed -->
+                Go back to <a id="home-link" href="/">homepage</a>
             </p>
         </div>
     </div>
 
     <script>
-        // --- Configuration ---
-        const countdownSeconds = 10; // Wait time changed to 10 seconds
-
-        // --- IMPORTANT: Define your redirect keys and target URLs here ---
-        // Add as many as you need. The 'key' MUST BE ALL LOWERCASE.
+        const countdownSeconds = 5;
         const redirectMap = {
-            // Key (from ?page=key):   Value (Actual URL to redirect to)
             'roblox':           'https://www.roblox.com/users/7615973079/profile',
             'github':           'https://github.com/Rocraften',
             'twitter':          'https://twitter.com/Rocraften',
             'pmc':              'https://www.planetminecraft.com/member/rocraften',
             'discord-profile':  'https://discord.com/users/1290046071774384215',
             'xbox-profile':     'https://www.xbox.com/en-US/play/user/Rocraften',
-
-            // Add links for your downloads or projects here
-            'mcedu-addon':      'YOUR_MCEDU_ADDON_DOWNLOAD_LINK_HERE', // Remember to replace placeholders
-            'roblox-tycoon':    'YOUR_ROBLOX_TYCOON_LINK_HERE', // Remember to replace placeholders
-            'py-game':          'YOUR_PYTHON_GAME_LINK_HERE', // Remember to replace placeholders
+            'secret':           'https://www.'
+            // Direct Downloads    
             'license.txt':      'https://www.mediafire.com/file/j9bq2u61y8trd2j/LICENSE.txt/file',
-            // Example: 'mycoolmod-v1': 'https://example.com/downloads/mycoolmod-v1.zip',
-
-            // Add more redirects as needed:
-            // 'another-key': 'https://some-other-website.com/resource',
         };
-        // --- End Configuration ---
-
-
-        // --- Redirect Logic ---
         document.addEventListener('DOMContentLoaded', () => {
             const loadingDiv = document.getElementById('loading-info');
             const errorDiv = document.getElementById('error-info');
@@ -155,8 +130,6 @@
             const fallbackParagraph = document.getElementById('fallback-paragraph');
             const errorMessageSpan = document.getElementById('error-message');
             const homeLink = document.getElementById('home-link');
-
-            // Set home link dynamically
             let homePageUrl = 'index.html';
             if (window.location.pathname.includes('/') && window.location.pathname !== '/') {
                  homePageUrl = '../index.html';
@@ -165,26 +138,19 @@
             }
             homeLink.href = homePageUrl;
 
-
             let secondsRemaining = countdownSeconds;
 
-            // Get the 'page' query parameter from the URL
             const urlParams = new URLSearchParams(window.location.search);
             const pageKey = urlParams.get('page');
 
-            // Find the target URL from the map using a LOWERCASE key
             const targetUrl = pageKey ? redirectMap[pageKey.toLowerCase()] : null;
 
             if (targetUrl) {
-                // Valid key found, proceed with redirect
                 loadingDiv.style.display = 'block';
                 errorDiv.style.display = 'none';
-
-                // Set fallback link href
                 fallbackLink.href = targetUrl;
-                countdownSpan.textContent = secondsRemaining; // Set initial countdown display
+                countdownSpan.textContent = secondsRemaining;
 
-                // Start the countdown interval
                 const interval = setInterval(() => {
                     secondsRemaining--;
                     countdownSpan.textContent = secondsRemaining;
@@ -192,17 +158,12 @@
                     if (secondsRemaining <= 0) {
                         clearInterval(interval);
                         console.log(`Redirecting to: ${targetUrl}`);
-
-                        // Show the fallback link *before* attempting redirect
                         fallbackParagraph.style.display = 'block';
-
-                        // Perform the redirect
                         window.location.replace(targetUrl);
                     }
-                }, 1000); // Run every 1 second
+                }, 1000);
 
             } else {
-                // Invalid or missing key
                 console.error("Redirect key missing or not found:", pageKey);
                 loadingDiv.style.display = 'none';
                 errorDiv.style.display = 'block';
